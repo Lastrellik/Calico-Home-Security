@@ -1,7 +1,7 @@
 Calico Home Security
 ====================
 
-![Laser Pointer](/docs/laser-160991.svg)
+![Laser Pointer](./docs/laser-160991.png)
 Image courtesy of [pixabay](https://pixabay.com/en/laser-optics-science-laser-pointer-160991/)
 
 The **Calico Home Security System** is a home security platform to detect and react to intruders. It is an _extensible_ system with multiple _modules_ available to be added to it.
