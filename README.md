@@ -167,6 +167,5 @@ Authors
 * Christopher Nash 
 * Tyler Jacobs 
 * Dave Tille 
-* Jason Bruder
-
+* Jason Bruderer
 This project was created as an assignment for our CSIS 2810 Computer Architecture course.
