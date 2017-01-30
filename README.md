@@ -7,6 +7,22 @@ Calico Home Security
 The **Calico Home Security System** is a home security platform to detect and react to intruders. It is an _extensible_ system with multiple _modules_ available to be added to it.
 
 
+Table of Contents
+=================
+
+- [Documentation](#documentation)
+	- [Hardware](#hardware)
+- [Development](#dvelopment)
+	- [IDE / Dev Environment Setup Instructions](#ide--dev-environment-setup-instructions)
+		- [IDE Setup Instructions:](#ide-setup-instructions)
+		- [Install Clang (Windows Only)](#install-clang-windows-only)
+		- [Run a "Blink" program on your Arduino Uno](#run-a-blink-program-on-your-arduino-uno)
+		- [Git Atom Package Setup Instructions:](#git-atom-package-setup-instructions)
+	- [Compile Instructions](#compile-instructions)
+	- [Deploy Instructions](#deploy-instructions)
+- [Authors](#authors)
+
+
 Documentation
 =============
 
