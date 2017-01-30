@@ -111,10 +111,12 @@ This step will make sure that PlatformIO is full installed and configured proper
 	* If prompted, click the `Save and build` option
 12. You should see a console window appear. It will compile several things. Wait for this to complete.
 13. Eventually you should see a `SUCCESS` message
-14. WIP below this point....
-15. Plug in your board
-16. Upload the program
-17. LED should blink on and off
+14. Plug in your Arduino Uno
+16. Upload the project by either clicking the `PlatformIO --> Upload` menu option or click the right-facing `arrow` icon on the left of the screen.
+17. A console window will appear. It will do several things and then upload the code to your Arduino. On the Arduino you should see multiple LEDs light up when the program is being uploaded.
+18. The LED on your Arduino board should turn on then off in 1-second intervals
+	* Note - This "Blink" program comes preinstalled on many boards so it may start blinking right when you first plug it in. TO make sure you've uploaded a new program correctly I'd suggest changing the delay amounts to something other than 1-second each then reuploading it. This way you know for sure it is your code that is runnin on it.
+19. Congratulations! You've hit a milestone - you've created your first PlatformIO application as well as run it on your Arduino! If you encountered any issues then they need to be address at this point before continuing on.
 
 ### Git Atom Package Setup Instructions:
 Ensure that you have a recent version of [Git](https://git-scm.com/downloads) installed before following these instructions.
