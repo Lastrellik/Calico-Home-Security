@@ -49,6 +49,73 @@ Some other IDEs considered:
 	* Note - if you already have Atom installed it will launch the existing Atom instance you have installed and install itself as a plugin
 4. Wait for installation to complete. When prompted, restart Atom.
 
+### Install Clang (Windows Only)
+Clang is what PlatformIO uses for the Intelligent Code Autocompletion. It comes installed on some platforms but not on Windows. Other platforms may also need to install it. You can find all the platform instructions (here)[http://docs.platformio.org/en/latest/ide/atom.html#ide-atom-installation-clang].
+
+1. Navigate to the (Clang Download)[http://llvm.org/releases/download.html] page.
+2. Under the `Pre-Built` Binaries section, choose the (Clang for Windows (64-bit))[http://releases.llvm.org/3.9.1/LLVM-3.9.1-win64.exe] option to download it
+3. Follow the install prompts. Make sure that you choose the `Add LLVM to the system PATH for all users` option while installing.
+	* Note - if you see `Failed to find MSBuild toolsets directory` error in the installation console, please ignore it and press any key to close this window. PlatformIO IDE uses only Clang completion engine that should work after it without any problems.
+4. You will need to restart PlatformIO / Atom if it was already running
+
+### Run a "Blink" program on your Arduino Uno
+This step will make sure that PlatformIO is full installed and configured properly. These are almost the exact steps provided by PlatformIO in their (quick start)[http://docs.platformio.org/en/latest/ide/atom.html#quick-start] guide. UIt also includes screenshots so if you are having difficulties with any of these steps refer to it to help you along.
+
+1. From the PlatformIO 'Home' page...
+2. Click the `+ New Project` button
+3. Click the `Selected board` dropdown and choose Arduino --> Arduino Uno
+4. Next to the `Choose the directory` dropdown click the `other` button to browse to a location where you want the code to reside
+	* I would choose a temporary location as this will only be really run once to make sure everything is configured
+5. Click the `Process` button
+6. Wait for the "Installing platform: atm..." message to go away and for the new project to be created
+7. Right-click on the `src` folder and choose `New file`
+8. Enter `src\main.cpp` in the dialog box that appears
+9. Hit your Enter key
+	* Note - on Windows and some other platforms it is at this point that PlatformIO will recognize you don't have "Clang" installed if you didn't follow the install instructions above. If this happens, follow the `Install Clang` instructions above.
+10. In main.cpp past in the following code:
+	```cpp
+	/**
+	 * Blink
+	 *
+	 * Turns on an LED on for one second,
+	 * then off for one second, repeatedly.
+	 */
+	#include "Arduino.h"
+
+	#ifndef LED_BUILTIN
+	#define LED_BUILTIN 13
+	#endif
+
+	void setup()
+	{
+	  // initialize LED digital pin as an output.
+	  pinMode(LED_BUILTIN, OUTPUT);
+	}
+
+	void loop()
+	{
+	  // turn the LED on (HIGH is the voltage level)
+	  digitalWrite(LED_BUILTIN, HIGH);
+
+	  // wait for a second
+	  delay(1000);
+
+	  // turn the LED off by making the voltage LOW
+	  digitalWrite(LED_BUILTIN, LOW);
+
+	   // wait for a second
+	  delay(1000);
+	}
+	```
+11. Build the project by either clicking the `PlatformIO --> Build` menu option, clicking in the lower left on the `PlatformIO: Build` button, or clicking the `checkmark` icon on the left of the screen.
+	* If prompted, click the `Save and build` option
+12. You should see a console window appear. It will compile several things. Wait for this to complete.
+13. Eventually you should see a `SUCCESS` message
+14. WIP below this point....
+15. Plug in your board
+16. Upload the program
+17. LED should blink on and off
+
 ### Git Atom Package Setup Instructions:
 Ensure that you have a recent version of [Git](https://git-scm.com/downloads) installed before following these instructions.
 
