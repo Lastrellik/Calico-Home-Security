@@ -161,11 +161,22 @@ Deploy Instructions
 2. asdf
 
 
+Wiring Diagrams / Schematics
+============================
+** These are only EXAMPLES!** Don't actually build these yet. These are just placeholders for future diagrams as we make them.
+
+![Base Wiring Diagram](./docs/circuit_diagrams/base_wiring_bb.png)
+<sub>(_The Base Wiring Diagram for the Calico Home Security System_)</sub>
+
+![Base Wiring Schematic](./docs/circuit_diagrams/base_wiring_schem.png)
+<sub>(_The Base Wiring Schematic for the Calico Home Security System_)</sub>
+
+
 Authors
 =======
 
-* Christopher Nash 
-* Tyler Jacobs 
-* Dave Tille 
+* Christopher Nash
+* Tyler Jacobs
+* Dave Tille
 * Jason Bruderer
 This project was created as an assignment for our CSIS 2810 Computer Architecture course.
