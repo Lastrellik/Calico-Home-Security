@@ -13,20 +13,20 @@ Table of Contents
 - [Documentation](#documentation)
   * [Hardware](#hardware)
 - [Development](#development)
-  * [IDE / Dev Environment Setup Instructions](#ide---dev-environment-setup-instructions)
+  * [IDE / Dev Environment Setup Instructions](#ide--dev-environment-setup-instructions)
     + [Which IDE for Arduino Development?](#which-ide-for-arduino-development-)
     + [IDE Setup Instructions](#ide-setup-instructions)
-    + [(Windows Only) Install Clang](#-windows-only--install-clang)
-    + [Run a "Blink" program on your Arduino Uno](#run-a--blink--program-on-your-arduino-uno)
-    + [(Optional) Git Atom Package Setup Instructions](#-optional--git-atom-package-setup-instructions)
-    + [(Optional) GitKraken Git GUI Client](#-optional--gitkraken-git-gui-client)
+    + [(Windows Only) Install Clang](#windows-only-install-clang)
+    + [Run a "Blink" program on your Arduino Uno](#run-a-blink-program-on-your-arduino-uno)
+    + [(Optional) Git Atom Package Setup Instructions](#optional-git-atom-package-setup-instructions)
+    + [(Optional) GitKraken Git GUI Client](#optional-gitkraken-git-gui-client)
     + [Clone the GitHub Repository](#clone-the-github-repository)
   * [Compile Instructions](#compile-instructions)
   * [Deploy Instructions](#deploy-instructions)
-- [Wiring Diagrams / Schematics](#wiring-diagrams---schematics)
+- [Wiring Diagrams / Schematics](#wiring-diagrams--schematics)
 - [Authors](#authors)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+<sub>Table of contents generated with <a href='http://ecotrust-canada.github.io/markdown-toc/'>markdown-toc</a></sub>
 
 Documentation
 =============
@@ -37,6 +37,7 @@ Hardware
 * [Arduino Uno](https://www.arduino.cc/en/Main/ArduinoBoardUno)
 * Ordinary Red Laser Pointer
 * Photoresistor
+* Single LED (or use the built-in LED on the Arduino Uno)
 * Various Wires and Miscellaneous Odds & Ends
 
 
