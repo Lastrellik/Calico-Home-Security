@@ -11,17 +11,22 @@ Table of Contents
 =================
 
 - [Documentation](#documentation)
-	- [Hardware](#hardware)
-- [Development](#dvelopment)
-	- [IDE / Dev Environment Setup Instructions](#ide--dev-environment-setup-instructions)
-		- [IDE Setup Instructions:](#ide-setup-instructions)
-		- [Install Clang (Windows Only)](#install-clang-windows-only)
-		- [Run a "Blink" program on your Arduino Uno](#run-a-blink-program-on-your-arduino-uno)
-		- [Git Atom Package Setup Instructions:](#git-atom-package-setup-instructions)
-	- [Compile Instructions](#compile-instructions)
-	- [Deploy Instructions](#deploy-instructions)
+  * [Hardware](#hardware)
+- [Development](#development)
+  * [IDE / Dev Environment Setup Instructions](#ide---dev-environment-setup-instructions)
+    + [Which IDE for Arduino Development?](#which-ide-for-arduino-development-)
+    + [IDE Setup Instructions](#ide-setup-instructions)
+    + [(Windows Only) Install Clang](#-windows-only--install-clang)
+    + [Run a "Blink" program on your Arduino Uno](#run-a--blink--program-on-your-arduino-uno)
+    + [(Optional) Git Atom Package Setup Instructions](#-optional--git-atom-package-setup-instructions)
+    + [(Optional) GitKraken Git GUI Client](#-optional--gitkraken-git-gui-client)
+    + [Clone the GitHub Repository](#clone-the-github-repository)
+  * [Compile Instructions](#compile-instructions)
+  * [Deploy Instructions](#deploy-instructions)
+- [Wiring Diagrams / Schematics](#wiring-diagrams---schematics)
 - [Authors](#authors)
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 Documentation
 =============
@@ -41,6 +46,8 @@ Development
 IDE / Dev Environment Setup Instructions
 ----------------------------------------
 
+### Which IDE for Arduino Development?
+
 We've chosen to use **[PlatformIO](http://platformio.org/)** as our IDE. We chose this above using the main [Arduino IDE](https://www.arduino.cc/en/Main/Software) for a number of reasons:
 
 1. The Arduino IDE is quite _'barebones'_. It doesn't support nice features like auto-complete or code linting. PlatformIO does out of the box.
@@ -56,7 +63,7 @@ Some other IDEs considered:
 2. [CLion](https://www.jetbrains.com/clion/)
 3. [Programino](http://www.programino.com/) _(Offers a pretty neat feature which displays your Arduino board's pinouts and specs right in the IDE)_
 
-### IDE Setup Instructions:
+### IDE Setup Instructions
 
 1. Ensure that a recent version of Python 2.X is installed
 	* Most platforms, except [Windows](https://www.python.org/downloads/windows/), will likely have this preinstalled.
@@ -65,7 +72,7 @@ Some other IDEs considered:
 	* Note - if you already have Atom installed it will launch the existing Atom instance you have installed and install itself as a plugin
 4. Wait for installation to complete. When prompted, restart Atom.
 
-### Install Clang (Windows Only)
+### (Windows Only) Install Clang
 Clang is what PlatformIO uses for the Intelligent Code Autocompletion. It comes installed on some platforms but not on Windows. Other platforms may also need to install it. You can find all the platform instructions (here)[http://docs.platformio.org/en/latest/ide/atom.html#ide-atom-installation-clang].
 
 1. Navigate to the (Clang Download)[http://llvm.org/releases/download.html] page.
@@ -134,7 +141,7 @@ This step will make sure that PlatformIO is full installed and configured proper
 	* Note - This "Blink" program comes preinstalled on many boards so it may start blinking right when you first plug it in. TO make sure you've uploaded a new program correctly I'd suggest changing the delay amounts to something other than 1-second each then reuploading it. This way you know for sure it is your code that is runnin on it.
 19. Congratulations! You've hit a milestone - you've created your first PlatformIO application as well as run it on your Arduino! If you encountered any issues then they need to be address at this point before continuing on.
 
-### Git Atom Package Setup Instructions:
+### (Optional) Git Atom Package Setup Instructions
 Ensure that you have a recent version of [Git](https://git-scm.com/downloads) installed before following these instructions.
 
 1. In Atom...
@@ -146,6 +153,24 @@ Ensure that you have a recent version of [Git](https://git-scm.com/downloads) in
 6. Click the Packages menu item. Git Plus should be listed.
 7. Close the Setting tab
 
+### (Optional) GitKraken Git GUI Client
+If you would like to use a Git GUI Client I'd recommend **[GitKraken](https://www.gitkraken.com/)**. It is pretty much awesome!
+
+There are other Git GUI clients out there such as [SmartGit](http://www.syntevo.com/smartgit/) or Github's own [GitHub Desktop](https://desktop.github.com/) which do a great job to help you interact with Git, but GitKraken just takes a different approach from these. The visuals, the drag-and-drop to commit, the overall interface just feel nice. No specific instructions are provided for any of these.
+
+### Clone the GitHub Repository
+
+1. Form the command line...
+2. Navigate to the directory where you would like the project to reside
+3. Issue the following Git command:
+	```
+	git clone https://github.com/Lastrellik/Calico-Home-Security.git
+	```
+4. Launch PlatformIO
+5. Click the "Open Project" button on the PlatformIO Home tab
+6. Browse to the directory where you checked out the Repository
+7. Click the Select Folder button
+8. Congratulation! You are now ready to begin development on the Calico Home Security System!
 
 
 Compile Instructions
@@ -179,4 +204,5 @@ Authors
 * Tyler Jacobs
 * Dave Tille
 * Jason Bruderer
+
 This project was created as an assignment for our CSIS 2810 Computer Architecture course.
