@@ -160,7 +160,7 @@ There are other Git GUI clients out there such as [SmartGit](http://www.syntevo.
 
 ### Clone the GitHub Repository
 
-1. Form the command line...
+1. From the command line...
 2. Navigate to the directory where you would like the project to reside
 3. Issue the following Git command:
 	```
