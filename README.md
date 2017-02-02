@@ -51,7 +51,7 @@ IDE / Dev Environment Setup Instructions
 
 We've chosen to use **[PlatformIO](http://platformio.org/)** as our IDE. We chose this above using the main [Arduino IDE](https://www.arduino.cc/en/Main/Software) for a number of reasons:
 
-1. The Arduino IDE is quite _'barebones'_. It doesn't support nice features like auto-complete or code linting. PlatformIO does out of the box.
+1. The Arduino IDE is quite _'barebones'_. It does not support nice features like auto-complete or code linting. PlatformIO does out of the box.
 2. PlatformIO is built on the popular [Atom](https://atom.io/) text editor. The community behind Atom has _many_ plugins for various code formats, styles, themes, etc.1
 3. Arduino IDE doesn't have Git Plugin support. Because PlatformIO is built on Atom, the ability to use a Git Plugin was just a few clicks away. _(Sure - we could have used Git from the commandline, but we wanted to simplify our workflow as much as possible.)_
 4. We knew coming in that we would likely be pulling in additional libraries for this project. Arduino IDE doesn't manage those for you. PlatformIO does out of the box.
