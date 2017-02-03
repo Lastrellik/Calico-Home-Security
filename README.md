@@ -37,7 +37,7 @@ Hardware
 * [Arduino Uno](https://www.arduino.cc/en/Main/ArduinoBoardUno)
 * Ordinary Red Laser Pointer
 * Photoresistor
-* Single LED (or use the built-in LED on the Arduino Uno)
+* Piezo Buzzer
 * Various Wires and Miscellaneous Odds & Ends
 
 
