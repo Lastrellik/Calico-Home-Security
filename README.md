@@ -15,8 +15,7 @@ Table of Contents
 - [Development](#development)
 - [Wiring Diagrams / Schematics](#wiring-diagrams--schematics)
 - [Authors](#authors)
-
-<sub>Table of contents generated with <a href='http://ecotrust-canada.github.io/markdown-toc/'>markdown-toc</a></sub>
+- [Why Calico?](#why-calico)
 
 Documentation
 =============
@@ -36,18 +35,6 @@ Development
 
 * [IDE / Dev Environment Setup Instructions](./docs/development/dev_environment_setup.md)
 
-Compile Instructions
---------------------
-
-1. asdf
-2. asdf
-
-Deploy Instructions
--------------------
-
-1. asdf
-2. asdf
-
 
 Wiring Diagrams / Schematics
 ============================
@@ -64,3 +51,9 @@ Authors
 * Jason Bruderer
 
 This project was created as an assignment for our CSIS 2810 Computer Architecture course.
+
+
+Why Calico?
+===========
+
+*Calico*, adj: Having sections or patches colored differently and usually brightly.
