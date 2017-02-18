@@ -26,7 +26,7 @@ public:
       digitalWrite(testedPin, LOW);
       delay(millisOff);
     }
-    if (pinMode.equalsIgnoreCase("SPEAKER")){
+    if (pinMode.equalsIgnoreCase("BUZZER")){
       tone(testedPin, 1000, millisOn);
     }
     if (pinMode.equalsIgnoreCase("PHOTORESISTOR")){
