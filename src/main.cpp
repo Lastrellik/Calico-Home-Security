@@ -1,56 +1,37 @@
-#include "Arduino.h"
+#include <ComponentTester.cpp>
 
-int ledG = 9;
-int ledY = 8;
-int ledR = 7;
-int photoR = 0;
-long previousMillis = 0;
-long intervalA = 1000;
-long intervalB = 1500;
-int state1 = LOW;
-int state2 = LOW;
+int ledR1 = 3; //left-most red LED
+int ledR2 = 4; //Right red LED
+int ledG = 2; //green LED
+int photoR = A0; //photoresistor input
+int buzzer = 6; //speaker
+
+//Test each of the components
+void testBoardComponents(){
+  ComponentTester tester(ledR1, "LED");
+  tester.testPin();
+  tester.setPinAndMode(ledR2, "LED");
+  tester.testPin();
+  tester.setPinAndMode(ledG, "LED");
+  tester.testPin();
+  tester.setPinAndMode(photoR, "photoresistor");
+  tester.testPin();
+  tester.setPinAndMode(buzzer, "speaker");
+  tester.testPin();
+}
 
 void setup() {
-
-  pinMode(ledG, OUTPUT);
-  pinMode(ledY, OUTPUT);
-  pinMode(ledR, OUTPUT);
-  pinMode(photoR, INPUT);
   Serial.begin(9600);  //Begin serial communcation
+  pinMode(ledR1, OUTPUT);
+  pinMode(ledR2, OUTPUT);
+  pinMode(ledG, OUTPUT);
+  pinMode(photoR, INPUT);
+  testBoardComponents();
+
 }
 
 void loop(){
-
-
-  unsigned long currentMillis = millis();
-  long check = currentMillis - previousMillis;
-  Serial.println(check);
-
-  if(analogRead(photoR) < 150){
-      digitalWrite(ledG, HIGH);
-      digitalWrite(ledR, LOW);
-      digitalWrite(ledY, LOW);
-
-
-
-  } else{
-      digitalWrite(ledG, LOW);
-      if (currentMillis - previousMillis >= intervalA) {
-          // save the last time you blinked the LED
-          previousMillis = currentMillis;
-
-          // if the LED is off turn it on and vice-versa:
-          if (state1 == LOW){
-            state1 = HIGH;
-            state2 = LOW;
-          }
-          else{
-            state1 = LOW;
-            state2 = HIGH;
-          }
-          // set the LED with the ledState of the variable:
-          digitalWrite(ledR, state1);
-          digitalWrite(ledY, state2);
-    }
-  }
+  Serial.print("AnalogRead: ");
+  Serial.println(analogRead(photoR));
+  delay(1000);
 }

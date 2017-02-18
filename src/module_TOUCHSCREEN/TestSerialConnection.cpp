@@ -1,9 +1,8 @@
-
 /**
  * Calico Home Security System
  *
  *
- */
+
 #include "Arduino.h"
 #ifndef LED_BUILTIN
 #define LED_BUILTIN 13
@@ -35,3 +34,4 @@ void loop() {
                 Serial.println(incomingByte, DEC);
         }
 }
+*/
