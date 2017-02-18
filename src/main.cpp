@@ -1,31 +1,37 @@
-/**
- * Calico Home Security System
- *
- *
- */
-#include "Arduino.h"
+#include <ComponentTester.cpp>
 
-#ifndef LED_BUILTIN
-#define LED_BUILTIN 13
-#endif
+int ledR1 = 3; //left-most red LED
+int ledR2 = 4; //Right red LED
+int ledG = 2; //green LED
+int photoR = A0; //photoresistor input
+int buzzer = 6; //speaker
 
-void setup()
-{
-  // initialize LED digital pin as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
+//Test each of the components
+void testBoardComponents(){
+  ComponentTester tester(ledR1, "LED");
+  tester.testPin();
+  tester.setPinAndMode(ledR2, "LED");
+  tester.testPin();
+  tester.setPinAndMode(ledG, "LED");
+  tester.testPin();
+  tester.setPinAndMode(photoR, "photoresistor");
+  tester.testPin();
+  tester.setPinAndMode(buzzer, "speaker");
+  tester.testPin();
 }
 
-void loop()
-{
-  // turn the LED on (HIGH is the voltage level)
-  digitalWrite(LED_BUILTIN, HIGH);
+void setup() {
+  Serial.begin(9600);  //Begin serial communcation
+  pinMode(ledR1, OUTPUT);
+  pinMode(ledR2, OUTPUT);
+  pinMode(ledG, OUTPUT);
+  pinMode(photoR, INPUT);
+  testBoardComponents();
 
-  // wait for a second
-  delay(1000);
+}
 
-  // turn the LED off by making the voltage LOW
-  digitalWrite(LED_BUILTIN, LOW);
-
-   // wait for a second
+void loop(){
+  Serial.print("AnalogRead: ");
+  Serial.println(analogRead(photoR));
   delay(1000);
 }
