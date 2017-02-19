@@ -12,6 +12,8 @@ class Component{
   public:
     int getPin();
     String getComponentType();
+    void setComponentPin(int pin);
+    void setComponentType(String componentType);
   private:
     int _pin;
     String _componentType;

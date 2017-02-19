@@ -16,3 +16,11 @@ int Component::getPin(){
 String Component::getComponentType(){
   return _componentType;
 }
+
+void Component::setComponentPin(int pin){
+  _pin = pin;
+}
+
+void Component::setComponentType(String componentType){
+  _componentType = componentType;
+}

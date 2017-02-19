@@ -4,28 +4,18 @@
 #include "Arduino.h"
 #include "LED.h"
 
-LED::LED(int pin) {
+LED::LED(int pin) : Component(pin, "LED") {
   pinMode(pin, OUTPUT);
-  _pin = pin;
   _isOn = false;
-  _componentType = "LED";
-}
-
-int LED::getPin() {
-  return _pin;
-}
-
-String LED::getComponentType() {
-  return _componentType;
 }
 
 void LED::on() {
-  digitalWrite(_pin, HIGH);
+  digitalWrite(Component::getPin(), HIGH);
   _isOn = true;
 }
 
 void LED::off() {
-  digitalWrite(_pin, LOW);
+  digitalWrite(Component::getPin(), LOW);
   _isOn = false;
 }
 

@@ -5,18 +5,15 @@
 #define LED_h
 
 #include "Arduino.h"
+#include "Component.h"
 
-class LED {
+class LED : public Component {
 public:
   LED(int pin);
-  int getPin();
-  String getComponentType();
   void on();
   void off();
   void toggle();
 private:
-  int _pin;
-  String _componentType;
   boolean _isOn;
 };
 
