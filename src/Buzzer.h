@@ -5,8 +5,9 @@
 #define Buzzer_h
 
 #include "Arduino.h"
+#include "Component.h"
 
-class Buzzer {
+class Buzzer: public Component {
 public:
   Buzzer(int pin);
   int getPin();
