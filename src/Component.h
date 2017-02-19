@@ -10,6 +10,7 @@ class Component{
   protected:
     Component(int pin, String componentType);
   public:
+    Component();
     int getPin();
     String getComponentType();
     void setComponentPin(int pin);
