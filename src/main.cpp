@@ -1,11 +1,11 @@
 #include "Arduino.h"
 
-#include <ComponentTester.cpp>
 
 #include "LED.h"
 #include "Photoresistor.h"
 #include "Buzzer.h"
 #include "Button.h"
+#include "ComponentTester.h"
 
 LED greenLED(2);
 LED redLED(3);
@@ -19,15 +19,17 @@ Button armButton(7);
 
 //Test each of the components
 void testBoardComponents(){
-  ComponentTester tester(greenLED.getPin(), greenLED.getComponentType());
+  ComponentTester tester(greenLED);
   tester.testPin();
-  tester.setPinAndMode(redLED.getPin(), redLED.getComponentType());
+  tester.setComponent(redLED);
   tester.testPin();
-  tester.setPinAndMode(alarmLED.getPin(), alarmLED.getComponentType());
+  tester.setComponent(alarmLED);
   tester.testPin();
-  tester.setPinAndMode(photoR.getPin(), photoR.getComponentType());
+  tester.setComponent(photoR);
   tester.testPin();
-  tester.setPinAndMode(buzzer.getPin(), buzzer.getComponentType());
+  tester.setComponent(buzzer);
+  tester.testPin();
+  tester.setComponent(armButton);
   tester.testPin();
 }
 
@@ -39,8 +41,8 @@ void setup() {
 void loop(){
   Serial.print("AnalogRead: ");
   Serial.println(photoR.takeReading());
-  delay(1000);
 
+  delay(1000);
   if(armButton.isPressed()) {
     buzzer.soundTone(1000);
   } else {

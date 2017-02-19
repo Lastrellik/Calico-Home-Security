@@ -9,6 +9,11 @@ Component::Component(int pin, String componentType){
   _componentType = componentType;
 }
 
+Component::Component(){
+  _pin = 13;
+  _componentType = "LED";
+}
+
 int Component::getPin(){
   return _pin;
 }
