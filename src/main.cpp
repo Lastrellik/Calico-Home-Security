@@ -6,6 +6,7 @@
 #include "Buzzer.h"
 #include "Button.h"
 #include "ComponentTester.h"
+#include "Laser.h"
 
 LED greenLED(2);
 LED redLED(3);
@@ -16,6 +17,8 @@ Photoresistor photoR(A0);
 Buzzer buzzer(6);
 
 Button armButton(7);
+
+Laser laser(8);
 
 //Test each of the components
 void testBoardComponents(){
@@ -28,6 +31,8 @@ void testBoardComponents(){
   tester.setComponent(photoR);
   tester.testPin();
   tester.setComponent(buzzer);
+  tester.testPin();
+  tester.setComponent(laser);
   tester.testPin();
   tester.setComponent(armButton);
   tester.testPin();

@@ -15,7 +15,8 @@ ComponentTester::ComponentTester(Component component) {
 void ComponentTester::testPin(){
   String componentType = _component.getComponentType();
   int pin = _component.getPin();
-  if(componentType.equalsIgnoreCase("LED")){
+  if(componentType.equalsIgnoreCase("LED") ||
+      componentType.equalsIgnoreCase("LASER")){
       digitalWrite(pin, HIGH);
       delay(_millisOn);
       digitalWrite(pin, LOW);
