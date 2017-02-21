@@ -5,16 +5,12 @@
 #define Photoresistor_h
 
 #include "Arduino.h"
+#include "Component.h"
 
-class Photoresistor {
+class Photoresistor : public Component {
 public:
   Photoresistor(int pin);
-  int getPin();
-  String getComponentType();
   int takeReading();
-private:
-  int _pin;
-  String _componentType;
 };
 
 #endif

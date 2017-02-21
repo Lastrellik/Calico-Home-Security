@@ -4,19 +4,13 @@
 #include "Arduino.h"
 #include "Button.h"
 
-Button::Button(int pin) {
+Button::Button(int pin) : Component(pin, "BUTTON"){
   pinMode(pin, INPUT);
-  _pin = pin;
-  _componentType = "BUTTON";
-}
-
-int Button::getPin() {
-  return _pin;
 }
 
 boolean Button::isPressed() {
   boolean pressed = false;
-  if (digitalRead(_pin) == HIGH) { // HIGH == Pressed
+  if (digitalRead(Component::getPin()) == HIGH) { // HIGH == Pressed
     pressed = true;
   }
   return pressed;

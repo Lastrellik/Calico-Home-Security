@@ -5,16 +5,11 @@
 #define Button_h
 
 #include "Arduino.h"
-
-class Button {
+#include "Component.h"
+class Button : public Component{
 public:
   Button(int pin);
-  int getPin();
-  String getComponentType();
   boolean isPressed();
-private:
-  int _pin;
-  String _componentType;
 };
 
 #endif
