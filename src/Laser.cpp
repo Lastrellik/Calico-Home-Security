@@ -21,7 +21,9 @@ void Laser::disengage(){
 void Laser::toggle(){
   if(_isOn){
     digitalWrite(Component::getPin(), LOW);
+    _isOn = false;
   } else {
     digitalWrite(Component::getPin(), HIGH);
+    _isOn = true;
   }
 }
