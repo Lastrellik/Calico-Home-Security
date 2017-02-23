@@ -51,6 +51,11 @@ void ComponentTester::setComponent(Component component){
   _component = component;
 }
 
+void ComponentTester::testComponent(Component component){
+  setComponent(component);
+  testPin();
+}
+
 Component ComponentTester::getComponent(){
   return _component;
 }

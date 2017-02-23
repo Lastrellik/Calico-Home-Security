@@ -24,22 +24,16 @@ Laser laser(8);
 void testBoardComponents(){
   ComponentTester tester(greenLED);
   tester.testPin();
-  tester.setComponent(redLED);
-  tester.testPin();
-  tester.setComponent(alarmLED);
-  tester.testPin();
-  tester.setComponent(photoR);
-  tester.testPin();
-  tester.setComponent(buzzer);
-  tester.testPin();
-  tester.setComponent(laser);
-  tester.testPin();
-  tester.setComponent(armButton);
-  tester.testPin();
+  tester.testComponent(redLED);
+  tester.testComponent(alarmLED);
+  tester.testComponent(photoR);
+  tester.testComponent(buzzer);
+  tester.testComponent(laser);
+  tester.testComponent(armButton);
 }
 
 void setup() {
-  Serial.begin(9600);  //Begin serial communcation
+  Serial.begin(9600);  //Begin serial communication
   testBoardComponents();
 }
 
