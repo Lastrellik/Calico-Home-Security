@@ -8,6 +8,9 @@ Laser::Laser(int pin) : Component(pin, "LASER"){
   pinMode(pin, OUTPUT);
 }
 
+Laser::Laser(){
+}
+
 void Laser::engage(){
   digitalWrite(Component::getPin(), HIGH);
   _isOn = true;

@@ -9,6 +9,7 @@
 class Button : public Component{
 public:
   Button(int pin);
+  Button();
   boolean isPressed();
 };
 

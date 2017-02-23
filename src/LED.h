@@ -10,6 +10,7 @@
 class LED : public Component {
 public:
   LED(int pin);
+  LED();
   void on();
   void off();
   void toggle();

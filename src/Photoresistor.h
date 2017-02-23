@@ -10,6 +10,7 @@
 class Photoresistor : public Component {
 public:
   Photoresistor(int pin);
+  Photoresistor();
   int takeReading();
 };
 
