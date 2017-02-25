@@ -6,7 +6,6 @@
 #define Alarm_h
 
 #include "Arduino.h"
-#include "Alarmbuilder.h"
 #include "Component.h"
 #include "LED.h"
 #include "Buzzer.h"
@@ -15,21 +14,40 @@
 #include "Button.h"
 
 class Alarm{
-  private:
-    Component _alarmLED; //LED for alarm status
-    Component _statusLED; //LED for calibration and status
-    Component _buzzer;
-    Component _laser;
-    Component _photoresistor;
-    Component _button;
 
   public:
+    Alarm();
+    void calibrate();
     void arm();
     void disarm();
-    void calibrate();
     void silence();
-    Alarm(AlarmBuilder alarmBuilder);
-    Alarm(LED alarmLED, LED statusLED, Buzzer buzzer, Laser laser, Photoresistor photoresistor, Button button);
+    void setGreenLED(LED& greenLED);
+    void setRedLED(LED& redLED);
+    void setAlarmLED(LED& alarmLED);
+    void setBuzzer(Buzzer& buzzer);
+    void setLaser(Laser& laser);
+    void setPhotoresistor(Photoresistor& photoresistor);
+    void setButton(Button& button);
+    void trigger();
+    bool isButtonPressed();
+    bool isCalibrated();
+    bool isArmed();
+    bool isTripped();
+    bool isTriggered();
+
+  private:
+    LED* _greenLED = new LED(2);
+    LED* _redLED = new LED(3);
+    LED* _alarmLED = new LED(4);
+    Photoresistor* _photoR = new Photoresistor(A0);
+    Buzzer* _buzzer = new Buzzer(6);
+    Button* _armButton = new Button(7);
+    Laser* _laser = new Laser(8);
+    bool _isArmed;
+    bool _isCalibrated;
+    bool _isTriggered;
+    int _baseReading;
+    int _threshold;
   };
 
 #endif
