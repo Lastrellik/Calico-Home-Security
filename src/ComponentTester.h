@@ -16,6 +16,7 @@ public:
   ComponentTester(Component component);
   ComponentTester();
   void testPin();
+  void testComponent(Component component);
   void setComponent(Component component);
   Component getComponent();
   void setOnTime(int onTime);
