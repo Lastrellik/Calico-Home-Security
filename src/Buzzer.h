@@ -10,6 +10,7 @@
 class Buzzer : public Component {
 public:
   Buzzer(int pin);
+  Buzzer();
   void soundTone(int frequency);
   void soundTone(int frequency, int millisOn);
   void stopTone();

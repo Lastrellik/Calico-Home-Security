@@ -10,6 +10,7 @@
 class Laser : public Component {
 public:
   Laser(int pin);
+  Laser();
   void engage();
   void disengage();
   void toggle();

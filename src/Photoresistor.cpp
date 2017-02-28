@@ -8,6 +8,9 @@ Photoresistor::Photoresistor(int pin) : Component(pin, "PHOTORESISTOR"){
   pinMode(pin, INPUT);
 }
 
+Photoresistor::Photoresistor(){
+}
+
 int Photoresistor::takeReading() {
   return analogRead(Component::getPin());
 }

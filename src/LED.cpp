@@ -8,6 +8,11 @@ LED::LED(int pin) : Component(pin, "LED") {
   pinMode(pin, OUTPUT);
   _isOn = false;
 }
+//default uses onboard LED
+LED::LED() : Component(13, "LED"){
+  pinMode(13, OUTPUT);
+  _isOn = false;
+}
 
 void LED::on() {
   digitalWrite(Component::getPin(), HIGH);

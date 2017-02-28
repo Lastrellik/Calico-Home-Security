@@ -8,6 +8,9 @@ Button::Button(int pin) : Component(pin, "BUTTON"){
   pinMode(pin, INPUT);
 }
 
+Button::Button(){
+}
+
 boolean Button::isPressed() {
   boolean pressed = false;
   if (digitalRead(Component::getPin()) == HIGH) { // HIGH == Pressed

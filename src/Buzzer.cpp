@@ -8,6 +8,9 @@ Buzzer::Buzzer(int pin) : Component(pin, "BUZZER"){
   pinMode(pin, OUTPUT);
 }
 
+Buzzer::Buzzer(){
+}
+
 void Buzzer::soundTone(int frequency) {
   tone(Component::getPin(), frequency);
 }
