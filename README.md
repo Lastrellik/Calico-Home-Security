@@ -14,8 +14,10 @@ Table of Contents
   * [Hardware](#hardware)
 - [Development](#development)
 - [Wiring Diagrams / Schematics](#wiring-diagrams--schematics)
-- [Authors](#authors)
-- [Why Calico?](#why-calico)
+- [About the Project](#about-the-project)
+  * [Authors](#authors)
+  * [Background](#background)
+  * [Why Calico?](#why-calico)
 
 Documentation
 =============
@@ -39,21 +41,39 @@ Development
 Wiring Diagrams / Schematics
 ============================
 
+The wiring diagrams are all kept in the [docs](./docs/circuit_diagrams) directory. 
+
+Note that some modules will not function when other modules are present. Please refer to the table in the [Circuit Diagrams Readme](./docs/circuit_diagrams/README.md) for a compatibility chart.
+
 * [BASE Module](./docs/circuit_diagrams/module_BASE/README.md)
 
 
+About the Project
+=================
+
 Authors
-=======
+-------
 
 * Christopher Nash
 * Tyler Jacobs
 * Dave Tille
 * Jason Bruderer
 
+Background
+----------
+
 This project was created as an assignment for our CSIS 2810 Computer Architecture course.
+
+The requirements for our project were that it must include a Micro Controller and it must be the foundation of the project. We chose to use an Arduino Uno for our project. The other requirement was that it must include at least one 'sensor' which reads in data and makes decisions based on that data.
+
+Picture in your mind the classic movie scene where the good guy is trying to break into the vault of the bad guy to get back the master plans he has stolen. To get into the vault, the good guy must pass through a maze of laser trip wires without breaking a single beam or the alarm will sound! 
+
+We wanted to replicate those laser trip wires. We also wanted to have a well architected, well documented, and totally awesome project to be able to present to the class. Thus the **Calico Home Security System** was born!
 
 
 Why Calico?
-===========
+-----------
 
 *Calico*, adj: Having sections or patches colored differently and usually brightly.
+
+We wanted our system to be modular from the very beginning. Calico seemed a fitting name.
