@@ -34,6 +34,8 @@ class Alarm{
     bool isArmed();
     bool isTripped();
     bool isTriggered();
+    bool isReadyToArm();
+    void soundOneAlarmCycle();
 
   private:
     LED* _greenLED = new LED(2);
@@ -43,11 +45,14 @@ class Alarm{
     Buzzer* _buzzer = new Buzzer(6);
     Button* _armButton = new Button(7);
     Laser* _laser = new Laser(8);
-    bool _isArmed;
-    bool _isCalibrated;
-    bool _isTriggered;
-    int _baseReading;
-    int _threshold;
+    bool _isArmed = false;
+    bool _isCalibrated = false;
+    bool _isTriggered = false;
+    int _baseReading = 0;
+    int _threshold = 100;
+    void determineBasePhotoresistorReading();
+    void alertFailedAction();
+    void alertSuccessfulAction();
   };
 
 #endif

@@ -13,6 +13,10 @@ public:
   Buzzer();
   void soundTone(int frequency);
   void soundTone(int frequency, int millisOn);
+  void soundAffirmativeTone();
+  void soundNegativeTone();
+  void soundAlarmHighTone();
+  void soundAlarmLowTone();
   void stopTone();
 };
 

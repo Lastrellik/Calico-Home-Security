@@ -11,12 +11,12 @@ Laser::Laser(int pin) : Component(pin, "LASER"){
 Laser::Laser(){
 }
 
-void Laser::engage(){
+void Laser::on(){
   digitalWrite(Component::getPin(), HIGH);
   _isOn = true;
 }
 
-void Laser::disengage(){
+void Laser::off(){
   digitalWrite(Component::getPin(), LOW);
   _isOn = false;
 }

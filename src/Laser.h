@@ -11,8 +11,8 @@ class Laser : public Component {
 public:
   Laser(int pin);
   Laser();
-  void engage();
-  void disengage();
+  void on();
+  void off();
   void toggle();
 private:
   boolean _isOn;
