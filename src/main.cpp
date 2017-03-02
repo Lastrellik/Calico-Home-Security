@@ -50,4 +50,10 @@ void loop(){
     }
   }
 
+  if(not alarm->isCalibrated()){
+    if(alarm->isButtonPressed()){
+      alarm->calibrate();
+    }
+  }
+
 }

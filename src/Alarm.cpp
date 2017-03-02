@@ -12,55 +12,57 @@
 #include "Alarm.h"
 
 Alarm::Alarm(){
-  _isArmed = false;
-  _isCalibrated = false;
-  _threshold = 100;
 }
 
 
 void Alarm::calibrate(){
-  _laser->disengage();
-  delay(500);
-  int avgReading = 0;
-  int numOfReadings = 15;
-  for(int i = 0; i < numOfReadings; i++){
-    avgReading += _photoR->takeReading();
-    delay(50);
-    _greenLED->on();
-    delay(50);
-    _greenLED->off();
-  }
-  avgReading /= numOfReadings; //get the average
-  _baseReading = avgReading;
-  delay(1000);
-  _laser->engage();
-  delay(500);
-  if(_photoR->takeReading() - 100 < _baseReading){
-    _buzzer->soundTone(500, 100);
-    _buzzer->soundTone(300, 150);
-    _redLED->on();
-    _alarmLED->on();
-    delay(3000);
-    _redLED->off();
-    _alarmLED->off();
+  determineBasePhotoresistorReading();
+  if(_photoR->takeReading() - _threshold < _baseReading){
+    alertFailedAction();
     _isCalibrated = false;
   } else {
-    _buzzer->soundTone(500, 100);
-    _buzzer->soundTone(700, 150);
-    _greenLED->on();
+    alertSuccessfulAction();
     _isCalibrated = true;
   }
 }
 
-void Alarm::arm(){
-  if (_isCalibrated){
-    _greenLED->off();
-    _alarmLED->on();
-    _isArmed = true;
-  } else {
-    _buzzer->soundTone(500, 100);
-    _buzzer->soundTone(300, 150);
+void Alarm::determineBasePhotoresistorReading(){
+  _laser->off();
+  int avgReading = 0;
+  int numOfReadings = 15;
+  for(int i = 0; i < numOfReadings; i++){
+    avgReading += _photoR->takeReading();
+    _greenLED->flash();
   }
+  _baseReading = avgReading / numOfReadings;
+  _laser->on();
+}
+
+void Alarm::alertFailedAction(){
+  _buzzer->soundNegativeTone();
+  _redLED->flash(3000);
+}
+
+void Alarm::alertSuccessfulAction(){
+  _buzzer->soundAffirmativeTone();
+  _greenLED->flash(3000);
+}
+
+void Alarm::arm(){
+  if (!this->isReadyToArm()){
+   this->alertFailedAction();
+ } else {
+   this->alertSuccessfulAction();
+   _alarmLED->on();
+   _isArmed = true;
+ }
+}
+
+bool Alarm::isReadyToArm(){
+  return(!this->isArmed()
+        && this->isCalibrated()
+        && !this->isTripped()
+        && !this->isTriggered());
 }
 
 bool Alarm::isArmed(){
@@ -74,21 +76,17 @@ bool Alarm::isTripped(){
 void Alarm::trigger(){
   _isTriggered = true;
   while(not _armButton->isPressed()){
-    _redLED->on();
-    delay(100);
-    _redLED->off();
-    delay(100);
-    _alarmLED->on();
-    delay(100);
-    _alarmLED->off();
-    delay(100);
+    this->soundOneAlarmCycle();
   }
-  //It's late. I'm just going to do this until next time.
-  _greenLED->on();
-  _alarmLED->off();
-  _redLED->off();
-  _isTriggered = false;
-  _isArmed = false;
+  this->alertSuccessfulAction();
+  this->disarm();
+}
+
+void Alarm::soundOneAlarmCycle(){
+  _buzzer->soundAlarmHighTone();
+  _redLED->flash(300);
+  _buzzer->soundAlarmLowTone();
+  _alarmLED->flash(300);
 }
 
 bool Alarm::isTriggered(){
@@ -96,6 +94,7 @@ bool Alarm::isTriggered(){
 }
 void Alarm::disarm(){
   _isTriggered = false;
+  _isArmed = false;
 
 }
 void Alarm::silence(){

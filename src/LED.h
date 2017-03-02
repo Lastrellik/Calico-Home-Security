@@ -14,6 +14,8 @@ public:
   void on();
   void off();
   void toggle();
+  void flash();
+  void flash(int millisOn);
 private:
   boolean _isOn;
 };

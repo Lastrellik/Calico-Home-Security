@@ -12,13 +12,32 @@ Buzzer::Buzzer(){
 }
 
 void Buzzer::soundTone(int frequency) {
-  tone(Component::getPin(), frequency);
+  tone(this->getPin(), frequency);
 }
 
 void Buzzer::soundTone(int frequency, int millisOn) {
-  tone(Component::getPin(), frequency, millisOn);
+  tone(this->getPin(), frequency, millisOn);
+}
+
+void Buzzer::soundAlarmHighTone(){
+  int frequency = 2000;
+  int millisOn = 333;
+  this->soundTone(frequency, millisOn);
+}
+
+void Buzzer::soundAlarmLowTone(){
+  int frequency = 1500;
+  int millisOn = 333;
+  this->soundTone(frequency, millisOn);
+}
+void Buzzer::soundAffirmativeTone(){
+  this->soundTone(800, 300);
+}
+
+void Buzzer::soundNegativeTone(){
+  this->soundTone(400, 300);
 }
 
 void Buzzer::stopTone() {
-  noTone(Component::getPin());
+  noTone(this->getPin());
 }

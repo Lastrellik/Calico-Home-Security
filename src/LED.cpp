@@ -15,12 +15,27 @@ LED::LED() : Component(13, "LED"){
 }
 
 void LED::on() {
-  digitalWrite(Component::getPin(), HIGH);
+  digitalWrite(this->getPin(), HIGH);
   _isOn = true;
 }
 
 void LED::off() {
-  digitalWrite(Component::getPin(), LOW);
+  digitalWrite(this->getPin(), LOW);
+  _isOn = false;
+}
+
+void LED::flash(){
+  this->on();
+  delay(50);
+  this->off();
+  delay(30);
+  _isOn = false;
+}
+
+void LED::flash(int millisOn){
+  this->on();
+  delay(millisOn);
+  this->off();
   _isOn = false;
 }
 
