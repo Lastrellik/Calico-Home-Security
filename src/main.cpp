@@ -1,6 +1,5 @@
 #include "Arduino.h"
 
-
 #include "LED.h"
 #include "Alarm.h"
 #include "Photoresistor.h"
@@ -10,6 +9,16 @@
 #include "Laser.h"
 
 Alarm* alarm;
+
+int baudRate = 9600;
+
+// TODO: Add conditional if around this section
+#include "module_WIFI\Wifi.h"
+Wifi* wifi;
+int rxPin = 10;
+int txPin = 11;
+String ssid = "YOUR_SSID_HERE";
+String password = "YOUR_WIRELESS_PASSWORD";
 
 //Test each of the components
 void testBoardComponents(){
@@ -33,10 +42,13 @@ void testBoardComponents(){
 }
 
 void setup() {
-  Serial.begin(9600);  //Begin serial communication
+  Serial.begin(baudRate);  //Begin serial communication
   testBoardComponents();
   alarm = new Alarm();
   alarm->calibrate();
+
+  wifi = new Wifi(rxPin, txPin);
+  wifi->initialize();
 }
 
 void loop(){
@@ -55,5 +67,5 @@ void loop(){
       alarm->calibrate();
     }
   }
-
+  wifi->checkTwoWayCommunication();
 }
