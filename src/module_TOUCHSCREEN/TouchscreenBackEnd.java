@@ -19,7 +19,7 @@ public class TouchscreenBackEnd {
 		try {
 		   while (true)
 		   {
-			  comPort.writeBytes(new byte[] {1, 2, 3, 4, 5, 6}, 1);
+			  //comPort.writeBytes(new byte[] {1, 2, 3, 4, 5, 6}, 1);
 		      Thread.sleep(1000);
 		      readBuffer = new byte[comPort.bytesAvailable()];
 		      int numRead = comPort.readBytes(readBuffer, readBuffer.length);

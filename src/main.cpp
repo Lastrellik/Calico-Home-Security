@@ -8,8 +8,11 @@
 #include "ComponentTester.h"
 #include "Laser.h"
 #include "Properties.h"
+#include "SerialComm.h"
 
 Alarm* alarm;
+SerialComm* serialComm;
+int iterations = 0;
 
 #include "module_WIFI\Wifi.h"
 Wifi* wifi;
@@ -25,7 +28,6 @@ void testBoardComponents(){
   Button armButton(7);
   Laser laser(8);
 
-
   ComponentTester tester(greenLED);
   tester.testPin();
   tester.testComponent(redLED);
@@ -40,6 +42,7 @@ void setup() {
   Serial.begin(Properties::BAUD_RATE);  //Begin serial communication
   testBoardComponents();
   alarm = new Alarm();
+  serialComm = new SerialComm();
   alarm->calibrate();
 
   if (Properties::MODULE_WIFI) {
@@ -49,6 +52,8 @@ void setup() {
 }
 
 void loop(){
+  iterations++;
+  serialComm->sendDataStream(String(iterations));
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
       alarm->arm();
