@@ -8,8 +8,11 @@
 #include "Button.h"
 #include "ComponentTester.h"
 #include "Laser.h"
+#include "SerialComm.h"
 
 Alarm* alarm;
+SerialComm* serialComm;
+int iterations = 0;
 
 //Test each of the components
 void testBoardComponents(){
@@ -20,7 +23,6 @@ void testBoardComponents(){
   Buzzer buzzer(6);
   Button armButton(7);
   Laser laser(8);
-
 
   ComponentTester tester(greenLED);
   tester.testPin();
@@ -33,13 +35,16 @@ void testBoardComponents(){
 }
 
 void setup() {
-  Serial.begin(9600);  //Begin serial communication
+  Serial.begin(9600);
   testBoardComponents();
   alarm = new Alarm();
+  serialComm = new SerialComm();
   alarm->calibrate();
 }
 
 void loop(){
+  iterations++;
+  serialComm->sendDataStream(String(iterations));
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
       alarm->arm();
