@@ -6,7 +6,7 @@
 
 #include "Arduino.h"
 #include "../lib/QueueArray.h"
-#include "../lib/Cryptosuite-master/Sha/sha256.h"
+#include "../lib/Cryptosuite/Sha/sha256.h"
 
 class SerialComm{
     public:
@@ -15,10 +15,11 @@ class SerialComm{
 
     private:
       void sendSyncRequestPacket();
-      void sendSyncAknowledgementPacket();
       void sendAcknowledgementPacket();
       void loadStringInOutputStream(String dataStream);
-      void initializeAES();
+      uint8_t* generateMessageHash(String message);
+      void printHash(uint8_t* hash);
+      bool gotCorrectHashFromDevice(uint8_t* messageHash);
       QueueArray<char> serialInputStream;
       QueueArray<char> serialOutputStream;
       bool establishedSocketWithRemoteHost = false;

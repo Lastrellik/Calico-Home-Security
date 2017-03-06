@@ -17,14 +17,18 @@ public class TouchscreenBackEnd {
 		comPort.openPort();
 		comPort.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING, 0, 0);
 		try {
-		   while (true)
-		   {
+		   while (true){
+			   if(comPort.bytesAvailable() > 0){
+				   Thread.sleep(100);
+				   readBuffer = new byte[comPort.bytesAvailable()];
+				   int numRead = comPort.readBytes(readBuffer, readBuffer.length);
+				   System.out.println(new String(readBuffer));
+				   
+			   }
+			  
 			  //comPort.writeBytes(new byte[] {1, 2, 3, 4, 5, 6}, 1);
 		      Thread.sleep(1000);
-		      readBuffer = new byte[comPort.bytesAvailable()];
-		      int numRead = comPort.readBytes(readBuffer, readBuffer.length);
-		      System.out.println("Read " + numRead + " bytes.");
-		      System.out.println(new String(readBuffer));
+		      //System.out.println("Read " + numRead + " bytes.");
 		   }
 		} catch (Exception e) { e.printStackTrace(); }
 		comPort.closePort();

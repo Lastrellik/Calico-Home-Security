@@ -52,8 +52,6 @@ void setup() {
 }
 
 void loop(){
-  iterations++;
-  serialComm->sendDataStream(String(iterations));
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
       alarm->arm();
