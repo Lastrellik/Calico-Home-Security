@@ -43,6 +43,7 @@ void setup() {
 }
 
 void loop(){
+  
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
       alarm->arm();
@@ -50,6 +51,7 @@ void loop(){
   } else {
     if(alarm->isTripped()){
       alarm->trigger();
+      serialComm->sendDataStream("Alarm has been triggered");
     }
   }
 
