@@ -19,7 +19,7 @@ void SerialComm::sendDataStream(String dataStream){
     Serial.print(serialOutputStream.dequeue());
   }
   Serial.println();
-  } while (gotCorrectHashFromDevice(messageHash) && communicationAttempts <= 3);
+} while (gotCorrectHashFromDevice(messageHash) && communicationAttempts++ <= 3);
 }
 
 bool SerialComm::gotCorrectHashFromDevice(uint8_t* messageHash){
@@ -41,12 +41,6 @@ void SerialComm::loadStringInOutputStream(String dataStream){
   for(char c : dataStream){
     serialOutputStream.enqueue(c);
   }
-}
-
-void SerialComm::sendSyncRequestPacket(){
-}
-
-void SerialAcknowledgementPacket(){
 }
 //for debugging. Should delete before committing
 void SerialComm::printHash(uint8_t* hash) {

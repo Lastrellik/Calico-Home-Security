@@ -1,11 +1,3 @@
-/**
- * Salt Lake Community College
- * Spring 2017 Semester
- * CSIS-2810 Computer Architecture
- * Instructor: Jon McGowan
- * 
- */
-
 package module_TOUCHSCREEN;
 
 public class TouchscreenApp {
@@ -14,8 +6,19 @@ public class TouchscreenApp {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		SerialInputListener inputListener = new SerialInputListener();
+		Thread listener = new Thread(inputListener, "Listener");
+		listener.start();
+		while(true){
+			for(byte b : inputListener.readAll()){
+				System.out.print((char)b);}
+			try {
+				Thread.sleep(1000);
+				System.out.println();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

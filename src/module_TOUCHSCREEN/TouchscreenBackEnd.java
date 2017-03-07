@@ -6,7 +6,7 @@
  * 
  */
 
-package module_TOUCHSCREEN;
+/*package module_TOUCHSCREEN;
 
 import com.fazecast.jSerialComm.*;
 
@@ -33,4 +33,4 @@ public class TouchscreenBackEnd {
 		} catch (Exception e) { e.printStackTrace(); }
 		comPort.closePort();
 	}
-}
+}*/
