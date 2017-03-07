@@ -7,18 +7,13 @@
 #include "Button.h"
 #include "ComponentTester.h"
 #include "Laser.h"
+#include "Properties.h"
 
 Alarm* alarm;
 
-int baudRate = 9600;
-
-// TODO: Add conditional if around this section
 #include "module_WIFI\Wifi.h"
 Wifi* wifi;
-int rxPin = 10;
-int txPin = 11;
-String ssid = "YOUR_SSID_HERE";
-String password = "YOUR_WIRELESS_PASSWORD";
+
 
 //Test each of the components
 void testBoardComponents(){
@@ -42,13 +37,15 @@ void testBoardComponents(){
 }
 
 void setup() {
-  Serial.begin(baudRate);  //Begin serial communication
+  Serial.begin(Properties::BAUD_RATE);  //Begin serial communication
   testBoardComponents();
   alarm = new Alarm();
   alarm->calibrate();
 
-  wifi = new Wifi(rxPin, txPin);
-  wifi->initialize();
+  if (Properties::MODULE_WIFI) {
+    wifi = new Wifi(Properties::WIFI_RX_PIN, Properties::WIFI_TX_PIN);
+    wifi->initialize();
+  }
 }
 
 void loop(){
