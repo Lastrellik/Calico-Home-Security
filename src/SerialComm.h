@@ -5,21 +5,19 @@
 #define SerialComm_h
 
 #include "Arduino.h"
-#include "../lib/QueueArray.h"
-#include "../lib/Cryptosuite/Sha/sha256.h"
+#include "DataPacket.h"
 
 class SerialComm{
     public:
-      SerialComm();
-      void sendDataStream(String dataStream);
-
+      static void sendLogMessage(String logMessage);
+      static void sendCommandMessage(String commandMessage);
+      static void sendInfoMessage(String infoMessage);
+      static bool hasDataPacket();
+      static DataPacket getDataPacket();
     private:
-      void loadStringInOutputStream(String dataStream);
-      uint8_t* generateMessageHash(String message);
-      void printHash(uint8_t* hash);
-      bool gotCorrectHashFromDevice(uint8_t* messageHash);
-      QueueArray<char> serialInputStream;
-      QueueArray<char> serialOutputStream;
+      static void sendDataPacket(DataPacket packet);
+      static bool recievedValidHashResponse(byte* validSha256Hash);
+      static bool recievedSha256HashBeforeTimeout();
 };
 
 #endif
