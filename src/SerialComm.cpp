@@ -42,6 +42,7 @@ void SerialComm::loadStringInOutputStream(String dataStream){
     serialOutputStream.enqueue(c);
   }
 }
+
 //for debugging. Should delete before committing
 void SerialComm::printHash(uint8_t* hash) {
   int i;
