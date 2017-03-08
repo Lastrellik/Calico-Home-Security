@@ -5,10 +5,10 @@ The WIFI Module uses an [ESP8266](https://en.wikipedia.org/wiki/ESP8266) to add 
 This wireless functionality allows you to be notified when the alarm is triggered.
 
 * [Parts](#parts)
-* [Bread Board Diagram](#bread_board_diagram)
-* [Schematic Diagram](#schematic_diagram)
+* [Bread Board Diagram](#bread-board-diagram)
+* [Schematic Diagram](#schematic-diagram)
 * [Setup Instructions](#setup)
-* [Future Development Ideas](#future_development_ideas)
+* [Future Development Ideas](#future-development-ideas)
 
 
 Parts
@@ -39,8 +39,8 @@ The **ESP8266** needs a few steps before it can be ready to communicate with the
 
 Once you have followed all the steps in both the IFTTT and ESP8266 Setup sections, make sure you have configured your Wifi Settings within the Properties.cpp file. There you will need to set your 
 
-* [IFTTT Setup](#ifttt_setup)
-* [ESP8266 Setup](#esp8266_setup)
+* [IFTTT Setup](#ifttt-setup)
+* [ESP8266 Setup](#esp8266-setup)
 
 Future Development Ideas
 ======================
