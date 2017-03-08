@@ -46,6 +46,7 @@ The wiring diagrams are all kept in the [docs](./docs/circuit_diagrams) director
 Note that some modules will not function when other modules are present. Please refer to the table in the [Circuit Diagrams Readme](./docs/circuit_diagrams/README.md) for a compatibility chart.
 
 * [BASE Module](./docs/circuit_diagrams/module_BASE/README.md)
+* [WIFI Module](./docs/circuit_diagrams/module_WIFI/README.md)
 
 
 About the Project
