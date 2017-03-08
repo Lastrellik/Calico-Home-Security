@@ -172,7 +172,7 @@ Make Sure Arduino and ESP8266 can communicate with each other
 	Got response from ESP8266: OK
 	```
 
-5. Congratulations - your EPS8266 and your Arduino Uno are successfully communicating with each other! At this point you can 
+5. Congratulations - your EPS8266 and your Arduino Uno are successfully communicating with each other! At this point you can go and upload the actual project's code to your Arduino. 
 
 
 In Case Of Emergency
