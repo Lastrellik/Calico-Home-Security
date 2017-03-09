@@ -64,5 +64,5 @@ void loop(){
       alarm->calibrate();
     }
   }
-  wifi->checkTwoWayCommunication();
+
 }

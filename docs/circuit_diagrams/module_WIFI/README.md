@@ -37,7 +37,7 @@ Setup
 =====
 The **ESP8266** needs a few steps before it can be ready to communicate with the Arduino. You also need to create an **IFTTT** (*IF This Then That*) account and configure a **Maker** channel and create an IFTTT **Applet**.
 
-Once you have followed all the steps in both the IFTTT and ESP8266 Setup sections, make sure you have configured your Wifi Settings within the Properties.cpp file. There you will need to set your 
+Once you have followed all the steps in both the IFTTT and ESP8266 Setup sections, make sure you have configured your Wifi Settings within the Properties.cpp file. There you will need to set your
 
 * [IFTTT Setup](#ifttt-setup)
 * [ESP8266 Setup](#esp8266-setup)
@@ -45,7 +45,7 @@ Once you have followed all the steps in both the IFTTT and ESP8266 Setup section
 Future Development Ideas
 ======================
 
-Initially, the Wifi module is only able to notify you when the alarm is triggered. It is also using IFTTT for that notification. We opted to go this route because it had the fewest 'moving pieces' and made it so we didn't have to maintain any other infrustructure pieces ourselves. 
+Initially, the Wifi module is only able to notify you when the alarm is triggered. It is also using IFTTT for that notification. We opted to go this route because it had the fewest 'moving pieces' and made it so we didn't have to maintain any other infrustructure pieces ourselves.
 
 However, there is no reason why there couldn't be the ability to take external commands in from the ESP8266 and have those control the alarm. A common framework/standard that people use with ESP8266's and connected them to the IoT is called [MQTT](http://mqtt.org/). Utilizing MQTT would involve setting up a broker service which you call with the ESP8266 to _publish_ events. The ESP8266 can also be configured to _pull_ events from the broker as well. In theory you could publish an event through some external means (an app, a website, etc.) into the MQTT broken with a message to "Arm" the alarm. The ESP8266 would _pull_ that message and then send a message to the Arduino Uno telling it to arm.
 
@@ -66,21 +66,21 @@ At the top of the screen in large letters there will be a banner which says some
 
 Now we need to create an Applet in IFTTT.
 
-1. Navigate to the [My Applets](https://ifttt.com/my_applets) page in IFTTT. We are going to need to create an applet for the `Maker` channel which will send a notification to our phone. 
-2. Click on the `New Applet` button. 
-3. Set the "This" to be the Maker channel. 
-4. Click on the `Receive a web request` box. 
-5. Set the Event Name to `alarm_triggered` _(Note that you can configure this to be something different if you'd like in the Properties.cpp file. Just make sure it matches what you type in here.)_. 
-6. Click the `Create Trigger` button. 
+1. Navigate to the [My Applets](https://ifttt.com/my_applets) page in IFTTT. We are going to need to create an applet for the `Maker` channel which will send a notification to our phone.
+2. Click on the `New Applet` button.
+3. Set the "This" to be the Maker channel.
+4. Click on the `Receive a web request` box.
+5. Set the Event Name to `alarm_tripped` _(Note that you can configure this to be something different if you'd like in the Properties.cpp file. Just make sure it matches what you type in here.)_.
+6. Click the `Create Trigger` button.
 7. Set the "That" to be the `Notifications` channel.
-8. Click the `Send a notification` box. 
+8. Click the `Send a notification` box.
 9. Set the Notification to be `The event named "{{EventName}}" occurred {{OccurredAt}} on the Maker service. Value 1 was {{Value1}}. Value 2 was {{Value2}}. Value 3 was {{Value3}}.`  _(Note you can really set this to be whatever you want. This is just an example notification that you can tweak in the future to be whatever you like it to be.)_
-10. Click the `Create Action` button. 
+10. Click the `Create Action` button.
 11. Click the `Finish` button.
 
 You are now configured to use IFTTT! Make sure you have included the key in the Properties.cpp file or your notifications sent when the alarm is triggered will not function.
 
-**Want to have some additional fun?** See what other channels you can add an also trigger when an alarm is triggered. For example, you could have it send you a text. You could have it send you a tweet or post on your Facebook page. You could have it turn on your Phillips Hue lights. You could... you get the idea. Welcome to the conected world of IFTTT!
+**Want to have some additional fun?** See what other channels you can add an also trigger when an alarm is triggered. For example, you could have it send you a text. You could have it send you a tweet or post on your Facebook page. You could log every event in a Google Spreadsheet. You could have it turn on your Phillips Hue lights. You could... you get the idea. Welcome to the connected world of IFTTT!
 
 
 
@@ -172,7 +172,7 @@ Make Sure Arduino and ESP8266 can communicate with each other
 	Got response from ESP8266: OK
 	```
 
-5. Congratulations - your EPS8266 and your Arduino Uno are successfully communicating with each other! At this point you can go and upload the actual project's code to your Arduino. 
+5. Congratulations - your EPS8266 and your Arduino Uno are successfully communicating with each other! At this point you can go and upload the actual project's code to your Arduino.
 
 
 In Case Of Emergency

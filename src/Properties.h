@@ -1,5 +1,10 @@
 /*
-  Properties.h - A class for Wifi Properties
+  Properties.h - A class for Properties
+
+  This class is intended to be included in any class which needs access to various Properties.
+  For example, if your class needs to know whether the PI module is activte or not then
+  you should include Properties.h in your class and call Properties::MODULE_PI to see
+  whether it is configured to be true or not.
 */
 
 #ifndef Properties_h
@@ -12,6 +17,7 @@ class Properties {
 
   public:
     // ********** GENERAL ********** //
+    static boolean DEBUGGING_ACTIVE;
     static int BAUD_RATE;
 
 
@@ -26,6 +32,8 @@ class Properties {
     static int WIFI_TX_PIN;
     static String WIFI_SSID;
     static String WIFI_PASSWORD;
+    static String IFTTT_MAKER_KEY;
+    static String IFTTT_MAKER_EVENT;
 
   private:
 

@@ -21,7 +21,7 @@ class Wifi { // TODO: I'd like to make this extend Component but the Wifi module
     void initialize();
     void beginSerialCommunication();
     void checkTwoWayCommunication();
-    // void connectToAccessPoint();
+    void connectToAccessPoint();
     // void sendNotification();
 
   private:
