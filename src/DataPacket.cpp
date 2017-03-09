@@ -3,7 +3,10 @@
 */
 #include "Arduino.h"
 #include "DataPacket.h"
-#include "../lib/Cryptosuite/Sha/sha256.h"
+#include "../lib/Cryptosuite/Sha/sha1.h"
+
+#define SIZE_OF_SHA1_IN_BYTES 20
+#define SIZE_OF_DATAPACKET_IN_BYTES 64
 
 DataPacket::DataPacket(String messageString, String packetTypeString){
   packetTypeString.toUpperCase();
@@ -15,7 +18,7 @@ DataPacket::DataPacket(String messageString, String packetTypeString){
 }
 
 DataPacket::DataPacket(byte* packetContents){
-  parseSha256FromRawPacket(packetContents);
+  parseSha1FromRawPacket(packetContents);
   parsePacketTypeFromRawPacket(packetContents);
 
 }
@@ -24,12 +27,12 @@ byte* DataPacket::getPacketAsArray(){
   return packetAsArray;
 }
 
-byte* DataPacket::getPacketSha256Hash(){
-  return sha256MessageHash;
+byte* DataPacket::getPacketSha1Hash(){
+  return sha1MessageHash;
 }
 
 int DataPacket::getSizeInBytes(){
-  return 64;
+  return SIZE_OF_DATAPACKET_IN_BYTES;
 }
 
 void DataPacket::appendPacketHeader(){
@@ -38,12 +41,12 @@ void DataPacket::appendPacketHeader(){
 }
 
 void DataPacket::appendHash(){
-  Sha256.init();
-  Sha256.print(messageString);
-  for(int i = 0; i < 32; i++){
-    sha256MessageHash[i] = Sha256.result()[i];
+  Sha1.init();
+  Sha1.print(messageString);
+  for(int i = 0; i < SIZE_OF_SHA1_IN_BYTES; i++){
+    sha1MessageHash[i] = Sha1.result()[i];
   }
-  append(sha256MessageHash);
+  append(sha1MessageHash);
 }
 
 void DataPacket::appendPacketTypeByte(){
@@ -74,15 +77,15 @@ void DataPacket::append(byte singleRawByte){
   packetAsArray[arrayCounter++] = singleRawByte;
 }
 
-void DataPacket::parseSha256FromRawPacket(byte* packetContents){
-  int sha256HashEnd = 32;
-  for(int i = 0; i < sha256HashEnd; i++){
-    sha256MessageHash[i] = packetContents[i + 1];
+void DataPacket::parseSha1FromRawPacket(byte* packetContents){
+  for(int i = 0; i < SIZE_OF_SHA1_IN_BYTES; i++){
+    sha1MessageHash[i] = packetContents[i + 1];
   }
 }
 
 void DataPacket::parsePacketTypeFromRawPacket(byte* packetContents){
-  switch(packetContents[33]){
+  byte packetTypeBytePositionInArray = SIZE_OF_SHA1_IN_BYTES + 1;
+  switch(packetContents[packetTypeBytePositionInArray]){
     case 0:
       packetTypeString = "LOG";
       break;
@@ -96,7 +99,7 @@ void DataPacket::parsePacketTypeFromRawPacket(byte* packetContents){
 }
 
 void DataPacket::parseMessageFromRawPacket(byte* packetContents){
-  for(int i = 33; i <= 63; i++){
+  for(int i = SIZE_OF_SHA1_IN_BYTES + 1; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
     messageString += packetContents[i];
   }
 }

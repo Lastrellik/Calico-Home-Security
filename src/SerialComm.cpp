@@ -5,6 +5,9 @@
 #include "SerialComm.h"
 #include "DataPacket.h"
 
+#define SIZE_OF_SHA1_IN_BYTES 20
+#define SIZE_OF_DATAPACKET_IN_BYTES 64
+
 void SerialComm::sendLogMessage(String logMessage){
   DataPacket logPacket(logMessage, "LOG");
   sendDataPacket(logPacket);
@@ -26,17 +29,16 @@ void SerialComm::sendDataPacket(DataPacket packet){
   do {
     Serial.flush();
     Serial.write(packet.getPacketAsArray(), packet.getSizeInBytes());
-  } while(!recievedValidHashResponse(packet.getPacketSha256Hash()) &&
+  } while(!recievedValidHashResponse(packet.getPacketSha1Hash()) &&
       numOfAttempts++ < numOfAttemptsBeforeTimeout);
 }
 
-bool SerialComm::recievedValidHashResponse(byte* validSha256Hash){
-  int sizeOfSha256HashInBytes = 32;
-  if(!recievedSha256HashBeforeTimeout()){
+bool SerialComm::recievedValidHashResponse(byte* validSha1Hash){
+  if(!recievedSha1HashBeforeTimeout()){
     return false;
   } else {
-    for(int i = 0; i < sizeOfSha256HashInBytes; i++){
-      if(validSha256Hash[i] != Serial.read()){
+    for(int i = 0; i < SIZE_OF_SHA1_IN_BYTES; i++){
+      if(validSha1Hash[i] != Serial.read()){
         return false;
       }
     }
@@ -44,11 +46,10 @@ bool SerialComm::recievedValidHashResponse(byte* validSha256Hash){
   return true;
 }
 
-bool SerialComm::recievedSha256HashBeforeTimeout(){
+bool SerialComm::recievedSha1HashBeforeTimeout(){
   int millisWaitedForResponse = 1;
   int millisBeforeTimeout = 1000;
-  int sizeOfSha256HashInBytes = 32;
-  while(Serial.available() != sizeOfSha256HashInBytes
+  while(Serial.available() != SIZE_OF_DATAPACKET_IN_BYTES
             && millisWaitedForResponse < millisBeforeTimeout){
     delay(millisWaitedForResponse++);
   }
@@ -56,12 +57,11 @@ bool SerialComm::recievedSha256HashBeforeTimeout(){
 }
 
 bool SerialComm::hasDataPacket(){
-  int serialInputBufferSizeInBytes = 64;
-  return(Serial.peek() == '~' && Serial.available() == serialInputBufferSizeInBytes);
+  return(Serial.peek() == '~' && Serial.available() == SIZE_OF_DATAPACKET_IN_BYTES);
 }
 
 DataPacket SerialComm::getDataPacket(){
-  byte rawPacketData[64];
+  byte rawPacketData[SIZE_OF_DATAPACKET_IN_BYTES];
   if(hasDataPacket()){
     Serial.readBytes(rawPacketData, Serial.available());
     return DataPacket(rawPacketData);
