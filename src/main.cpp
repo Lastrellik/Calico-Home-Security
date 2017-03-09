@@ -1,6 +1,5 @@
 #include "Arduino.h"
 
-
 #include "LED.h"
 #include "Alarm.h"
 #include "Photoresistor.h"
@@ -8,8 +7,13 @@
 #include "Button.h"
 #include "ComponentTester.h"
 #include "Laser.h"
+#include "Properties.h"
 
 Alarm* alarm;
+
+#include "module_WIFI\Wifi.h"
+Wifi* wifi;
+
 
 //Test each of the components
 void testBoardComponents(){
@@ -33,10 +37,15 @@ void testBoardComponents(){
 }
 
 void setup() {
-  Serial.begin(9600);  //Begin serial communication
+  Serial.begin(Properties::BAUD_RATE);  //Begin serial communication
   testBoardComponents();
   alarm = new Alarm();
   alarm->calibrate();
+
+  if (Properties::MODULE_WIFI) {
+    wifi = new Wifi(Properties::WIFI_RX_PIN, Properties::WIFI_TX_PIN);
+    wifi->initialize();
+  }
 }
 
 void loop(){
