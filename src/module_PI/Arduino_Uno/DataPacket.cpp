@@ -18,9 +18,7 @@ DataPacket::DataPacket(String messageString, String packetTypeString){
 }
 
 DataPacket::DataPacket(byte* packetContents){
-  for(int i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
-  packetHash[i] = packetContents[i];
-  }
+  parsePacketArray(packetContents);
   parseSha1FromRawPacket(packetContents);
   parsePacketTypeFromRawPacket(packetContents);
   parseMessageFromRawPacket(packetContents);
@@ -88,6 +86,12 @@ void DataPacket::append(byte rawData[], int length){
 
 void DataPacket::append(byte singleRawByte){
   packetAsArray[arrayCounter++] = singleRawByte;
+}
+
+void DataPacket::parsePacketArray(byte* packetContents){
+  for(int i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
+    packetAsArray[i] = packetContents[i];
+  }
 }
 
 void DataPacket::parseSha1FromRawPacket(byte* packetContents){

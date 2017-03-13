@@ -17,7 +17,7 @@ class SerialComm{
       static void sendInfoMessage(String infoMessage);
       static void sendInstructionRequest();
       static bool hasDataPacket();
-      static DataPacket getDataPacket();
+      static DataPacket getDataPacketIfAvailable();
     private:
       static void sendDataPacket(DataPacket packet);
       static bool recievedValidHashResponse(byte* validSha1Hash);
