@@ -4,15 +4,32 @@ import java.util.LinkedList;
 
 public class SerialInputListener extends SerialComm implements Runnable {
 
+	private final int SIZE_OF_PACKET_IN_BYTES = 64;
+	
 	@Override
 	public void run() {
-		while (true)
+		while (true){
 			listen();
+			createPacketIfAvailable();
+		}
 	}
 
 	public SerialInputListener() {
-		serialInputStream = new LinkedList<>();
+		serialInputStream = new LinkedList<Byte>();
+		packetInputStream = new LinkedList<DataPacket>();
 		comPort.openPort();
+	}
+	
+	public boolean isPacketAvailable(){
+		return !packetInputStream.isEmpty();
+	}
+	
+	public boolean isDataStreamEmpty(){
+		return(serialInputStream.isEmpty());
+	}
+	
+	public DataPacket getDataPacket(){
+		return packetInputStream.remove();
 	}
 
 	private void listen() {
@@ -21,10 +38,35 @@ public class SerialInputListener extends SerialComm implements Runnable {
 			comPort.readBytes(readBuffer, readBuffer.length);
 			for (byte b : readBuffer) serialInputStream.add(b);
 		}
-		pause(500);
+		pause(100);
+	}
+	
+	private void createPacketIfAvailable(){
+		DataPacket packet;
+		if(isRawPacketAvailable()){
+			byte[] rawPacketData = new byte[SIZE_OF_PACKET_IN_BYTES];
+			for(int i = 0; i < SIZE_OF_PACKET_IN_BYTES; i++){
+				rawPacketData[i] = serialInputStream.remove();
+			}
+			packet = new DataPacket(rawPacketData);
+			packetInputStream.add(packet);
+			sendPacketHashBackToArduino(packet);
+		}
+	}
+	
+	private void sendPacketHashBackToArduino(DataPacket packet){
+		comPort.writeBytes(packet.getPacketSha1Hash(), 8);
+	}
+	
+	private boolean isRawPacketAvailable(){
+		if(!serialInputStream.isEmpty()){
+			return(serialInputStream.peek() == '~' && serialInputStream.size() == SIZE_OF_PACKET_IN_BYTES);
+		} else {
+			return false;
+		}
 	}
 
-	public byte[] readAll() {
+	public byte[] flush() {
 		byte[] wholeStream = new byte[serialInputStream.size()];
 		for (int i = 0; i < serialInputStream.size(); i++) {
 			wholeStream[i] = serialInputStream.remove();

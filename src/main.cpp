@@ -36,20 +36,21 @@ void testBoardComponents(){
 
 void setup() {
   Serial.begin(9600);
-  testBoardComponents();
+  //testBoardComponents();
   alarm = new Alarm();
   serialComm = new SerialComm();
   alarm->calibrate();
 }
 
 void loop(){
-
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
+      SerialComm::sendLogMessage("Alarm Armed");
       alarm->arm();
     }
   } else {
     if(alarm->isTripped()){
+      SerialComm::sendLogMessage("Alarm Tripped");
       alarm->trigger();
     }
   }

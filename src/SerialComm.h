@@ -7,7 +7,7 @@
 #include "Arduino.h"
 #include "DataPacket.h"
 
-#define SIZE_OF_SHA1_IN_BYTES 20
+#define SIZE_OF_HASH_IN_PACKET 8
 #define SIZE_OF_DATAPACKET_IN_BYTES 64
 
 class SerialComm{
@@ -15,6 +15,7 @@ class SerialComm{
       static void sendLogMessage(String logMessage);
       static void sendCommandMessage(String commandMessage);
       static void sendInfoMessage(String infoMessage);
+      static void sendInstructionRequest();
       static bool hasDataPacket();
       static DataPacket getDataPacket();
     private:

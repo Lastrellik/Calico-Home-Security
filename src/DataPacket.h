@@ -7,7 +7,7 @@
 #include "Arduino.h"
 #include "../lib/Cryptosuite/Sha/sha1.h"
 
-#define SIZE_OF_SHA1_IN_BYTES 20
+#define SIZE_OF_HASH_IN_PACKET 8
 #define SIZE_OF_DATAPACKET_IN_BYTES 64
 
 class DataPacket{
@@ -15,21 +15,22 @@ class DataPacket{
       DataPacket(String message, String packetType);
       DataPacket(byte* packetContents);
       byte* getPacketAsArray();
-      byte* getPacketSha1Hash();
+      byte* getPacketHash();
       int getSizeInBytes();
-      DataPacket getDataPacket();
+      String getPacketType();
+      String getMessage();
     private:
       void appendPacketHeader();
       void appendHash();
       void appendPacketTypeByte();
       void appendMessage();
-      void append(byte rawData[]);
+      void append(byte rawData[], int length);
       void append(byte singleRawByte);
       void parseSha1FromRawPacket(byte* packetContents);
       void parsePacketTypeFromRawPacket(byte* packetContents);
       void parseMessageFromRawPacket(byte* packetContents);
       int arrayCounter = 1;
-      byte sha1MessageHash[SIZE_OF_SHA1_IN_BYTES];
+      byte packetHash[SIZE_OF_HASH_IN_PACKET];
       byte packetAsArray[SIZE_OF_DATAPACKET_IN_BYTES] { '~' };
       String messageString;
       String packetTypeString;
