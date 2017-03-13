@@ -8,7 +8,7 @@
 #include "ComponentTester.h"
 #include "Laser.h"
 #include "Properties.h"
-#include "SerialComm.h"
+#include "module_TOUCHSCREEN/SerialComm.h"
 
 Alarm* alarm;
 SerialComm* serialComm;

@@ -12,7 +12,7 @@
 #include "Laser.h"
 #include "Photoresistor.h"
 #include "Button.h"
-#include "SerialComm.h"
+#include "module_TOUCHSCREEN/SerialComm.h"
 #include "Properties.h"
 
 class Alarm{
