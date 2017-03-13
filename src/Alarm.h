@@ -12,6 +12,8 @@
 #include "Laser.h"
 #include "Photoresistor.h"
 #include "Button.h"
+#include "SerialComm.h"
+#include "Properties.h"
 
 class Alarm{
 
