@@ -17,7 +17,6 @@ int iterations = 0;
 #include "module_WIFI\Wifi.h"
 Wifi* wifi;
 
-
 //Test each of the components
 void testBoardComponents(){
   LED greenLED(2);
