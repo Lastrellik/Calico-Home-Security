@@ -9,13 +9,21 @@ public class TouchscreenApp {
 		SerialInputListener inputListener = new SerialInputListener();
 		Thread listener = new Thread(inputListener, "Listener");
 		listener.start();
+		DataPacket packet;
 		while(true){
-			for(byte b : inputListener.readAll()){
-				System.out.print((char)b);}
-			try {
-				Thread.sleep(1000);
+			//System.out.println(inputListener.isPacketAvailable());
+			if(inputListener.isPacketAvailable()){
+				packet = inputListener.getDataPacket();
+				System.out.println("Packet Type: " + packet.getPacketType());
+				System.out.print("Packet raw hash: ");
+				for(byte b : packet.getPacketSha1Hash()) System.out.print(b + " ");
 				System.out.println();
+				System.out.println("Packet Message: " + packet.getMessage());
+			}
+			try {
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

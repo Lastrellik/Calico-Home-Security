@@ -1,23 +1,18 @@
 package module_TOUCHSCREEN;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import com.fazecast.jSerialComm.*;
 
 abstract class SerialComm {
-	protected Queue<Byte> serialOutputStream;
+	protected Queue<DataPacket> serialPacketOutputStream;
 	protected static Queue<Byte> serialInputStream;
-	protected MessageDigest digest;
+	protected static Queue<DataPacket> packetInputStream;
 	protected SerialPort comPort;
 
 	public SerialComm() {
 		try {
-			digest = MessageDigest.getInstance("SHA-256");
 			comPort = getArduinoCommPort();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
 		} catch (NoSuchElementException n) {
 			n.printStackTrace();
 		}

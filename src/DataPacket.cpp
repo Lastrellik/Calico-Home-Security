@@ -5,12 +5,11 @@
 #include "DataPacket.h"
 #include "../lib/Cryptosuite/Sha/sha1.h"
 
-#define SIZE_OF_SHA1_IN_BYTES 20
+#define SIZE_OF_HASH_IN_PACKET 8
 #define SIZE_OF_DATAPACKET_IN_BYTES 64
 
 DataPacket::DataPacket(String messageString, String packetTypeString){
   packetTypeString.toUpperCase();
-  messageString.toUpperCase();
   this->messageString = messageString;
   this->packetTypeString = packetTypeString;
   appendPacketHeader();
@@ -18,21 +17,32 @@ DataPacket::DataPacket(String messageString, String packetTypeString){
 }
 
 DataPacket::DataPacket(byte* packetContents){
+  for(int i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
+  packetHash[i] = packetContents[i];
+  }
   parseSha1FromRawPacket(packetContents);
   parsePacketTypeFromRawPacket(packetContents);
-
+  parseMessageFromRawPacket(packetContents);
 }
 
 byte* DataPacket::getPacketAsArray(){
   return packetAsArray;
 }
 
-byte* DataPacket::getPacketSha1Hash(){
-  return sha1MessageHash;
+byte* DataPacket::getPacketHash(){
+  return packetHash;
 }
 
 int DataPacket::getSizeInBytes(){
   return SIZE_OF_DATAPACKET_IN_BYTES;
+}
+
+String DataPacket::getPacketType(){
+  return packetTypeString;
+}
+
+String DataPacket::getMessage(){
+  return messageString;
 }
 
 void DataPacket::appendPacketHeader(){
@@ -43,10 +53,10 @@ void DataPacket::appendPacketHeader(){
 void DataPacket::appendHash(){
   Sha1.init();
   Sha1.print(messageString);
-  for(int i = 0; i < SIZE_OF_SHA1_IN_BYTES; i++){
-    sha1MessageHash[i] = Sha1.result()[i];
+  for(int i = 0; i < SIZE_OF_HASH_IN_PACKET; i++){
+    packetHash[i] = Sha1.result()[i];
   }
-  append(sha1MessageHash);
+  append(packetHash, SIZE_OF_HASH_IN_PACKET);
 }
 
 void DataPacket::appendPacketTypeByte(){
@@ -57,18 +67,20 @@ void DataPacket::appendPacketTypeByte(){
     packetTypeByte = 1;
   } else if (packetTypeString == "INFO"){
     packetTypeByte = 2;
+  } else if (packetTypeString == "REQUEST"){
+    packetTypeByte = 3;
   }
   append(packetTypeByte);
 }
 
 void DataPacket::appendMessage(){
-  byte messageByte[messageString.length()];
-  messageString.getBytes(messageByte, messageString.length());
-  append(messageByte);
+  byte messageByte[messageString.length() + 1];
+  messageString.getBytes(messageByte, messageString.length() + 1);
+  append(messageByte, messageString.length());
 }
 
-void DataPacket::append(byte rawData[]){
-  for(uint8_t i = 0; i < sizeof(rawData)/sizeof(byte); i++){
+void DataPacket::append(byte rawData[], int length){
+  for(uint8_t i = 0; i < length; i++){
     append(rawData[i]);
   }
 }
@@ -78,13 +90,13 @@ void DataPacket::append(byte singleRawByte){
 }
 
 void DataPacket::parseSha1FromRawPacket(byte* packetContents){
-  for(int i = 0; i < SIZE_OF_SHA1_IN_BYTES; i++){
-    sha1MessageHash[i] = packetContents[i + 1];
+  for(int i = 0; i < SIZE_OF_HASH_IN_PACKET; i++){
+    packetHash[i] = packetContents[i + 1];
   }
 }
 
 void DataPacket::parsePacketTypeFromRawPacket(byte* packetContents){
-  byte packetTypeBytePositionInArray = SIZE_OF_SHA1_IN_BYTES + 1;
+  byte packetTypeBytePositionInArray = SIZE_OF_HASH_IN_PACKET + 1;
   switch(packetContents[packetTypeBytePositionInArray]){
     case 0:
       packetTypeString = "LOG";
@@ -95,11 +107,14 @@ void DataPacket::parsePacketTypeFromRawPacket(byte* packetContents){
     case 2:
       packetTypeString = "INFO";
       break;
+    case 3:
+      packetTypeString = "REQUEST";
+      break;
   }
 }
 
 void DataPacket::parseMessageFromRawPacket(byte* packetContents){
-  for(int i = SIZE_OF_SHA1_IN_BYTES + 1; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
+  for(int i = SIZE_OF_HASH_IN_PACKET + 1; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
     messageString += packetContents[i];
   }
 }

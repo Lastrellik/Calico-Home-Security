@@ -52,13 +52,14 @@ void setup() {
 }
 
 void loop(){
-
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
+      SerialComm::sendLogMessage("Alarm Armed");
       alarm->arm();
     }
   } else {
     if(alarm->isTripped()){
+      SerialComm::sendLogMessage("Alarm Tripped");
       alarm->trigger();
     }
   }
