@@ -1,5 +1,7 @@
 package module_TOUCHSCREEN;
 
+import java.util.Scanner;
+
 public class TouchscreenApp {
 
 	/**
@@ -10,8 +12,21 @@ public class TouchscreenApp {
 		Thread listener = new Thread(inputListener, "Listener");
 		listener.start();
 		DataPacket packet;
+		Scanner input = new Scanner(System.in);
+		boolean arm;
+		SerialOutput output = new SerialOutput();
 		while(true){
 			//System.out.println(inputListener.isPacketAvailable());
+			System.out.println("Arm?");
+			arm = input.nextBoolean();
+			if(arm){
+				System.out.println("Okie dokie");
+				output.sendCommandMessage("0");
+				output.sendNextCommand();				
+			} else {
+				output.sendCommandMessage("1");
+				output.sendNextCommand();
+			}
 			if(inputListener.isPacketAvailable()){
 				packet = inputListener.getDataPacket();
 				System.out.println("Packet Type: " + packet.getPacketType());

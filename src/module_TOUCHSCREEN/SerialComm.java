@@ -28,4 +28,5 @@ abstract class SerialComm {
 		}
 		throw new NoSuchElementException();
 	}
+
 }

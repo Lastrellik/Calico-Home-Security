@@ -26,6 +26,7 @@ class DataPacket{
       void appendMessage();
       void append(byte rawData[], int length);
       void append(byte singleRawByte);
+      void parsePacketArray(byte* packetContents);
       void parseSha1FromRawPacket(byte* packetContents);
       void parsePacketTypeFromRawPacket(byte* packetContents);
       void parseMessageFromRawPacket(byte* packetContents);

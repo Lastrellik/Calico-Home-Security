@@ -28,6 +28,17 @@ void SerialComm::sendInstructionRequest(){
   sendDataPacket(requestPacket);
 }
 
+DataPacket SerialComm::getDataPacketIfAvailable(){
+  if(hasDataPacket()){
+    byte serialBuffer[SIZE_OF_DATAPACKET_IN_BYTES];
+    Serial.readBytes(serialBuffer, SIZE_OF_DATAPACKET_IN_BYTES);
+    DataPacket packet(serialBuffer);
+    return packet;
+  } else {
+    return 0;
+  }
+}
+
 void SerialComm::sendDataPacket(DataPacket packet){
   int numOfAttempts = 0;
   int numOfAttemptsBeforeTimeout = 3;

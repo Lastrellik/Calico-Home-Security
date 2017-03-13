@@ -9,9 +9,11 @@
 #include "Laser.h"
 #include "Properties.h"
 #include "module_TOUCHSCREEN/SerialComm.h"
+#include "module_TOUCHSCREEn/CommandListener.h"
 
 Alarm* alarm;
 SerialComm* serialComm;
+CommandListener* commandListener;
 int iterations = 0;
 
 #include "module_WIFI\Wifi.h"
@@ -42,6 +44,7 @@ void setup() {
   testBoardComponents();
   alarm = new Alarm();
   serialComm = new SerialComm();
+  commandListener = new CommandListener(alarm);
   alarm->calibrate();
 
   if (Properties::MODULE_WIFI) {
@@ -51,6 +54,7 @@ void setup() {
 }
 
 void loop(){
+  commandListener->executeCommandIfAvailable();
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
       alarm->arm();
@@ -66,5 +70,6 @@ void loop(){
       alarm->calibrate();
     }
   }
+  delay(1000);
 
 }
