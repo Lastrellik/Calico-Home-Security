@@ -5,9 +5,10 @@
 #include "Component.h"
 
 Component::Component(int pin, String componentType){
-  Serial.println("Component "+componentType + "is set at pin "+pin);
+  Serial.println("Component " + componentType + " is set at pin " + pin);
   _pin = pin;
   _componentType = componentType;
+  delay(100);
 }
 
 Component::Component(){
