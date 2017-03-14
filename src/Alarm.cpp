@@ -24,7 +24,7 @@ void Alarm::calibrate(){
     alertSuccessfulAction();
     _isCalibrated = true;
   }
-  Serial.println("Alarm is calibrating");
+  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm is calibrating");
 }
 
 void Alarm::determineBasePhotoresistorReading(){
@@ -37,19 +37,19 @@ void Alarm::determineBasePhotoresistorReading(){
   }
   _baseReading = avgReading / numOfReadings;
   _laser->on();
-  Serial.println("Alam is determining base read of Photoresistor");
+  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alam is determining base read of Photoresistor");
 }
 
 void Alarm::alertFailedAction(){
   _buzzer->soundNegativeTone();
   _redLED->flash(3000);
-  Serial.println("Alarm failed to arm");
+  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm failed to arm");
 }
 
 void Alarm::alertSuccessfulAction(){
   _buzzer->soundAffirmativeTone();
   _greenLED->flash(3000);
-  Serial.println("Alarm is armed");
+  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm is armed");
 }
 
 void Alarm::arm(){
@@ -75,7 +75,7 @@ bool Alarm::isArmed(){
 }
 
 bool Alarm::isTripped(){
-    Serial.println("Alarm is tripped");
+    if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm is tripped");
   return (_photoR->takeReading() - 100 < _baseReading);
 }
 
@@ -103,14 +103,14 @@ bool Alarm::isTriggered(){
 void Alarm::disarm(){
   _isTriggered = false;
   _isArmed = false;
-  Serial.println("Alarm is disarmed");
+  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm is disarmed");
 }
 void Alarm::silence(){
 
 }
 
 bool Alarm::isCalibrated(){
-  Serial.println("Alarm is calibrated");
+  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm is calibrated");
   return _isCalibrated;
 }
 
