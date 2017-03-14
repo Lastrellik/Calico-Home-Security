@@ -5,7 +5,7 @@ CommandListener.h - A class for listening and executing commands from an externa
 #define CommandListener_h
 
 #include "Arduino.h"
-#include "DataPacket.h"
+#include "module_PI/Arduino_Uno/DataPacket.h"
 #include "Alarm.h"
 
 #define SIZE_OF_HASH_IN_PACKET 8

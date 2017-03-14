@@ -9,8 +9,7 @@
 #include "Laser.h"
 #include "Properties.h"
 #include "module_PI/Arduino_Uno/SerialComm.h"
-#include "module_TOUCHSCREEN/SerialComm.h"
-#include "module_TOUCHSCREEn/CommandListener.h"
+#include "module_Pi/Arduino_Uno/CommandListener.h"
 
 Alarm* alarm;
 SerialComm* serialComm;
