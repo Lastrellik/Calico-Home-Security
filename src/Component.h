@@ -5,6 +5,7 @@
 #define Component_h
 
 #include "Arduino.h"
+#include "Properties.h"
 
 class Component{
   protected:
