@@ -28,7 +28,7 @@ void ComponentTester::testPin(){
   if(componentType.equalsIgnoreCase("PHOTORESISTOR")){
     for(int i = 1; i <= 10; i++){
         if(Properties::DEBUGGING_ACTIVE) {
-          Serial.print("test# " + i + ": ");
+          Serial.print(String("test# ") + i + ": ");
           Serial.println(analogRead(pin));
         }
         delay(100);
