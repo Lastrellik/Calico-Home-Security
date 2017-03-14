@@ -12,7 +12,6 @@
 
 Alarm* alarm;
 SerialComm* serialComm;
-int iterations = 0;
 
 #include "module_WIFI\Wifi.h"
 Wifi* wifi;
