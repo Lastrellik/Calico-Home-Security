@@ -43,7 +43,7 @@ void SerialComm::sendDataPacket(DataPacket packet){
   int numOfAttempts = 0;
   int numOfAttemptsBeforeTimeout = 3;
   do {
-    for (size_t i = 0; i < 64; i++) {
+    for (size_t i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++) {
       Serial.print((char)packet.getPacketAsArray()[i]);
     }
   } while(!recievedValidHashResponse(packet.getPacketHash()) &&
@@ -74,5 +74,5 @@ bool SerialComm::recievedSha1HashBeforeTimeout(){
 }
 
 bool SerialComm::hasDataPacket(){
-  return(Serial.peek() == '~' && Serial.available() == SIZE_OF_DATAPACKET_IN_BYTES);
+  return(Serial.peek() == '~');
 }

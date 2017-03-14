@@ -7,7 +7,7 @@ public class DataPacket {
 
 	private final int SIZE_OF_SHA1_IN_BYTES = 8;
 	private final int SIZE_OF_DATAPACKET_IN_BYTES = 64;
-	private int arrayCounter = 1;
+	private int arrayCounter = 0;
 	private byte[] sha1MessageHash;
 	private byte[] packetAsArray;
 	private String messageString;
@@ -19,7 +19,6 @@ public class DataPacket {
 		this.packetTypeString = packetType.toUpperCase();
 		sha1MessageHash = new byte[SIZE_OF_SHA1_IN_BYTES];
 		packetAsArray = new byte[SIZE_OF_DATAPACKET_IN_BYTES];
-		packetAsArray[0] = '~';
 		initializeMessageDigestForSha1();
 		appendPacketHeader();
 		appendMessage();
@@ -56,6 +55,7 @@ public class DataPacket {
 	}
 
 	private void appendPacketHeader() {
+		appendStartOfPacketByte();
 		appendHash();
 		appendPacketTypeByte();
 	}
@@ -68,6 +68,10 @@ public class DataPacket {
 		}
 	}
 
+	private void appendStartOfPacketByte(){
+		append((byte)'~');
+	}
+	
 	private void appendHash() {
 		byte[] sha1Hash = digest.digest(messageString.getBytes());
 		for (int i = 0; i < SIZE_OF_SHA1_IN_BYTES; i++) {
@@ -102,6 +106,7 @@ public class DataPacket {
 
 	private void append(byte singleRawByte) {
 		packetAsArray[arrayCounter++] = singleRawByte;
+		if(arrayCounter >= SIZE_OF_DATAPACKET_IN_BYTES) arrayCounter = 0;	
 	}
 
 	private void parseSha1FromRawPacket(byte[] packetContents) {
@@ -132,5 +137,6 @@ public class DataPacket {
 		  for(int i = SIZE_OF_SHA1_IN_BYTES + 2; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
 			    messageString += (char)packetContents[i];		
 		  }
+		  messageString.trim();
 	}
 }

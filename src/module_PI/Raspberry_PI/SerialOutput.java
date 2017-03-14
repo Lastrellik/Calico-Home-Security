@@ -20,7 +20,7 @@ public class SerialOutput extends SerialComm {
 	public void sendNextCommand(){
 		if(!isOutputStreamEmpty()){
 			DataPacket nextCommand = serialPacketOutputStream.remove();
-			comPort.writeBytes(nextCommand.getPacketAsArray(), nextCommand.getSizeInBytes());
+			System.out.println(comPort.writeBytes(nextCommand.getPacketAsArray(), nextCommand.getSizeInBytes()));
 		}
 	}
 }

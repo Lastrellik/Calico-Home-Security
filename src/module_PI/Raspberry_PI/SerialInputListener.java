@@ -11,6 +11,7 @@ public class SerialInputListener extends SerialComm implements Runnable {
 		while (true){
 			listen();
 			createPacketIfAvailable();
+			pause(300);
 		}
 	}
 
@@ -36,9 +37,13 @@ public class SerialInputListener extends SerialComm implements Runnable {
 		if (comPort.bytesAvailable() > 0) {
 			byte[] readBuffer = new byte[comPort.bytesAvailable()];
 			comPort.readBytes(readBuffer, readBuffer.length);
-			for (byte b : readBuffer) serialInputStream.add(b);
+			for (byte b : readBuffer) {
+				serialInputStream.add(b);
+				System.out.print((char)b);
+			}
+			System.out.println("Size: " + serialInputStream.size());
+			System.out.println("peek: " + serialInputStream.peek());
 		}
-		pause(100);
 	}
 	
 	private void createPacketIfAvailable(){
@@ -51,6 +56,7 @@ public class SerialInputListener extends SerialComm implements Runnable {
 			packet = new DataPacket(rawPacketData);
 			packetInputStream.add(packet);
 			sendPacketHashBackToArduino(packet);
+			System.out.println("Packet was created");
 		}
 	}
 	
@@ -60,7 +66,7 @@ public class SerialInputListener extends SerialComm implements Runnable {
 	
 	private boolean isRawPacketAvailable(){
 		if(!serialInputStream.isEmpty()){
-			return(serialInputStream.peek() == '~' && serialInputStream.size() == SIZE_OF_PACKET_IN_BYTES);
+			return(serialInputStream.peek() == '~' && serialInputStream.size() >= SIZE_OF_PACKET_IN_BYTES);
 		} else {
 			return false;
 		}

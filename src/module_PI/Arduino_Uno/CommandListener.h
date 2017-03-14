@@ -16,7 +16,6 @@ class CommandListener {
     CommandListener(Alarm* alarm);
     void executeCommandIfAvailable();
   private:
-    void sendHashBack();
     void executeCommand();
     DataPacket currentPacket = 0;
     Alarm* alarm;
