@@ -1,4 +1,4 @@
-package module_TOUCHSCREEN;
+package module_PI.Raspberry_PI;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

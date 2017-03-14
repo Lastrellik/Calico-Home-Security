@@ -1,8 +1,9 @@
 /*
   dataPacket.h - A class designed around Serial Communication
 */
-#include "Arduino.h"
+
 #include "DataPacket.h"
+#include "Arduino.h"
 #include "../lib/Cryptosuite/Sha/sha1.h"
 
 #define SIZE_OF_HASH_IN_PACKET 8

@@ -8,7 +8,7 @@
 #include "ComponentTester.h"
 #include "Laser.h"
 #include "Properties.h"
-#include "module_TOUCHSCREEN/SerialComm.h"
+#include "module_PI/Arduino_Uno/SerialComm.h"
 
 Alarm* alarm;
 SerialComm* serialComm;
