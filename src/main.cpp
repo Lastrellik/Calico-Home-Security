@@ -8,12 +8,13 @@
 #include "ComponentTester.h"
 #include "Laser.h"
 #include "Properties.h"
+#include "module_PI/Arduino_Uno/SerialComm.h"
 
 Alarm* alarm;
+SerialComm* serialComm;
 
 #include "module_WIFI\Wifi.h"
 Wifi* wifi;
-
 
 //Test each of the components
 void testBoardComponents(){
@@ -24,7 +25,6 @@ void testBoardComponents(){
   Buzzer buzzer(6);
   Button armButton(7);
   Laser laser(8);
-
 
   ComponentTester tester(greenLED);
   tester.testPin();
@@ -40,6 +40,7 @@ void setup() {
   Serial.begin(Properties::BAUD_RATE);  //Begin serial communication
   testBoardComponents();
   alarm = new Alarm();
+  serialComm = new SerialComm();
   alarm->calibrate();
 
   if (Properties::MODULE_WIFI) {
@@ -51,10 +52,12 @@ void setup() {
 void loop(){
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
+      if(Properties::MODULE_PI) SerialComm::sendLogMessage("Alarm Armed");
       alarm->arm();
     }
   } else {
     if(alarm->isTripped()){
+      if(Properties::MODULE_PI) SerialComm::sendLogMessage("Alarm Tripped");
       alarm->trigger();
     }
   }

@@ -12,7 +12,7 @@
 #include "Properties.h"
 
 // ********** GENERAL ********** //
-boolean Properties::DEBUGGING_ACTIVE = true;
+boolean Properties::DEBUGGING_ACTIVE = false;
 int Properties::BAUD_RATE = 9600;
 
 // ********** MODULES ********** //
