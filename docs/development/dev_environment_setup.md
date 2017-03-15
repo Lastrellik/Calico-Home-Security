@@ -1,11 +1,10 @@
 IDE / Dev Environment Setup Instructions
 ========================================
 
-+ [Which IDE for Arduino Development?](#which-ide-for-arduino-development-)
++ [Which IDE for Arduino Development?](#which-ide-for-arduino-development)
 + [IDE Setup Instructions](#ide-setup-instructions)
-+ [(Windows Only) Install Clang](#windows-only-install-clang)
++ [Install Clang](#install-clang)
 + [Run a "Blink" program on your Arduino Uno](#run-a-blink-program-on-your-arduino-uno)
-+ [(Optional) Git Atom Package Setup Instructions](#optional-git-atom-package-setup-instructions)
 + [(Optional) GitKraken Git GUI Client](#optional-gitkraken-git-gui-client)
 + [Clone the GitHub Repository](#clone-the-github-repository)
 
@@ -36,8 +35,8 @@ Some other IDEs considered:
 	* Note - if you already have Atom installed it will launch the existing Atom instance you have installed and install itself as a plugin
 4. Wait for installation to complete. When prompted, restart Atom.
 
-## (Windows Only) Install Clang
-Clang is what PlatformIO uses for the Intelligent Code Autocompletion. It comes installed on some platforms but not on Windows. Other platforms may also need to install it. You can find all the platform instructions (here)[http://docs.platformio.org/en/latest/ide/atom.html#ide-atom-installation-clang].
+## Install Clang
+Clang is what PlatformIO uses for the Intelligent Code Autocompletion. It comes installed on some platforms but not on Windows or some flavors of Linux. Other platforms may also need to install it. You can find all the platform instructions (here)[http://docs.platformio.org/en/latest/ide/atom.html#ide-atom-installation-clang].
 
 1. Navigate to the (Clang Download)[http://llvm.org/releases/download.html] page.
 2. Under the `Pre-Built` Binaries section, choose the (Clang for Windows (64-bit))[http://releases.llvm.org/3.9.1/LLVM-3.9.1-win64.exe] option to download it
@@ -104,18 +103,6 @@ This step will make sure that PlatformIO is full installed and configured proper
 18. The LED on your Arduino board should turn on then off in 1-second intervals
 	* Note - This "Blink" program comes preinstalled on many boards so it may start blinking right when you first plug it in. TO make sure you've uploaded a new program correctly I'd suggest changing the delay amounts to something other than 1-second each then reuploading it. This way you know for sure it is your code that is runnin on it.
 19. Congratulations! You've hit a milestone - you've created your first PlatformIO application as well as run it on your Arduino! If you encountered any issues then they need to be address at this point before continuing on.
-
-## (Optional) Git Atom Package Setup Instructions
-Ensure that you have a recent version of [Git](https://git-scm.com/downloads) installed before following these instructions.
-
-1. In Atom...
-2. File --> Settings
-3. Select the Install tab
-4. In the Search packages box type "git-plus". Press Enter to search.
-5. Locate "git-plus" _(the correct one should have >1Million installs)_ and click the Install button
-	* Note - it may show that there is a later version than the one that is supported by this version of Atom. Thats ok - just install the version which is available.
-6. Click the Packages menu item. Git Plus should be listed.
-7. Close the Setting tab
 
 ## (Optional) GitKraken Git GUI Client
 If you would like to use a Git GUI Client I'd recommend **[GitKraken](https://www.gitkraken.com/)**. It is pretty much awesome!
