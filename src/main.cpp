@@ -14,7 +14,6 @@
 Alarm* alarm;
 SerialComm* serialComm;
 CommandListener* commandListener;
-int iterations = 0;
 
 #include "module_WIFI\Wifi.h"
 Wifi* wifi;
@@ -57,10 +56,12 @@ void loop(){
   commandListener->executeCommandIfAvailable();
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
+      if(Properties::MODULE_PI) SerialComm::sendLogMessage("Alarm Armed");
       alarm->arm();
     }
   } else {
     if(alarm->isTripped()){
+      if(Properties::MODULE_PI) SerialComm::sendLogMessage("Alarm Tripped");
       alarm->trigger();
     }
   }

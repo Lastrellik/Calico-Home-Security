@@ -6,6 +6,7 @@
 
 #include "Arduino.h"
 #include "Component.h"
+#include "Properties.h"
 
 class Laser : public Component {
 public:

@@ -9,7 +9,7 @@ public class SerialOutput extends SerialComm {
 	}
 	
 	public void sendCommandMessage(String commandMessage){
-		DataPacket commandPacket = new DataPacket(commandMessage, "COMMAND");
+		DataPacket commandPacket = new DataPacket(commandMessage, PacketType.COMMAND);
 		serialPacketOutputStream.add(commandPacket);
 	}
 	

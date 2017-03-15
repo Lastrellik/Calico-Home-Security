@@ -6,6 +6,8 @@
 
 #include "Arduino.h"
 #include "Component.h"
+#include "Properties.h"
+
 class Button : public Component{
 public:
   Button(int pin);

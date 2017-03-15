@@ -11,12 +11,12 @@ public class DataPacket {
 	private byte[] sha1MessageHash;
 	private byte[] packetAsArray;
 	private String messageString;
-	private String packetTypeString;
+	private PacketType packetType;
 	protected MessageDigest digest;
 
-	public DataPacket(String message, String packetType) {
+	public DataPacket(String message, PacketType packetType) {
 		this.messageString = message.toUpperCase();
-		this.packetTypeString = packetType.toUpperCase();
+		this.packetType = packetType;
 		sha1MessageHash = new byte[SIZE_OF_SHA1_IN_BYTES];
 		packetAsArray = new byte[SIZE_OF_DATAPACKET_IN_BYTES];
 		initializeMessageDigestForSha1();
@@ -29,9 +29,9 @@ public class DataPacket {
 		messageString = "";
 		initializeMessageDigestForSha1();
 		this.packetAsArray = packetContents;
-		parseSha1FromRawPacket(packetContents);
-		parsePacketTypeFromRawPacket(packetContents);
-		parseMessageFromRawPacket(packetContents);
+		setSha1FromRawPacket(packetContents);
+		setPacketTypeFromRawPacket(packetContents);
+		setMessageFromRawPacket(packetContents);
 	}
 
 	public byte[] getPacketAsArray() {
@@ -46,8 +46,8 @@ public class DataPacket {
 		return SIZE_OF_DATAPACKET_IN_BYTES;
 	}
 	
-	String getPacketType(){
-		  return packetTypeString;
+	PacketType getPacketType(){
+		  return packetType;
 	}
 
 	String getMessage(){
@@ -81,17 +81,7 @@ public class DataPacket {
 	}
 
 	private void appendPacketTypeByte() {
-		byte packetTypeByte = 0;
-		if (packetTypeString == "LOG") {
-			packetTypeByte = 0;
-		} else if (packetTypeString == "COMMAND") {
-			packetTypeByte = 1;
-		} else if (packetTypeString == "INFO") {
-			packetTypeByte = 2;
-		} else if (packetTypeString == "REQUEST"){
-			packetTypeByte = 3;
-		}
-		append(packetTypeByte);
+		append(packetType.getByte());
 	}
 
 	private void appendMessage() {
@@ -109,31 +99,18 @@ public class DataPacket {
 		if(arrayCounter >= SIZE_OF_DATAPACKET_IN_BYTES) arrayCounter = 0;	
 	}
 
-	private void parseSha1FromRawPacket(byte[] packetContents) {
+	private void setSha1FromRawPacket(byte[] packetContents) {
 		for (int i = 0; i < SIZE_OF_SHA1_IN_BYTES; i++) {
 			sha1MessageHash[i] = packetContents[i + 1];
 		}
 	}
 
-	private void parsePacketTypeFromRawPacket(byte[] packetContents) {
+	private void setPacketTypeFromRawPacket(byte[] packetContents) {
 		byte packetTypeBytePositionInArray = SIZE_OF_SHA1_IN_BYTES + 1;
-		switch (packetContents[packetTypeBytePositionInArray]) {
-			case 0:
-				packetTypeString = "LOG";
-				break;
-			case 1:
-				packetTypeString = "COMMAND";
-				break;
-			case 2:
-				packetTypeString = "INFO";
-				break;
-			case 3:
-				packetTypeString = "REQUEST";
-				break;
-		}
+		packetType = PacketType.getPacketTypeFromByte(packetContents[packetTypeBytePositionInArray]);
 	}
 
-	private void parseMessageFromRawPacket(byte[] packetContents) {
+	private void setMessageFromRawPacket(byte[] packetContents) {
 		  for(int i = SIZE_OF_SHA1_IN_BYTES + 2; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
 			    messageString += (char)packetContents[i];		
 		  }

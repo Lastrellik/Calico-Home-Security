@@ -5,23 +5,26 @@
 #include "DataPacket.h"
 #include "Arduino.h"
 #include "../lib/Cryptosuite/Sha/sha1.h"
+#include "PacketType.h"
 
 #define SIZE_OF_HASH_IN_PACKET 8
 #define SIZE_OF_DATAPACKET_IN_BYTES 64
 
-DataPacket::DataPacket(String messageString, String packetTypeString){
+DataPacket::DataPacket(String messageString, PacketType packetType){
   packetTypeString.toUpperCase();
   this->messageString = messageString;
-  this->packetTypeString = packetTypeString;
+  this->packetType = packetType;
   appendPacketHeader();
   appendMessage();
 }
 
 DataPacket::DataPacket(byte* packetContents){
-  parsePacketArray(packetContents);
-  parseSha1FromRawPacket(packetContents);
-  parsePacketTypeFromRawPacket(packetContents);
-  parseMessageFromRawPacket(packetContents);
+  for(int i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
+  packetHash[i] = packetContents[i];
+  }
+  setSha1FromRawPacket(packetContents);
+  setPacketTypeFromRawPacket(packetContents);
+  setMessageFromRawPacket(packetContents);
 }
 
 byte* DataPacket::getPacketAsArray(){
@@ -59,17 +62,7 @@ void DataPacket::appendHash(){
 }
 
 void DataPacket::appendPacketTypeByte(){
-  byte packetTypeByte = 0;
-  if(packetTypeString == "LOG"){
-    packetTypeByte = 0;
-  } else if (packetTypeString == "COMMAND"){
-    packetTypeByte = 1;
-  } else if (packetTypeString == "INFO"){
-    packetTypeByte = 2;
-  } else if (packetTypeString == "REQUEST"){
-    packetTypeByte = 3;
-  }
-  append(packetTypeByte);
+  append((byte)packetType);
 }
 
 void DataPacket::appendMessage(){
@@ -88,37 +81,35 @@ void DataPacket::append(byte singleRawByte){
   packetAsArray[arrayCounter++] = singleRawByte;
 }
 
-void DataPacket::parsePacketArray(byte* packetContents){
-  for(int i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
-    packetAsArray[i] = packetContents[i];
-  }
-}
-
-void DataPacket::parseSha1FromRawPacket(byte* packetContents){
+void DataPacket::setSha1FromRawPacket(byte* packetContents){
   for(int i = 0; i < SIZE_OF_HASH_IN_PACKET; i++){
     packetHash[i] = packetContents[i + 1];
   }
 }
 
-void DataPacket::parsePacketTypeFromRawPacket(byte* packetContents){
+void DataPacket::setPacketTypeFromRawPacket(byte* packetContents){
   byte packetTypeBytePositionInArray = SIZE_OF_HASH_IN_PACKET + 1;
   switch(packetContents[packetTypeBytePositionInArray]){
     case 0:
       packetTypeString = "LOG";
+      packetType = PacketType::LOG;
       break;
     case 1:
       packetTypeString = "COMMAND";
+      packetType = PacketType::COMMAND;
       break;
     case 2:
       packetTypeString = "INFO";
+      packetType = PacketType::INFO;
       break;
     case 3:
       packetTypeString = "REQUEST";
+      packetType = PacketType::REQUEST;
       break;
   }
 }
 
-void DataPacket::parseMessageFromRawPacket(byte* packetContents){
+void DataPacket::setMessageFromRawPacket(byte* packetContents){
   for(int i = SIZE_OF_HASH_IN_PACKET + 1; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
     messageString += packetContents[i];
   }

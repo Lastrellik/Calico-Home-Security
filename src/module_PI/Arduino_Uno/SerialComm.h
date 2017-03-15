@@ -20,8 +20,8 @@ class SerialComm{
       static DataPacket getDataPacketIfAvailable();
     private:
       static void sendDataPacket(DataPacket packet);
-      static bool recievedValidHashResponse(byte* validSha1Hash);
-      static bool recievedSha1HashBeforeTimeout();
+      static bool receivedValidHashResponse(byte* validSha1Hash);
+      static bool receivedSha1HashBeforeTimeout();
 };
 
 #endif
