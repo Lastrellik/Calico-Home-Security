@@ -20,10 +20,6 @@ public:
   void testComponent(Component component);
   void setComponent(Component component);
   Component getComponent();
-  void setOnTime(int onTime);
-  void setOffTime(int offTime);
-  int getOnTime();
-  int getOffTime();
 };
 
 #endif

@@ -16,10 +16,12 @@ class SerialComm{
       static void sendCommandMessage(String commandMessage);
       static void sendInfoMessage(String infoMessage);
       static void sendInstructionRequest();
+      static void sendErrorMessage(String errorMessage);
       static bool hasDataPacket();
       static DataPacket getDataPacketIfAvailable();
     private:
       static void sendDataPacket(DataPacket packet);
+      static void flushBuffer();
       static bool receivedValidHashResponse(byte* validSha1Hash);
       static bool receivedSha1HashBeforeTimeout();
 };

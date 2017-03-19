@@ -6,9 +6,14 @@
 #include "ComponentTester.h"
 #include "Buzzer.h"
 #include "Button.h"
+#include "Logger.h"
 
-ComponentTester::ComponentTester(Component component) {
-  Serial.begin(9600);
+ComponentTester::ComponentTester() {
+  Logger::Log("Default ComponentTester Constructor");
+}
+
+ComponentTester::ComponentTester(Component component){
+  Logger::Log("ComponentTester Constructor");
   _component = component;
 }
 
@@ -26,20 +31,17 @@ void ComponentTester::testPin(){
     tone(pin, 1000, 100); //(Buzzer)_component.tone(1000) wouldn't work. Polymorphism?
   }
   if(componentType.equalsIgnoreCase("PHOTORESISTOR")){
-    for(int i = 1; i <= 10; i++){
+    /*for(int i = 1; i <= 10; i++){
         if(Properties::DEBUGGING_ACTIVE) {
-          Serial.print(String("test# ") + i + ": ");
-          Serial.println(analogRead(pin));
+          Logger::Log("Test #" + i + ": " + analogRead(pin)));
         }
-        delay(100);
-      }
+      }*/
   }
   if(componentType.equalsIgnoreCase("BUTTON")){
     Button button(_component.getPin()); //May be wasted memory
-    Serial.println("Press the button to test");
     for(int i = 0; i < 150; i++){
       if(button.isPressed()) {
-        if(Properties::DEBUGGING_ACTIVE) Serial.println("The button was pressed");
+        Logger::Log("The button was pressed");
         break;
       }
       delay(200);
@@ -58,20 +60,4 @@ void ComponentTester::testComponent(Component component){
 
 Component ComponentTester::getComponent(){
   return _component;
-}
-
-void ComponentTester::setOnTime(int onTime){
-  _millisOn = onTime;
-}
-
-void ComponentTester::setOffTime(int offTime){
-  _millisOff = offTime;
-}
-
-int ComponentTester::getOnTime(){
-  return _millisOn;
-}
-
-int ComponentTester::getOffTime(){
-  return _millisOff;
 }

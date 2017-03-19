@@ -99,7 +99,7 @@ public class DataPacket {
 		if(arrayCounter >= SIZE_OF_DATAPACKET_IN_BYTES) arrayCounter = 0;	
 	}
 
-	private void setSha1FromRawPacket(byte[] packetContents) {
+	private void setSha1FromRawPacket(byte[] packetContents) {		
 		for (int i = 0; i < SIZE_OF_SHA1_IN_BYTES; i++) {
 			sha1MessageHash[i] = packetContents[i + 1];
 		}

@@ -39,8 +39,9 @@ void testBoardComponents(){
 }
 
 void setup() {
-  Serial.begin(Properties::BAUD_RATE);  //Begin serial communication
-  testBoardComponents();
+  delay(5000);
+  Serial.begin(Properties::BAUD_RATE);
+  //testBoardComponents();
   alarm = new Alarm();
   serialComm = new SerialComm();
   commandListener = new CommandListener(alarm);
@@ -56,12 +57,10 @@ void loop(){
   commandListener->executeCommandIfAvailable();
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
-      if(Properties::MODULE_PI) SerialComm::sendLogMessage("Alarm Armed");
       alarm->arm();
     }
   } else {
-    if(alarm->isTripped()){
-      if(Properties::MODULE_PI) SerialComm::sendLogMessage("Alarm Tripped");
+    if(alarm->isTripped() && not alarm->isTriggered()){
       alarm->trigger();
     }
   }
@@ -71,6 +70,8 @@ void loop(){
       alarm->calibrate();
     }
   }
-  delay(1000);
 
+  if(alarm->isTriggered()){
+    alarm->soundOneAlarmCycle();
+  }
 }

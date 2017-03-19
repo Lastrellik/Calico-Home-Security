@@ -17,7 +17,7 @@ int Properties::BAUD_RATE = 9600;
 
 // ********** MODULES ********** //
 boolean Properties::MODULE_WIFI = false;
-boolean Properties::MODULE_PI = false;
+boolean Properties::MODULE_PI = true;
 boolean Properties::MODULE_IR = false;
 
 

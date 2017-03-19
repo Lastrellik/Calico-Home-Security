@@ -5,6 +5,7 @@
 #include "SerialComm.h"
 #include "DataPacket.h"
 #include "PacketType.h"
+#include "Logger.h"
 
 #define SIZE_OF_HASH_IN_PACKET 8
 #define SIZE_OF_DATAPACKET_IN_BYTES 64
@@ -29,6 +30,11 @@ void SerialComm::sendInstructionRequest(){
   sendDataPacket(requestPacket);
 }
 
+void SerialComm::sendErrorMessage(String errorMessage){
+  DataPacket errorPacket(errorMessage, PacketType::ERROR);
+  sendDataPacket(errorPacket);
+}
+
 DataPacket SerialComm::getDataPacketIfAvailable(){
   if(hasDataPacket()){
     byte serialBuffer[SIZE_OF_DATAPACKET_IN_BYTES];
@@ -41,14 +47,21 @@ DataPacket SerialComm::getDataPacketIfAvailable(){
 }
 
 void SerialComm::sendDataPacket(DataPacket packet){
-  int numOfAttempts = 0;
-  int numOfAttemptsBeforeTimeout = 3;
-  do {
     for (size_t i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++) {
       Serial.print((char)packet.getPacketAsArray()[i]);
     }
-  } while(!receivedValidHashResponse(packet.getPacketHash()) &&
-      numOfAttempts++ < numOfAttemptsBeforeTimeout);
+
+    if(!receivedValidHashResponse(packet.getPacketHash())){
+      flushBuffer();
+      sendDataPacket(packet);
+    }
+}
+
+void SerialComm::flushBuffer(){
+  while(Serial.available() != 0) {
+    char t = Serial.read();
+  }
+  Logger::Log("Error in DataPacket Communication!");
 }
 
 bool SerialComm::receivedValidHashResponse(byte* validSha1Hash){
@@ -75,5 +88,5 @@ bool SerialComm::receivedSha1HashBeforeTimeout(){
 }
 
 bool SerialComm::hasDataPacket(){
-  return(Serial.peek() == '~');
+  return(Serial.peek() == '~') && Serial.available() == 64;
 }

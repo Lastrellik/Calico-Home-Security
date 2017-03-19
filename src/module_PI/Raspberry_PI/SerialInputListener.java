@@ -11,7 +11,6 @@ public class SerialInputListener extends SerialComm implements Runnable {
 		while (true){
 			listen();
 			createPacketIfAvailable();
-			pause(300);
 		}
 	}
 
@@ -19,6 +18,9 @@ public class SerialInputListener extends SerialComm implements Runnable {
 		serialInputStream = new LinkedList<Byte>();
 		packetInputStream = new LinkedList<DataPacket>();
 		comPort.openPort();
+		pause(5000);
+		flush();
+		pause(1000);
 	}
 	
 	public boolean isPacketAvailable(){
@@ -39,10 +41,10 @@ public class SerialInputListener extends SerialComm implements Runnable {
 			comPort.readBytes(readBuffer, readBuffer.length);
 			for (byte b : readBuffer) {
 				serialInputStream.add(b);
-				System.out.print((char)b);
+				System.out.print(b + " ");
 			}
-			System.out.println("Size: " + serialInputStream.size());
-			System.out.println("peek: " + serialInputStream.peek());
+			//System.out.println("Size: " + serialInputStream.size());
+			//System.out.println("peek: " + serialInputStream.peek());
 		}
 	}
 	
@@ -56,7 +58,7 @@ public class SerialInputListener extends SerialComm implements Runnable {
 			packet = new DataPacket(rawPacketData);
 			packetInputStream.add(packet);
 			sendPacketHashBackToArduino(packet);
-			System.out.println("Packet was created");
+			System.out.println("Message: " + packet.getMessage());
 		}
 	}
 	
@@ -72,12 +74,11 @@ public class SerialInputListener extends SerialComm implements Runnable {
 		}
 	}
 
-	public byte[] flush() {
-		byte[] wholeStream = new byte[serialInputStream.size()];
-		for (int i = 0; i < serialInputStream.size(); i++) {
-			wholeStream[i] = serialInputStream.remove();
+	public void flush() {
+		byte[] b = new byte[1];
+		while(comPort.bytesAvailable() > 0){
+			b[0] = (byte) comPort.readBytes(b, 1);
 		}
-		return wholeStream;
 	}
 
 	private void pause(int millis){

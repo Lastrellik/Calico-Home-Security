@@ -11,7 +11,7 @@
 #define SIZE_OF_DATAPACKET_IN_BYTES 64
 
 DataPacket::DataPacket(String messageString, PacketType packetType){
-  packetTypeString.toUpperCase();
+  //packetTypeString.toUpperCase();
   this->messageString = messageString;
   this->packetType = packetType;
   appendPacketHeader();
@@ -105,6 +105,10 @@ void DataPacket::setPacketTypeFromRawPacket(byte* packetContents){
     case 3:
       packetTypeString = "REQUEST";
       packetType = PacketType::REQUEST;
+      break;
+    case 4:
+      packetTypeString = "ERROR";
+      packetType = PacketType::ERROR;
       break;
   }
 }
