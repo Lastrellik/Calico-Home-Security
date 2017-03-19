@@ -74,4 +74,12 @@ void loop(){
   if(alarm->isTriggered()){
     alarm->soundOneAlarmCycle();
   }
+
+  if(alarm->isTriggered() && alarm->isButtonPressed()){
+    alarm->disarm();
+  }
+
+  if(alarm->isArmed() && alarm->isButtonPressed()){
+    alarm->disarm();
+  }
 }

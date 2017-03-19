@@ -13,6 +13,7 @@
 #include "Logger.h"
 
 Alarm::Alarm(){
+  Logger::Log("Alarm has been created");
 }
 
 
@@ -34,11 +35,11 @@ void Alarm::determineBasePhotoresistorReading(){
   int numOfReadings = 15;
   for(int i = 0; i < numOfReadings; i++){
     avgReading += _photoR->takeReading();
-    //_greenLED->flash();
+    _greenLED->flash();
   }
   _baseReading = avgReading / numOfReadings;
+  Logger::Log("Base Photoresistor Reading: " + _baseReading);
   _laser->on();
-  //Logger::Log("Base Photoresistor Reading: ");
 }
 
 void Alarm::alertFailedAction(){
@@ -82,11 +83,6 @@ bool Alarm::isTripped(){
 
 void Alarm::trigger(){
   _isTriggered = true;
-  while(not _armButton->isPressed()){
-    this->soundOneAlarmCycle();
-  }
-  this->alertSuccessfulAction();
-  this->disarm();
 }
 
 void Alarm::soundOneAlarmCycle(){
@@ -101,8 +97,10 @@ bool Alarm::isTriggered(){
 }
 
 void Alarm::disarm(){
+  this->alertSuccessfulAction();
   _isTriggered = false;
   _isArmed = false;
+  _alarmLED->off();
   Logger::Log("Alarm has been disarmed");
 }
 void Alarm::silence(){

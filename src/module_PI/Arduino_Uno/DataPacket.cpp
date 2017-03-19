@@ -11,7 +11,7 @@
 #define SIZE_OF_DATAPACKET_IN_BYTES 64
 
 DataPacket::DataPacket(String messageString, PacketType packetType){
-  //packetTypeString.toUpperCase();
+  packetTypeString = packetTypeToString(packetType);
   this->messageString = messageString;
   this->packetType = packetType;
   appendPacketHeader();
@@ -19,9 +19,6 @@ DataPacket::DataPacket(String messageString, PacketType packetType){
 }
 
 DataPacket::DataPacket(byte* packetContents){
-  for(int i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
-  packetHash[i] = packetContents[i];
-  }
   setSha1FromRawPacket(packetContents);
   setPacketTypeFromRawPacket(packetContents);
   setMessageFromRawPacket(packetContents);
@@ -117,4 +114,19 @@ void DataPacket::setMessageFromRawPacket(byte* packetContents){
   for(int i = SIZE_OF_HASH_IN_PACKET + 1; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
     messageString += packetContents[i];
   }
+}
+
+String DataPacket::packetTypeToString(PacketType packetType){
+  switch((byte) packetType){
+    case 0:
+      return "LOG";
+      case 1:
+      return "COMMAND";
+      case 2:
+      return "INFO";
+      case 3:
+      return "REQUEST";
+      case 4:
+      return "ERROR";
+    }
 }
