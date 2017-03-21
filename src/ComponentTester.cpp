@@ -31,11 +31,11 @@ void ComponentTester::testPin(){
     tone(pin, 1000, 100); //(Buzzer)_component.tone(1000) wouldn't work. Polymorphism?
   }
   if(componentType.equalsIgnoreCase("PHOTORESISTOR")){
-    /*for(int i = 1; i <= 10; i++){
+    for(int i = 1; i <= 10; i++){
         if(Properties::DEBUGGING_ACTIVE) {
-          Logger::Log("Test #" + i + ": " + analogRead(pin)));
+          Logger::Log(String("Test #") + i + String(": ") + String(analogRead(pin)));
         }
-      }*/
+      }
   }
   if(componentType.equalsIgnoreCase("BUTTON")){
     Button button(_component.getPin()); //May be wasted memory

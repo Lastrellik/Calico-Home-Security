@@ -9,6 +9,7 @@ Component::Component(int pin, String componentType){
   Logger::Log("Component " + componentType + " is set at pin " + pin);
   _pin = pin;
   _componentType = componentType;
+  delay(100);
 }
 
 Component::Component(){

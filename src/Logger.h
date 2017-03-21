@@ -14,7 +14,7 @@ public:
   static void Log(String message){
     if(Properties::DEBUGGING_ACTIVE) Serial.println(message);
     if(Properties::MODULE_PI) SerialComm::sendLogMessage(message);
-    delay(100);
+    Serial.flush();
   }
 };
 

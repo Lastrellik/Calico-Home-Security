@@ -38,20 +38,20 @@ void Alarm::determineBasePhotoresistorReading(){
     _greenLED->flash();
   }
   _baseReading = avgReading / numOfReadings;
-  Logger::Log("Base Photoresistor Reading: " + _baseReading);
+  Logger::Log("Base Photoresistor Reading Determined");
   _laser->on();
 }
 
 void Alarm::alertFailedAction(){
+  Logger::Log("Alarm Failed Action");
   _buzzer->soundNegativeTone();
   _redLED->flash(1000);
-  Logger::Log("Alarm Failed Action");
 }
 
 void Alarm::alertSuccessfulAction(){
+  Logger::Log("Alarm successful action");
   _buzzer->soundAffirmativeTone();
   _greenLED->flash(1000);
-  Logger::Log("Alarm successful action");
 }
 
 void Alarm::arm(){
@@ -82,6 +82,7 @@ bool Alarm::isTripped(){
 }
 
 void Alarm::trigger(){
+  //Logger::Log("Alarm has been triggered!");
   _isTriggered = true;
 }
 

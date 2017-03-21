@@ -41,7 +41,7 @@ void testBoardComponents(){
 void setup() {
   delay(5000);
   Serial.begin(Properties::BAUD_RATE);
-  //testBoardComponents();
+  testBoardComponents();
   alarm = new Alarm();
   serialComm = new SerialComm();
   commandListener = new CommandListener(alarm);
