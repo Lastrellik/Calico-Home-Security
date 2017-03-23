@@ -12,7 +12,6 @@
 #include "Laser.h"
 #include "Photoresistor.h"
 #include "Button.h"
-#include "module_PI/Arduino_Uno/SerialComm.h"
 #include "Properties.h"
 
 class Alarm{
@@ -23,13 +22,6 @@ class Alarm{
     void arm();
     void disarm();
     void silence();
-    void setGreenLED(LED& greenLED);
-    void setRedLED(LED& redLED);
-    void setAlarmLED(LED& alarmLED);
-    void setBuzzer(Buzzer& buzzer);
-    void setLaser(Laser& laser);
-    void setPhotoresistor(Photoresistor& photoresistor);
-    void setButton(Button& button);
     void trigger();
     bool isButtonPressed();
     bool isCalibrated();
@@ -50,6 +42,7 @@ class Alarm{
     bool _isArmed = false;
     bool _isCalibrated = false;
     bool _isTriggered = false;
+    bool _isSilenced = false;
     int _baseReading = 0;
     int _threshold = 100;
     void determineBasePhotoresistorReading();
