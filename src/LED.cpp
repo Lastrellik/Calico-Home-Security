@@ -26,10 +26,9 @@ void LED::off() {
 
 void LED::flash(){
   this->on();
-  delay(50);
+  delay(70);
   this->off();
-  delay(30);
-  _isOn = false;
+  delay(50);
 }
 
 void LED::flash(int millisOn){

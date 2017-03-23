@@ -10,8 +10,10 @@
 #include "Photoresistor.h"
 #include "Button.h"
 #include "Alarm.h"
+#include "Logger.h"
 
 Alarm::Alarm(){
+  Logger::Log("Alarm has been created");
 }
 
 
@@ -22,9 +24,9 @@ void Alarm::calibrate(){
     _isCalibrated = false;
   } else {
     alertSuccessfulAction();
+    Logger::Log("Alarm Successful Calibration");
     _isCalibrated = true;
   }
-  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm is calibrating");
 }
 
 void Alarm::determineBasePhotoresistorReading(){
@@ -36,28 +38,29 @@ void Alarm::determineBasePhotoresistorReading(){
     _greenLED->flash();
   }
   _baseReading = avgReading / numOfReadings;
+  Logger::Log("Base Photoresistor Reading Determined");
   _laser->on();
-  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alam is determining base read of Photoresistor");
 }
 
 void Alarm::alertFailedAction(){
+  Logger::Log("Alarm Failed Action");
   _buzzer->soundNegativeTone();
-  _redLED->flash(3000);
-  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm failed to arm");
+  _redLED->flash(1000);
 }
 
 void Alarm::alertSuccessfulAction(){
+  Logger::Log("Alarm successful action");
   _buzzer->soundAffirmativeTone();
-  _greenLED->flash(3000);
-  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm is armed");
+  _greenLED->flash(1000);
 }
 
 void Alarm::arm(){
   if (!this->isReadyToArm()){
    this->alertFailedAction();
+   Logger::Log("Alarm failed to arm");
  } else {
    this->alertSuccessfulAction();
-    if(Properties::MODULE_PI) SerialComm::sendLogMessage("Alarm Armed");
+    Logger::Log("Alarm sucessfully armed");
    _alarmLED->on();
    _isArmed = true;
  }
@@ -75,24 +78,18 @@ bool Alarm::isArmed(){
 }
 
 bool Alarm::isTripped(){
-    if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm is tripped");
   return (_photoR->takeReading() - 100 < _baseReading);
 }
 
 void Alarm::trigger(){
+  //Logger::Log("Alarm has been triggered!");
   _isTriggered = true;
-  if(Properties::MODULE_PI) SerialComm::sendLogMessage("Alarm Triggered");
-  while(not _armButton->isPressed()){
-    this->soundOneAlarmCycle();
-  }
-  this->alertSuccessfulAction();
-  this->disarm();
 }
 
 void Alarm::soundOneAlarmCycle(){
-  _buzzer->soundAlarmHighTone();
+  if (not this->_isSilenced) _buzzer->soundAlarmHighTone();
   _redLED->flash(300);
-  _buzzer->soundAlarmLowTone();
+  if (not this->_isSilenced) _buzzer->soundAlarmLowTone();
   _alarmLED->flash(300);
 }
 
@@ -101,40 +98,21 @@ bool Alarm::isTriggered(){
 }
 
 void Alarm::disarm(){
+  this->alertSuccessfulAction();
   _isTriggered = false;
   _isArmed = false;
-  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm is disarmed");
+  _alarmLED->off();
+  Logger::Log("Alarm has been disarmed");
 }
 void Alarm::silence(){
-
+  _isSilenced = true;
+  Logger::Log("Alarm has been silenced");
 }
 
 bool Alarm::isCalibrated(){
-  if(Properties::DEBUGGING_ACTIVE) Serial.println("Alarm is calibrated");
   return _isCalibrated;
 }
 
 bool Alarm::isButtonPressed(){
   return _armButton->isPressed();
-}
-void Alarm::setGreenLED(LED& greenLED){
-  _greenLED = &greenLED;
-}
-void Alarm::setRedLED(LED& redLED){
-  _redLED = &redLED;
-}
-void Alarm::setAlarmLED(LED& alarmLED){
-  _alarmLED = &alarmLED;
-}
-void Alarm::setBuzzer(Buzzer& buzzer){
-  _buzzer = &buzzer;
-}
-void Alarm::setLaser(Laser& laser){
-  _laser = &laser;
-}
-void Alarm::setPhotoresistor(Photoresistor& photoresistor){
-  _photoR = &photoresistor;
-}
-void Alarm::setButton(Button& button){
-  _armButton = &button;
 }

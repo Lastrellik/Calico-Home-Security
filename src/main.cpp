@@ -9,9 +9,11 @@
 #include "Laser.h"
 #include "Properties.h"
 #include "module_PI/Arduino_Uno/SerialComm.h"
+#include "module_Pi/Arduino_Uno/CommandListener.h"
 
 Alarm* alarm;
 SerialComm* serialComm;
+CommandListener* commandListener;
 
 #include "module_WIFI\Wifi.h"
 Wifi* wifi;
@@ -37,10 +39,12 @@ void testBoardComponents(){
 }
 
 void setup() {
-  Serial.begin(Properties::BAUD_RATE);  //Begin serial communication
+  delay(5000);
+  Serial.begin(Properties::BAUD_RATE);
   testBoardComponents();
   alarm = new Alarm();
   serialComm = new SerialComm();
+  commandListener = new CommandListener(alarm);
   alarm->calibrate();
 
   if (Properties::MODULE_WIFI) {
@@ -50,14 +54,13 @@ void setup() {
 }
 
 void loop(){
+  commandListener->executeCommandIfAvailable();
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
-      if(Properties::MODULE_PI) SerialComm::sendLogMessage("Alarm Armed");
       alarm->arm();
     }
   } else {
-    if(alarm->isTripped()){
-      if(Properties::MODULE_PI) SerialComm::sendLogMessage("Alarm Tripped");
+    if(alarm->isTripped() && not alarm->isTriggered()){
       alarm->trigger();
     }
   }
@@ -68,4 +71,15 @@ void loop(){
     }
   }
 
+  if(alarm->isTriggered()){
+    alarm->soundOneAlarmCycle();
+  }
+
+  if(alarm->isTriggered() && alarm->isButtonPressed()){
+    alarm->disarm();
+  }
+
+  if(alarm->isArmed() && alarm->isButtonPressed()){
+    alarm->disarm();
+  }
 }
