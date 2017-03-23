@@ -1,9 +1,8 @@
 /*
 CommandListener.h - A class for listening and executing commands from an external source
-*/
+*/ //TODO: Fix This
+/*
 #include "Arduino.h"
-#include "module_PI/Arduino_Uno/SerialComm.h"
-#include "CommandListener.h"
 #include "Alarm.h"
 #include "Logger.h"
 
@@ -16,15 +15,10 @@ CommandListener::CommandListener(Alarm* alarm){
 }
 
 void CommandListener::executeCommandIfAvailable(){
-  if(SerialComm::hasDataPacket()){
-    currentPacket = SerialComm::getDataPacketIfAvailable();
-    executeCommand();
-  }
 }
 
 void CommandListener::executeCommand(){
-  String message = currentPacket.getMessage();
-  Logger::Log("Received Command " + message);
+  /*Logger::Log("Received Command " + message);
   switch (message.toInt()) {
     case 0:
       alarm->arm();
@@ -38,5 +32,5 @@ void CommandListener::executeCommand(){
     case 4:
       alarm->calibrate();
       break;
-  }
-}
+  }*/
+//}

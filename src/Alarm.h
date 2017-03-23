@@ -12,7 +12,6 @@
 #include "Laser.h"
 #include "Photoresistor.h"
 #include "Button.h"
-#include "module_PI/Arduino_Uno/SerialComm.h"
 #include "Properties.h"
 
 class Alarm{

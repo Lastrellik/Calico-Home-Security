@@ -56,8 +56,8 @@ void Alarm::alertSuccessfulAction(){
 
 void Alarm::arm(){
   if (!this->isReadyToArm()){
-   this->alertFailedAction();
    Logger::Log("Alarm failed to arm");
+   this->alertFailedAction();
  } else {
    this->alertSuccessfulAction();
     Logger::Log("Alarm sucessfully armed");
