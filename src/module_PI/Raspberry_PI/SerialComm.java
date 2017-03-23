@@ -8,11 +8,14 @@ abstract class SerialComm {
 	protected Queue<DataPacket> serialPacketOutputStream;
 	protected static Queue<Byte> serialInputStream;
 	protected static Queue<DataPacket> packetInputStream;
-	protected SerialPort comPort;
+	protected static SerialPort comPort;
 
 	public SerialComm() {
 		try {
-			comPort = getArduinoCommPort();
+			if(comPort == null){
+				comPort = getArduinoCommPort();
+				comPort.setBaudRate(9600);
+			}
 		} catch (NoSuchElementException n) {
 			n.printStackTrace();
 		}
@@ -21,11 +24,11 @@ abstract class SerialComm {
 	private SerialPort getArduinoCommPort() {
 		SerialPort[] comPorts = SerialPort.getCommPorts();
 		for (int i = 0; i < comPorts.length; i++) {
-			System.out.println(comPorts[i].getDescriptivePortName());
 			if (comPorts[i].getDescriptivePortName().matches("Arduino.*")) {
 				return comPorts[i];
 			}
 		}
 		throw new NoSuchElementException();
 	}
+
 }

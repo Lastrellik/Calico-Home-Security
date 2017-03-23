@@ -30,6 +30,7 @@ class DataPacket{
       void setSha1FromRawPacket(byte* packetContents);
       void setPacketTypeFromRawPacket(byte* packetContents);
       void setMessageFromRawPacket(byte* packetContents);
+      String packetTypeToString(PacketType packetType);
       int arrayCounter = 1;
       byte packetHash[SIZE_OF_HASH_IN_PACKET];
       byte packetAsArray[SIZE_OF_DATAPACKET_IN_BYTES] { '~' };

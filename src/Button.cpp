@@ -12,7 +12,6 @@ Button::Button(){
 }
 
 boolean Button::isPressed() {
-  if(Properties::DEBUGGING_ACTIVE) Serial.println("Button has been pressed");
   boolean pressed = false;
   if (digitalRead(Component::getPin()) == HIGH) { // HIGH == Pressed
     pressed = true;
