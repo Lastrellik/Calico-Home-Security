@@ -8,6 +8,18 @@ public class SerialOutput extends SerialComm {
 		serialPacketOutputStream = new LinkedList<>();
 	}
 	
+	//FOR TESTING PURPOSES ONLY! I ANTICPATE THIS TO BE MODIFIED
+	public void sendArmPacket(){
+		byte[] buffer = {0};
+		comPort.writeBytes(buffer, 1);
+	}
+	
+	public void sendDisarmPacket(){
+		byte[] buffer = {1};
+		comPort.writeBytes(buffer, 1);		
+	}
+	//Above code is for testing pursposes only
+	
 	public void sendCommandPacket(int packetContents){
 		DataPacket commandPacket = new DataPacket(packetContents);
 		serialPacketOutputStream.add(commandPacket);

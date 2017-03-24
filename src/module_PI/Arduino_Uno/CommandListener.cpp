@@ -1,13 +1,13 @@
 /*
 CommandListener.h - A class for listening and executing commands from an external source
-*/ //TODO: Fix This
-/*
+*/
+
 #include "Arduino.h"
 #include "Alarm.h"
 #include "Logger.h"
+#include "CommandListener.h"
 
-#define SIZE_OF_HASH_IN_PACKET 8
-#define SIZE_OF_DATAPACKET_IN_BYTES 64
+#define SIZE_OF_DATAPACKET_IN_BYTES 8
 
 CommandListener::CommandListener(Alarm* alarm){
   Logger::Log("CommandListener Created");
@@ -15,11 +15,13 @@ CommandListener::CommandListener(Alarm* alarm){
 }
 
 void CommandListener::executeCommandIfAvailable(){
+  if(Serial.available() > 0){
+    executeCommand(Serial.read());
+  }
 }
 
-void CommandListener::executeCommand(){
-  /*Logger::Log("Received Command " + message);
-  switch (message.toInt()) {
+void CommandListener::executeCommand(byte commandByte){
+  switch (commandByte) {
     case 0:
       alarm->arm();
       break;
@@ -32,5 +34,5 @@ void CommandListener::executeCommand(){
     case 4:
       alarm->calibrate();
       break;
-  }*/
-//}
+  }
+}

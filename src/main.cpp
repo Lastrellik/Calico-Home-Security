@@ -11,7 +11,7 @@
 #include "module_Pi/Arduino_Uno/CommandListener.h"
 
 Alarm* alarm;
-//CommandListener* commandListener;
+CommandListener* commandListener;
 
 #include "module_WIFI\Wifi.h"
 Wifi* wifi;
@@ -37,11 +37,10 @@ void testBoardComponents(){
 }
 
 void setup() {
-  delay(5000);
   Serial.begin(Properties::BAUD_RATE);
   testBoardComponents();
   alarm = new Alarm();
-  //commandListener = new CommandListener(alarm);
+  commandListener = new CommandListener(alarm);
   alarm->calibrate();
 
   if (Properties::MODULE_WIFI) {
@@ -51,7 +50,7 @@ void setup() {
 }
 
 void loop(){
-  //commandListener->executeCommandIfAvailable();
+  commandListener->executeCommandIfAvailable();
   if(not alarm->isArmed()){
     if(alarm->isButtonPressed()){
       alarm->arm();
