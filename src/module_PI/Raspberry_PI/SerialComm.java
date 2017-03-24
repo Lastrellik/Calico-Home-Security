@@ -28,7 +28,7 @@ abstract class SerialComm {
 				return comPorts[i];
 			}
 		}
-		throw new NoSuchElementException();
+		throw new NoSuchElementException("Arduino Uno Cannot Be Found");
 	}
 
 }

@@ -1,10 +1,10 @@
 package module_PI.Raspberry_PI;
 
 public enum PacketType {
-	LOG((byte)0), COMMAND((byte)1), INFO((byte)2), REQUEST((byte)3), ERROR((byte)4);
+	LOG((byte)1), DATA((byte)2), COMMAND((byte)3), ERROR((byte)4), REQUEST((byte)5);
 	
 	private byte packetTypeByte;
-	private String[] packetTypeStrings = {"LOG", "COMMAND", "INFO", "REQUEST", "ERROR"};
+	private String[] packetTypeStrings = {"LOG", "DATA", "COMMAND", "ERROR", "REQUEST"};
 	
 	private PacketType(byte b){
 		packetTypeByte = b;

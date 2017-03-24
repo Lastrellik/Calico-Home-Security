@@ -8,8 +8,13 @@ public class SerialOutput extends SerialComm {
 		serialPacketOutputStream = new LinkedList<>();
 	}
 	
-	public void sendCommandMessage(String commandMessage){
-		DataPacket commandPacket = new DataPacket(commandMessage, PacketType.COMMAND);
+	public void sendCommandPacket(int packetContents){
+		DataPacket commandPacket = new DataPacket(packetContents);
+		serialPacketOutputStream.add(commandPacket);
+	}
+	
+	public void sendCommandPacket(byte[] packetContents){
+		DataPacket commandPacket = new DataPacket(packetContents);
 		serialPacketOutputStream.add(commandPacket);
 	}
 	
