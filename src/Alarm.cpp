@@ -11,6 +11,7 @@
 #include "Button.h"
 #include "Alarm.h"
 #include "Logger.h"
+#include "ComponentTester.h"
 
 Alarm::Alarm(){
   Logger::Log("Alarm has been created");
@@ -28,6 +29,19 @@ void Alarm::calibrate(){
     _isCalibrated = true;
   }
   _laser->off();
+}
+
+void Alarm::testBoardComponents(){
+  if (isArmed()) disarm();
+  ComponentTester tester(_greenLED);
+  tester.testPin();
+  tester.testComponent(_redLED);
+  tester.testComponent(_alarmLED);
+  tester.testComponent(_photoR);
+  tester.testComponent(_buzzer);
+  tester.testComponent(_laser);
+  //tester.testComponent(_armButton);
+
 }
 
 void Alarm::determineBasePhotoresistorReading(){
@@ -60,6 +74,7 @@ void Alarm::arm(){
   if (!this->isReadyToArm()){
    Logger::Log("Alarm failed to arm");
    this->alertFailedAction();
+   if(!this->isArmed()) _laser->off();
  } else {
    this->alertSuccessfulAction();
     Logger::Log("Alarm sucessfully armed");

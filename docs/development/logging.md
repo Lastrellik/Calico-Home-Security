@@ -45,8 +45,11 @@ Message Translation Chart
 | 1 - Log     | 1 - Error        | 001 - Execute Command: Arm |
 | 2 - Data    | 2 - Warn         | 002 - Execute Command: Disarm |
 | 3 - Command | 3 - Debug        | 003 - Execute Command: Silence |
-| 4 - Error   | 4 - Info         | 003 - Execute Command: Calibrate |
-| 5 - Request | 5 - Trace        | 514 - [EXAMPLE] Component Configured on Pin 14 |
+| 4 - Error   | 4 - Info         | 004 - Execute Command: Calibrate |
+| 5 - Request | 5 - Trace        | 005 - Execute Command: Trigger |
+| | | 006 - Execute Command: Reset Calibration |
+| | | 007 - Execute Command: Test Components |
+| | | 514 - [EXAMPLE] Component Configured on Pin 14 |
 | | | 515 - [EXAMPLE] Component Configured on Pin 15 |
 | | | 516 - [EXAMPLE] ... |
 
