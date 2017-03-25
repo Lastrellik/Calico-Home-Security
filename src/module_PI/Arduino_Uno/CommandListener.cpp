@@ -54,5 +54,8 @@ void CommandListener::executeCommand(byte* commandBytes){
     case 30006:
       alarm->resetCalibration();
       break;
+    case 30007:
+      alarm->testBoardComponents();
+      break;
   }
 }
