@@ -12,14 +12,14 @@ ComponentTester::ComponentTester() {
   Logger::Log("Default ComponentTester Constructor");
 }
 
-ComponentTester::ComponentTester(Component component){
+ComponentTester::ComponentTester(Component* component){
   Logger::Log("ComponentTester Constructor");
   _component = component;
 }
 
 void ComponentTester::testPin(){
-  String componentType = _component.getComponentType();
-  int pin = _component.getPin();
+  String componentType = _component->getComponentType();
+  int pin = _component->getPin();
   if(componentType.equalsIgnoreCase("LED") ||
       componentType.equalsIgnoreCase("LASER")){
       digitalWrite(pin, HIGH);
@@ -38,7 +38,7 @@ void ComponentTester::testPin(){
       }
   }
   if(componentType.equalsIgnoreCase("BUTTON")){
-    Button button(_component.getPin()); //May be wasted memory
+    Button button(_component->getPin()); //May be wasted memory
     for(int i = 0; i < 150; i++){
       if(button.isPressed()) {
         Logger::Log("The button was pressed");
@@ -49,15 +49,11 @@ void ComponentTester::testPin(){
   }
 }
 
-void ComponentTester::setComponent(Component component){
+void ComponentTester::setComponent(Component* component){
   _component = component;
 }
 
-void ComponentTester::testComponent(Component component){
+void ComponentTester::testComponent(Component* component){
   setComponent(component);
   testPin();
-}
-
-Component ComponentTester::getComponent(){
-  return _component;
 }

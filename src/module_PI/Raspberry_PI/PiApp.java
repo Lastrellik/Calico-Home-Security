@@ -13,6 +13,12 @@ public class PiApp {
 		SerialOutput output = new SerialOutput();
 		
 		pause(10000);
+		output.sendTestComponentsPacket();
+		output.sendCalibratePacket();
+		output.sendArmPacket();
+		output.sendTriggerPacket();
+		output.sendSilencePacket();
+		
 		while(true){
 			output.sendArmPacket();
 			pause(5000);
