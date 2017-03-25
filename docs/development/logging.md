@@ -49,12 +49,20 @@ Message Translation Chart
 | 5 - Request | 5 - Trace        | 005 - Execute Command: Trigger |
 | | | 006 - Execute Command: Reset Calibration |
 | | | 007 - Execute Command: Test Components |
-| | | 514 - [EXAMPLE] Component Configured on Pin 14 |
-| | | 515 - [EXAMPLE] Component Configured on Pin 15 |
-| | | 516 - [EXAMPLE] ... |
+| | | 016 - Alarm Created |
+| | | 017 - Alarm Failed |
+| | | 018 - Alarm Successful |
+| | | 019 - Alarm Failed Arming |
+| | | 020 - Alarm Successful Arming |
+| | | 021 - Base Photoresistor Data |
+| | | 022 - Base Photoresistor Test |
+| | | 023 - Component Created |
+| | | 024 - Component Tester Created |
+| | | 025 - Button Pressed |
+| | | 026 - CommandListener Created |
 
 **Details Block Definitions:**
-* [001 - 009] - Reserved for Commands intended for the Alarm (Arduino) to execute.
+* [001 - 030] - Reserved for Commands intended for the Alarm (Arduino) to execute.
 * []
 
 **Notes:**

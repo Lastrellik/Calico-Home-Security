@@ -6,7 +6,7 @@
 #include "Logger.h"
 
 Component::Component(int pin, String componentType){
-  Logger::Log("Component " + componentType + " is set at pin " + pin);
+  Serial.write(14023); //14023 = Log, Info, Componed Created
   _pin = pin;
   _componentType = componentType;
   delay(100);

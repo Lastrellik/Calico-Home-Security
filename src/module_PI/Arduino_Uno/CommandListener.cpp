@@ -10,7 +10,7 @@ CommandListener.h - A class for listening and executing commands from an externa
 #define SIZE_OF_DATAPACKET_IN_BYTES 5
 
 CommandListener::CommandListener(Alarm* alarm){
-  Logger::Log("CommandListener Created");
+  Serial.write(14018); //14017 = Log, Info, CommandListener Created
   this->alarm = alarm;
 }
 
