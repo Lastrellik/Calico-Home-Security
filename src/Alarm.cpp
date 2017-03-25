@@ -32,6 +32,7 @@ void Alarm::calibrate(){
 }
 
 void Alarm::testBoardComponents(){
+  if (isArmed()) disarm();
   ComponentTester tester(_greenLED);
   tester.testPin();
   tester.testComponent(_redLED);
