@@ -12,7 +12,6 @@ Buzzer::Buzzer(){
 }
 
 void Buzzer::soundTone(int frequency) {
-  if(Properties::DEBUGGING_ACTIVE) Serial.println("Buzzer has started sounding");
   tone(this->getPin(), frequency);
 }
 
@@ -40,6 +39,5 @@ void Buzzer::soundNegativeTone(){
 }
 
 void Buzzer::stopTone() {
-  if(Properties::DEBUGGING_ACTIVE) Serial.println("Buzzer has stopped sounding");
   noTone(this->getPin());
 }

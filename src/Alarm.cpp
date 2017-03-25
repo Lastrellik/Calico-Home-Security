@@ -14,7 +14,7 @@
 #include "ComponentTester.h"
 
 Alarm::Alarm(){
-  Logger::Log("Alarm has been created");
+  Serial.write(14008); //14008 = Log, Info Alarm Created
 }
 
 
@@ -25,7 +25,7 @@ void Alarm::calibrate(){
     _isCalibrated = false;
   } else {
     alertSuccessfulAction();
-    Logger::Log("Alarm Successful Calibration");
+    Serial.write(34004)); //34004 = Command, Info Execute Command calibrate
     _isCalibrated = true;
   }
   _laser->off();
@@ -53,18 +53,18 @@ void Alarm::determineBasePhotoresistorReading(){
     _greenLED->flash();
   }
   _baseReading = avgReading / numOfReadings;
-  Logger::Log("Base Photoresistor Reading Determined");
+  Serial.write(24013); //24013 = Data, Info, Base Photoresistor Data
   _laser->on();
 }
 
 void Alarm::alertFailedAction(){
-  Logger::Log("Alarm Failed Action");
+  Serial.write(14009); //14009 = Log, Info, Alarm Failed
   _buzzer->soundNegativeTone();
   _redLED->flash(1000);
 }
 
 void Alarm::alertSuccessfulAction(){
-  Logger::Log("Alarm successful action");
+  Serial.write(14010); //14010 = Log, Info, Alarm Successful
   _buzzer->soundAffirmativeTone();
   _greenLED->flash(1000);
 }
@@ -72,12 +72,12 @@ void Alarm::alertSuccessfulAction(){
 void Alarm::arm(){
   _laser->on();
   if (!this->isReadyToArm()){
-   Logger::Log("Alarm failed to arm");
+   Serial.write(14011); //14011 = Log, Info, Alarm Failed Arming
    this->alertFailedAction();
    if(!this->isArmed()) _laser->off();
  } else {
    this->alertSuccessfulAction();
-    Logger::Log("Alarm sucessfully armed");
+    Serial.write(14012);
    _alarmLED->on();
    _isArmed = true;
  }
@@ -99,7 +99,7 @@ bool Alarm::isTripped(){
 }
 
 void Alarm::trigger(){
-  Logger::Log("Alarm has been triggered!");
+  Serial.write(34005); //34005 = Command, Info, Excuet Command: Trigger
   _isTriggered = true;
   _isSilenced = false;
 }
@@ -112,6 +112,7 @@ void Alarm::soundOneAlarmCycle(){
 }
 
 void Alarm::resetCalibration(){
+  Serial.write(14006); //14006 = Log, Info, Execute Command: Reset Calibration
   disarm();
   _isCalibrated = false;
 }
@@ -127,11 +128,11 @@ void Alarm::disarm(){
   _alarmLED->off();
   _isSilenced = false;
   _laser->off();
-  Logger::Log("Alarm has been disarmed");
+  Serial.write(34002); //34002 = Command, Info, Execute Command: Disarm
 }
 void Alarm::silence(){
   _isSilenced = true;
-  Logger::Log("Alarm has been silenced");
+  Serial.write(34003); //34003 = Command, Info, Excuet Command: Silence
 }
 
 bool Alarm::isCalibrated(){

@@ -9,11 +9,11 @@
 #include "Logger.h"
 
 ComponentTester::ComponentTester() {
-  Logger::Log("Default ComponentTester Constructor");
+  Serial.write(14015); //14016 = Log, Info, Componet Tester
 }
 
 ComponentTester::ComponentTester(Component* component){
-  Logger::Log("ComponentTester Constructor");
+  Seria.write(14015); //14016 = Log, Info, Componet Tester
   _component = component;
 }
 
@@ -30,18 +30,16 @@ void ComponentTester::testPin(){
   if(componentType.equalsIgnoreCase("BUZZER")){
     tone(pin, 1000, 100); //(Buzzer)_component.tone(1000) wouldn't work. Polymorphism?
   }
+
   if(componentType.equalsIgnoreCase("PHOTORESISTOR")){
-    for(int i = 1; i <= 10; i++){
-        if(Properties::DEBUGGING_ACTIVE) {
-          Logger::Log(String("Test #") + i + String(": ") + String(analogRead(pin)));
-        }
-      }
+        Serial.write(14014); //14014 Log, Info, Base Photoresistor Test
   }
+
   if(componentType.equalsIgnoreCase("BUTTON")){
     Button button(_component->getPin()); //May be wasted memory
     for(int i = 0; i < 150; i++){
       if(button.isPressed()) {
-        Logger::Log("The button was pressed");
+        Serial.write(24017); //24017 Data, Info, Button Pressed
         break;
       }
       delay(200);
