@@ -27,6 +27,7 @@ void Alarm::calibrate(){
     Logger::Log("Alarm Successful Calibration");
     _isCalibrated = true;
   }
+  _laser->off();
 }
 
 void Alarm::determineBasePhotoresistorReading(){
@@ -55,6 +56,7 @@ void Alarm::alertSuccessfulAction(){
 }
 
 void Alarm::arm(){
+  _laser->on();
   if (!this->isReadyToArm()){
    Logger::Log("Alarm failed to arm");
    this->alertFailedAction();
@@ -82,8 +84,9 @@ bool Alarm::isTripped(){
 }
 
 void Alarm::trigger(){
-  //Logger::Log("Alarm has been triggered!");
+  Logger::Log("Alarm has been triggered!");
   _isTriggered = true;
+  _isSilenced = false;
 }
 
 void Alarm::soundOneAlarmCycle(){
@@ -91,6 +94,11 @@ void Alarm::soundOneAlarmCycle(){
   _redLED->flash(300);
   if (not this->_isSilenced) _buzzer->soundAlarmLowTone();
   _alarmLED->flash(300);
+}
+
+void Alarm::resetCalibration(){
+  disarm();
+  _isCalibrated = false;
 }
 
 bool Alarm::isTriggered(){
@@ -102,6 +110,8 @@ void Alarm::disarm(){
   _isTriggered = false;
   _isArmed = false;
   _alarmLED->off();
+  _isSilenced = false;
+  _laser->off();
   Logger::Log("Alarm has been disarmed");
 }
 void Alarm::silence(){

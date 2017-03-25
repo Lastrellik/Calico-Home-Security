@@ -3,41 +3,39 @@ package module_PI.Raspberry_PI;
 import java.util.LinkedList;
 
 public class SerialOutput extends SerialComm {
+	private final int SIZE_OF_DATAPACKET_IN_BYTES = 5;
 	
 	public SerialOutput(){
 		serialPacketOutputStream = new LinkedList<>();
 	}
 	
-	//FOR TESTING PURPOSES ONLY! I ANTICPATE THIS TO BE MODIFIED
 	public void sendArmPacket(){
-		byte[] buffer = {0};
-		comPort.writeBytes(buffer, 1);
+		byte[] buffer = {3,0,0,0,1}; // 30001 = Command, NA, Execute Command: Arm
+		comPort.writeBytes(buffer, SIZE_OF_DATAPACKET_IN_BYTES);
 	}
 	
 	public void sendDisarmPacket(){
-		byte[] buffer = {1};
-		comPort.writeBytes(buffer, 1);		
-	}
-	//Above code is for testing pursposes only
-	
-	public void sendCommandPacket(int packetContents){
-		DataPacket commandPacket = new DataPacket(packetContents);
-		serialPacketOutputStream.add(commandPacket);
+		byte[] buffer = {3,0,0,0,2};// 30002 = Command, NA, Execute Command: Disarm
+		comPort.writeBytes(buffer, SIZE_OF_DATAPACKET_IN_BYTES);		
 	}
 	
-	public void sendCommandPacket(byte[] packetContents){
-		DataPacket commandPacket = new DataPacket(packetContents);
-		serialPacketOutputStream.add(commandPacket);
+	public void sendSilencePacket(){
+		byte[] buffer = {3,0,0,0,3};// 30003 = Command, NA, Execute Command: Silence
+		comPort.writeBytes(buffer, SIZE_OF_DATAPACKET_IN_BYTES);		
 	}
 	
-	public boolean isOutputStreamEmpty(){
-		return(serialPacketOutputStream.isEmpty());
+	public void sendCalibratePacket(){
+		byte[] buffer = {3,0,0,0,4};// 30004 = Command, NA, Execute Command: Calibrate
+		comPort.writeBytes(buffer, SIZE_OF_DATAPACKET_IN_BYTES);		
 	}
 	
-	public void sendNextCommand(){
-		if(!isOutputStreamEmpty()){
-			DataPacket nextCommand = serialPacketOutputStream.remove();
-			System.out.println(comPort.writeBytes(nextCommand.getPacketAsArray(), nextCommand.getSizeInBytes()));
-		}
+	public void sendTriggerPacket(){
+		byte[] buffer = {3,0,0,0,5};// 30005 = Command, NA, Execute Command: Trigger
+		comPort.writeBytes(buffer, SIZE_OF_DATAPACKET_IN_BYTES);	
+	}
+	
+	public void sendResetCalibrationPacket(){
+		byte[] buffer = {3,0,0,0,6};// 30006 = Command, NA, Execute Command: ResetCalibration
+		comPort.writeBytes(buffer, SIZE_OF_DATAPACKET_IN_BYTES);	
 	}
 }

@@ -15,7 +15,9 @@ class CommandListener {
     CommandListener(Alarm* alarm);
     void executeCommandIfAvailable();
   private:
-    void executeCommand(byte commandByte);
+    int commandByteToInt(byte* commandBytes);
+    void executeCommand(byte* commandBytes);
+    byte* commandBytes;
     Alarm* alarm;
 };
 

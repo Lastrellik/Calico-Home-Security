@@ -19,6 +19,7 @@ class Alarm{
   public:
     Alarm();
     void calibrate();
+    void testBoardComponents();
     void arm();
     void disarm();
     void silence();
@@ -30,6 +31,7 @@ class Alarm{
     bool isTriggered();
     bool isReadyToArm();
     void soundOneAlarmCycle();
+    void resetCalibration();
 
   private:
     LED* _greenLED = new LED(2);

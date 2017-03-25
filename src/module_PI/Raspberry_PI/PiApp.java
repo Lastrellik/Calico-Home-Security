@@ -9,25 +9,32 @@ public class PiApp {
 	public static void main(String[] args) {
 		SerialInputListener inputListener = new SerialInputListener();
 		Thread listener = new Thread(inputListener, "Listener");
-		listener.start();
-		//The code below is for testing purposes only
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		listener.start();		
 		SerialOutput output = new SerialOutput();
-		output.sendArmPacket();
+		
+		pause(10000);
+		while(true){
+			output.sendArmPacket();
+			pause(5000);
+			output.sendTriggerPacket();
+			pause(2000);
+			output.sendSilencePacket();
+			pause(2000);
+			output.sendDisarmPacket();
+			pause(5000);
+			output.sendResetCalibrationPacket();
+			pause(5000);
+			output.sendCalibratePacket();
+			pause(5000);
+		}
+	}
+	
+	private static void pause(int millis){
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(millis);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		output.sendDisarmPacket();
 	}
 
 }
