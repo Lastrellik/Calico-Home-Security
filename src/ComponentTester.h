@@ -10,16 +10,15 @@
 
 class ComponentTester{
 private:
-  Component _component;
+  Component* _component;
   int _millisOn = 500;
   int _millisOff = 100;
 public:
-  ComponentTester(Component component);
+  ComponentTester(Component* component);
   ComponentTester();
   void testPin();
-  void testComponent(Component component);
-  void setComponent(Component component);
-  Component getComponent();
+  void testComponent(Component* component);
+  void setComponent(Component* component);
 };
 
 #endif

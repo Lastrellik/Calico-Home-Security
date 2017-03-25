@@ -38,4 +38,10 @@ public class SerialOutput extends SerialComm {
 		byte[] buffer = {3,0,0,0,6};// 30006 = Command, NA, Execute Command: ResetCalibration
 		comPort.writeBytes(buffer, SIZE_OF_DATAPACKET_IN_BYTES);	
 	}
+	
+	public void sendTestComponentsPacket(){
+		byte[] buffer = {3,0,0,0,7};// 30007 = Command, NA, Execute Command: TestComponents
+		comPort.writeBytes(buffer, SIZE_OF_DATAPACKET_IN_BYTES);	
+		
+	}
 }

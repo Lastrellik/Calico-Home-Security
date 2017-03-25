@@ -15,7 +15,7 @@ CommandListener::CommandListener(Alarm* alarm){
 }
 
 void CommandListener::executeCommandIfAvailable(){
-  if(Serial.available() > SIZE_OF_DATAPACKET_IN_BYTES){
+  if(Serial.available() >= SIZE_OF_DATAPACKET_IN_BYTES){
     for(int i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
       commandBytes[i] = Serial.read();
     }
@@ -53,6 +53,9 @@ void CommandListener::executeCommand(byte* commandBytes){
       break;
     case 30006:
       alarm->resetCalibration();
+      break;
+    case 30007:
+      alarm->testBoardComponents();
       break;
   }
 }
