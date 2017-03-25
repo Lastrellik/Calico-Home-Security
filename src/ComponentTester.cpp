@@ -9,11 +9,11 @@
 #include "Logger.h"
 
 ComponentTester::ComponentTester() {
-  Serial.write(14015); //14016 = Log, Info, Componet Tester
+  Serial.write(14024); //14024 = Log, Info, Componet Tester
 }
 
 ComponentTester::ComponentTester(Component* component){
-  Seria.write(14015); //14016 = Log, Info, Componet Tester
+  Seria.write(14024); //14024 = Log, Info, Componet Tester
   _component = component;
 }
 
@@ -32,7 +32,7 @@ void ComponentTester::testPin(){
   }
 
   if(componentType.equalsIgnoreCase("PHOTORESISTOR")){
-        Serial.write(14014); //14014 Log, Info, Base Photoresistor Test
+        Serial.write(14022); //14022 Log, Info, Base Photoresistor Test
   }
 
   if(componentType.equalsIgnoreCase("BUTTON")){

@@ -14,7 +14,7 @@
 #include "ComponentTester.h"
 
 Alarm::Alarm(){
-  Serial.write(14008); //14008 = Log, Info Alarm Created
+  Serial.write(14016); //14016 = Log, Info Alarm Created
 }
 
 
@@ -53,18 +53,18 @@ void Alarm::determineBasePhotoresistorReading(){
     _greenLED->flash();
   }
   _baseReading = avgReading / numOfReadings;
-  Serial.write(24013); //24013 = Data, Info, Base Photoresistor Data
+  Serial.write(24021); //24021 = Data, Info, Base Photoresistor Data
   _laser->on();
 }
 
 void Alarm::alertFailedAction(){
-  Serial.write(14009); //14009 = Log, Info, Alarm Failed
+  Serial.write(14017); //14017 = Log, Info, Alarm Failed
   _buzzer->soundNegativeTone();
   _redLED->flash(1000);
 }
 
 void Alarm::alertSuccessfulAction(){
-  Serial.write(14010); //14010 = Log, Info, Alarm Successful
+  Serial.write(14018); //14018 = Log, Info, Alarm Successful
   _buzzer->soundAffirmativeTone();
   _greenLED->flash(1000);
 }
@@ -72,12 +72,12 @@ void Alarm::alertSuccessfulAction(){
 void Alarm::arm(){
   _laser->on();
   if (!this->isReadyToArm()){
-   Serial.write(14011); //14011 = Log, Info, Alarm Failed Arming
+   Serial.write(14019); //14011 = Log, Info, Alarm Failed Arming
    this->alertFailedAction();
    if(!this->isArmed()) _laser->off();
  } else {
    this->alertSuccessfulAction();
-    Serial.write(14012);
+    Serial.write(14018); //14018 = Log, Info, Alarm Successful
    _alarmLED->on();
    _isArmed = true;
  }

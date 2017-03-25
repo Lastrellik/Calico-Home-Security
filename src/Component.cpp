@@ -6,7 +6,7 @@
 #include "Logger.h"
 
 Component::Component(int pin, String componentType){
-  Serial.write(14015); //14015 = Log, Info, Componed Created
+  Serial.write(14023); //14023 = Log, Info, Componed Created
   _pin = pin;
   _componentType = componentType;
   delay(100);
