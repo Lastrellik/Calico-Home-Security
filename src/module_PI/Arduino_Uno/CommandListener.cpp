@@ -1,13 +1,13 @@
 /*
 CommandListener.h - A class for listening and executing commands from an external source
-*/ //TODO: Fix This
-/*
+*/
+
 #include "Arduino.h"
 #include "Alarm.h"
 #include "Logger.h"
+#include "CommandListener.h"
 
-#define SIZE_OF_HASH_IN_PACKET 8
-#define SIZE_OF_DATAPACKET_IN_BYTES 64
+#define SIZE_OF_DATAPACKET_IN_BYTES 5
 
 CommandListener::CommandListener(Alarm* alarm){
   Logger::Log("CommandListener Created");
@@ -15,22 +15,44 @@ CommandListener::CommandListener(Alarm* alarm){
 }
 
 void CommandListener::executeCommandIfAvailable(){
+  if(Serial.available() > SIZE_OF_DATAPACKET_IN_BYTES){
+    for(int i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
+      commandBytes[i] = Serial.read();
+    }
+    executeCommand(commandBytes);
+  }
 }
 
-void CommandListener::executeCommand(){
-  /*Logger::Log("Received Command " + message);
-  switch (message.toInt()) {
-    case 0:
+int CommandListener::commandByteToInt(byte* commandBytes){
+    int commandByteToInt = 0;
+    int multiplier = 10000;
+    for(int i = 0; i < SIZE_OF_DATAPACKET_IN_BYTES; i++){
+      commandByteToInt += multiplier * commandBytes[i];
+      multiplier /= 10;
+    }
+    return commandByteToInt;
+}
+
+void CommandListener::executeCommand(byte* commandBytes){
+  int commandInt = commandByteToInt(commandBytes);
+  switch (commandInt) {
+    case 30001:
       alarm->arm();
       break;
-    case 1:
+    case 30002:
       alarm->disarm();
       break;
-    case 3:
+    case 30003:
       alarm->silence();
       break;
-    case 4:
+    case 30004:
       alarm->calibrate();
       break;
-  }*/
-//}
+    case 30005:
+      alarm->trigger();
+      break;
+    case 30006:
+      alarm->resetCalibration();
+      break;
+  }
+}
