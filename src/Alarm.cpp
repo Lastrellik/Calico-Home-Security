@@ -73,7 +73,7 @@ void Alarm::arm(){
   if (!this->isReadyToArm()){
    Logger::Log("Alarm failed to arm");
    this->alertFailedAction();
-   _laser->off();
+   if(!this->isArmed()) _laser->off();
  } else {
    this->alertSuccessfulAction();
     Logger::Log("Alarm sucessfully armed");
