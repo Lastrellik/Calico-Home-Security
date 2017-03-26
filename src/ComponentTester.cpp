@@ -1,22 +1,31 @@
-/*
-  ComponentTester.cpp - Generic class for testing components
-*/
+/**
+  Calico Home Security System, ComponentTester.cpp
+  Purpose: Used to test the Component subclasses
 
+  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @version To be Determined
+*/
 #include "Arduino.h"
 #include "ComponentTester.h"
 #include "Buzzer.h"
 #include "Button.h"
 #include "Logger.h"
-
+/**
+  Base constructor that logs that ComponentTester is being used
+*/
 ComponentTester::ComponentTester() {
   Logger::Log("Default ComponentTester Constructor");
 }
-
+/**
+  Constructor that builds a Component object for testing
+*/
 ComponentTester::ComponentTester(Component* component){
   Logger::Log("ComponentTester Constructor");
   _component = component;
 }
-
+/**
+  Determines the componentType and tests it accordingly based on the class
+*/
 void ComponentTester::testPin(){
   String componentType = _component->getComponentType();
   int pin = _component->getPin();
@@ -48,11 +57,15 @@ void ComponentTester::testPin(){
     }
   }
 }
-
+/**
+  Setter for the component
+*/
 void ComponentTester::setComponent(Component* component){
   _component = component;
 }
-
+/**
+  A function that uses setComponent and testPin at the same time
+*/
 void ComponentTester::testComponent(Component* component){
   setComponent(component);
   testPin();

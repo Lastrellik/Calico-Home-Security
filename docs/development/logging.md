@@ -47,11 +47,11 @@ Message Translation Chart
 | 3 - Command | 3 - Debug        | 003 - Execute Command: Silence |
 | 4 - Error   | 4 - Info         | 004 - Execute Command: Calibrate |
 | 5 - Request | 5 - Trace        | 005 - Execute Command: Trigger |
-| | | 006 - Execute Command: Reset Calibration |
-| | | 007 - Execute Command: Test Components |
-| | | 514 - [EXAMPLE] Component Configured on Pin 14 |
-| | | 515 - [EXAMPLE] Component Configured on Pin 15 |
-| | | 516 - [EXAMPLE] ... |
+|             |                  | 006 - Execute Command: Reset Calibration |
+|             |                  | 007 - Execute Command: Test Components |
+|             |                  | 514 - [EXAMPLE] Component Configured on Pin 14 |
+|             |                  | 515 - [EXAMPLE] Component Configured on Pin 15 |
+|             |                  | 516 - [EXAMPLE] ... |
 
 **Details Block Definitions:**
 * [001 - 009] - Reserved for Commands intended for the Alarm (Arduino) to execute.
