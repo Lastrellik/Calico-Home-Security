@@ -36,7 +36,7 @@ Some other IDEs considered:
 4. Wait for installation to complete. When prompted, restart Atom.
 
 ## Install Clang
-Clang is what PlatformIO uses for the Intelligent Code Autocompletion. It comes installed on some platforms but not on Windows or some flavors of Linux. Other platforms may also need to install it. You can find all the platform instructions (here)[http://docs.platformio.org/en/latest/ide/atom.html#ide-atom-installation-clang].
+Clang is what PlatformIO uses for the Intelligent Code Autocompletion. It comes installed on some platforms but not on Windows or some flavors of Linux. Other platforms may also need to install it. You can find all the platform instructions [here](http://docs.platformio.org/en/latest/ide/atom.html#ide-atom-installation-clang).
 
 1. Navigate to the (Clang Download)[http://llvm.org/releases/download.html] page.
 2. Under the `Pre-Built` Binaries section, choose the (Clang for Windows (64-bit))[http://releases.llvm.org/3.9.1/LLVM-3.9.1-win64.exe] option to download it

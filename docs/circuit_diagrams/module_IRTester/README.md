@@ -5,4 +5,4 @@ This is a diagram of the testing module for the IR sensor and remote. The purpos
 
 The sensor used has a 3 pin configuration. The (G) pin is used as ground, the (R) pin is used for power and plugged into the 5 volt port and the (Y) pin is used as the sensor and in this instance, run to the 11th digital pin. The Y pin returns the values of specific buttons used on the remote.
 
-Please consult manufacturer specificatitions for your specific pin-layout.
+Please consult manufacturer specifications for your specific pin-layout.

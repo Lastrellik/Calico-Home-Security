@@ -45,7 +45,7 @@ Once you have followed all the steps in both the IFTTT and ESP8266 Setup section
 Future Development Ideas
 ======================
 
-Initially, the Wifi module is only able to notify you when the alarm is triggered. It is also using IFTTT for that notification. We opted to go this route because it had the fewest 'moving pieces' and made it so we didn't have to maintain any other infrustructure pieces ourselves.
+Initially, the Wifi module is only able to notify you when the alarm is triggered. It is also using IFTTT for that notification. We opted to go this route because it had the fewest 'moving pieces' and made it so we didn't have to maintain any other infrastructure pieces ourselves.
 
 However, there is no reason why there couldn't be the ability to take external commands in from the ESP8266 and have those control the alarm. A common framework/standard that people use with ESP8266's and connected them to the IoT is called [MQTT](http://mqtt.org/). Utilizing MQTT would involve setting up a broker service which you call with the ESP8266 to _publish_ events. The ESP8266 can also be configured to _pull_ events from the broker as well. In theory you could publish an event through some external means (an app, a website, etc.) into the MQTT broken with a message to "Arm" the alarm. The ESP8266 would _pull_ that message and then send a message to the Arduino Uno telling it to arm.
 
@@ -56,7 +56,7 @@ The above would have taken much more time and resources to get fully set up than
 IFTTT Setup
 ===========
 
-You are going to need an acount at [IFTTT](https://ifttt.com/). Create an account, verify your email address, etc. before continuing.
+You are going to need an account at [IFTTT](https://ifttt.com/). Create an account, verify your email address, etc. before continuing.
 
 After you have created your IFTT account, install the IFTTT app on you cell phone. IFTTT has apps for both iOS and Android. Log in on your cell phone and go through the initial setup steps on your phone.
 
@@ -94,7 +94,7 @@ By default, the ESP8266 communicates at `115200` baud which is too fast for the 
 1. Create a new project in PlatformIO. Call it something similar to "esp8266_setup"
 2. Paste the following code into a `main.cpp` file
 
-	```
+	```c++
 	#include "Arduino.h"
 	#include <SoftwareSerial.h>
 
@@ -138,7 +138,7 @@ Make Sure Arduino and ESP8266 can communicate with each other
 
 1. Paste the following code into a `main.cpp` file
 
-	```
+	```c++
 	#include "Arduino.h"
 	#include <SoftwareSerial.h>
 
