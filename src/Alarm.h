@@ -1,5 +1,10 @@
-/*
-  Alarm.h - A class for creating, arming, disarming, and calibrating the alarm
+/**
+  Calico Home Security System, Alarm.h
+  Purpose: Alarm creaties an alarm ojbect, arms it, disarms it, and calibrates the paramaters
+  for the alarm object
+
+  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @version To be Determined
 */
 
 #ifndef Alarm_h
@@ -33,6 +38,20 @@ class Alarm{
     void soundOneAlarmCycle();
     void resetCalibration();
 
+    /**
+      @param _greenLED, _redLED, _alarmLED used for LEDs on the breadboard
+        creates LED objects to manage them
+      @param _photoR used for value of photorsistor
+        creates Photoresistor object to manage it
+      @param _buzzer used to set Buzzer value
+        creates Buzzer object to manage it
+      @param _armButton used to determine state of Button on or off
+        creates a Button object to manage it
+      @param _laser used to manage the laser status on or off
+        creats a Lser object to manage it
+      @param bools are used to determine the state of the status of what they're
+        named for
+    */
   private:
     LED* _greenLED = new LED(2);
     LED* _redLED = new LED(3);
