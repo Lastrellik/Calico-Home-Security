@@ -14,9 +14,9 @@ Not all modules are compatible with eachother. The following chart shows those w
 
 |             | Mini               | Base               | Pi                 | Wifi               | Touchscreen        | Turret             |
 |-------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
-| Mini        | :white_check_mark: | :x:                |                    |                    |                    |                    |
-| Base        | :x:                | :white_check_mark: |                    |                    |                    |                    |
-| Pi          |                    |                    | :white_check_mark: | :x:                |                    |                    |
-| Wifi        |                    |                    | :x:                | :white_check_mark: |                    |                    |
-| Touchscreen |                    |                    |                    |                    | :white_check_mark: |                    |
-| Turret      |                    |                    |                    |                    |                    | :white_check_mark: |
+| Mini        | :white_check_mark: | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Base        | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Pi          | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | ?                  |
+| Wifi        | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :x:                | ?                  |
+| Touchscreen | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | ?                  |
+| Turret      | :white_check_mark: | :white_check_mark: | ?                  | ?                  | ?                  | :white_check_mark: |

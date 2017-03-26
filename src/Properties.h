@@ -22,9 +22,13 @@ class Properties {
 
 
     // ********** MODULES ********** //
+    static boolean MODULE_BASE;
+    static boolean MODULE_MINI;
     static boolean MODULE_WIFI;
     static boolean MODULE_PI;
     static boolean MODULE_IR;
+    static boolean MODULE_TOUCHSCREEN;
+    static boolean MODULE_TURRET;
 
 
     // ********** WIFI MODULE PROPERTIES ********** //
