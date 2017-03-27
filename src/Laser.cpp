@@ -39,13 +39,4 @@ void Laser::off(){
   digitalWrite(Component::getPin(), LOW);
   _isOn = false;
 }
-//Need to think about removing toggle as we don't really use it
-void Laser::toggle(){
-  if(_isOn){
-    digitalWrite(Component::getPin(), LOW);
-    _isOn = false;
-  } else {
-    digitalWrite(Component::getPin(), HIGH);
-    _isOn = true;
-  }
 }
