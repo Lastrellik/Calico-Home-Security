@@ -42,7 +42,7 @@ void Alarm::calibrate(){
     _isCalibrated = false;
   } else {
     alertSuccessfulAction();
-    Serial.write(30004); // 30004 = Command, N/A, Execute Command: Calibrate
+    Serial.write(13106); // 13106 = Log, Debug, Alarm succesful calibration
     _isCalibrated = true;
   }
   _laser->off();
@@ -108,7 +108,7 @@ void Alarm::alertSuccessfulAction(){
   @param _isArmed is alertSuccessfulAction is set to true
 */
 void Alarm::arm(){
-  Serial.write(30001); // 30001 = Command, N/A, Execute Command: Arm
+  Serial.write(13107); // 13107 = Log, Debug, Alarm has begun arming
   _laser->on();
   if (!this->isReadyToArm()){
    Serial.write(13104); // 13104 = Log, Debug, Alarm failed to arm
@@ -150,7 +150,7 @@ bool Alarm::isTripped(){
   @param sets _isSilenced to be false
 */
 void Alarm::trigger(){
-  Serial.write(30005); // 30005 = Command, N/A, Execute Command: Trigger
+  Serial.write(13108); // 13108 = Log, Debug, Alarm has been triggered
   _isTriggered = true;
   _isSilenced = false;
 }
@@ -169,7 +169,7 @@ void Alarm::soundOneAlarmCycle(){
   @param _isCalibrated is set to false
 */
 void Alarm::resetCalibration(){
-  Serial.write(30006); // 30006 = Commmand, N/A, Execute Commmand: Reset Calibration
+  Serial.write(13109); // 13109 = Log, Debug, Alarm calibration is being reset
   disarm();
   _isCalibrated = false;
 }
@@ -194,14 +194,14 @@ void Alarm::disarm(){
   _alarmLED->off();
   _isSilenced = false;
   _laser->off();
-  Serial.write(30002); // 30002 = Command, N/A, Execute Command: Disarm
+  Serial.write(13110); // 13110 = Log, Debug, Alarm is being disarmed
 }
 /**
   Silences the alarm by setting _isSilenced to true
 */
 void Alarm::silence(){
   _isSilenced = true;
-  Serial.write(30003); // 30003 = Command, N/A, Execute Command: Silence
+  Serial.write(13111); // 13111 = Log, Debug, Alarm is being silenced
 }
 /**
   @return getter for _isCalibrated

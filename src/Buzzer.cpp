@@ -26,9 +26,6 @@ Buzzer::Buzzer(){
     function.
 */
 void Buzzer::soundTone(int frequency) {
-  //Need to take a look at while we're using properies for a Serail.println
-  //does not affected the tone
-  //if(Properties::DEBUGGING_ACTIVE) Serial.println("Buzzer has started sounding");
   Serial.write(13201); // 13201 = Log, Debug, Buzzer has started to sound
   tone(this->getPin(), frequency);
 }
@@ -81,7 +78,6 @@ void Buzzer::soundNegativeTone(){
   Stops the tone of the Buzzer sounding
 */
 void Buzzer::stopTone() {
-  //if(Properties::DEBUGGING_ACTIVE) Serial.println("Buzzer has stopped sounding");
   Serial.write(13202); // 13202 = Log, Debug, Buzzer has stopped sounding
   noTone(this->getPin());
 }

@@ -55,6 +55,12 @@ Message Translation Chart
 |             |                  | 103 - Alarm successful action
 |             |                  | 104 - Alarm failed to arm
 |             |                  | 105 - Alarm successfully armed
+|             |                  | 106 - Alarm successful calibration
+|             |                  | 107 - Alarm has begun arming
+|             |                  | 108 - Alarm has been triggered
+|             |                  | 109 - Alarm calibration is being reset
+|             |                  | 110 - Alarm is being disarmed
+|             |                  | 111 - Alarm is being is being silenced
 |             |                  | 150 - Button object successfully created
 |             |                  | 151 - Button has been pressed
 |             |                  | 200 - Buzzer object has been created
