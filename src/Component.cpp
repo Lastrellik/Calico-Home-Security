@@ -1,7 +1,7 @@
 /**
   Calico Home Security System, Component.cpp
   Purpose: Handles creation of a Component object.
-    Which are used to determine the type of compoent Ex. "LED" and where it is
+    Which are used to determine the type of component Ex. "LED" and where it is
     on the breadboard.
     Component is the superclass for LED, Laser, Buzzer, Photoresistor, Button.
 

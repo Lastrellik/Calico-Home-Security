@@ -1,6 +1,6 @@
 /**
   Calico Home Security System, Laser.h
-  Purpose: Manages the lASER and creates a LASER object
+  Purpose: Manages the Laser and creates a Laser object
 
   @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
