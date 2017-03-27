@@ -18,7 +18,7 @@ public:
   Laser();
   void on();
   void off();
-  void toggle();
+  
 private:
   boolean _isOn;
 };
