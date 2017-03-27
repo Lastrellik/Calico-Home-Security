@@ -39,4 +39,3 @@ void Laser::off(){
   digitalWrite(Component::getPin(), LOW);
   _isOn = false;
 }
-}

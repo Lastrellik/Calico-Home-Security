@@ -11,7 +11,7 @@ Logger.h - A class based around logging events
 class Logger{
 public:
   static void Log(String message){
-    if(Properties::DEBUGGING_ACTIVE) Serial.println(message);
+  //  if(Properties::DEBUGGING_ACTIVE) Serial.println(message);
   //if(Properties::MODULE_PI) SerialComm::sendLogMessage(message);
   }
 };

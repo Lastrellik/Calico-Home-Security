@@ -4,7 +4,7 @@
 
   @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
-*//
+*/
 #ifndef ComponentTester_h
 #define ComponentTester_h
 
