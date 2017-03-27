@@ -24,7 +24,7 @@ Laser::Laser(int pin) : Component(pin, "LASER"){
 Laser::Laser(){
 }
 /**
-  Turns the lASER on
+  Turns the Laser on
 */
 void Laser::on(){
   Serial.write(13351); // 13351 = Log, Debug, Laser has been turned on
