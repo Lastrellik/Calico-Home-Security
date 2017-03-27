@@ -49,14 +49,45 @@ Message Translation Chart
 | 5 - Request | 5 - Trace        | 005 - Execute Command: Trigger |
 |             |                  | 006 - Execute Command: Reset Calibration |
 |             |                  | 007 - Execute Command: Test Components |
+|             |                  | 100 - Alarm object successfully created |
+|             |                  | 101 - Alarm base photoresistor reading determined
+|             |                  | 102 - Alarm failed action
+|             |                  | 103 - Alarm successful action
+|             |                  | 104 - Alarm failed to arm
+|             |                  | 105 - Alarm successfully armed
+|             |                  | 150 - Button object successfully created
+|             |                  | 151 - Button has been pressed
+|             |                  | 200 - Buzzer object has been created
+|             |                  | 201 - Buzzer has started to sound
+|             |                  | 202 - Buzzer has stopped sounding
+|             |                  | 250 - Component object successfully created
+|             |                  | 300 - ComponentTester default constructor object successfully created
+|             |                  | 301 - ComponentTester object successfully created
+|             |                  | 350 - Laser object successfully created
+|             |                  | 351 - Laser has been turned on
+|             |                  | 352 - Laser has been turned off
+|             |                  | 400 - LED object successfully created
+|             |                  | 401 - LED has been turned on
+|             |                  | 402 - LED has been turned off
+|             |                  | 403 - LED flashing
+|             |                  | 404 - LED toggling
+|             |                  | 450 - Photoresistor object has been successfully created
+|             |                  | 451 - Photoresistor taking reading
 |             |                  | 514 - [EXAMPLE] Component Configured on Pin 14 |
 |             |                  | 515 - [EXAMPLE] Component Configured on Pin 15 |
 |             |                  | 516 - [EXAMPLE] ... |
 
 **Details Block Definitions:**
 * [001 - 009] - Reserved for Commands intended for the Alarm (Arduino) to execute.
-* []
-
+* [100 - 149] - Reserved for Alarm Class messages to be logged.
+* [150 - 199] - Reserved for Button messages to be logged.
+* [200 - 249] - Reserved for Buzzer messages to be logged.
+* [250 - 299] - Reserved for Component messages to be logged.
+* [300 - 349] - Reserved for ComponentTester messages to be logged.
+* [350 - 399] - Reserved for Laser messages to be logged.
+* [400 - 449] - Reserved for LED messages to be logged.
+* [450 - 499] - Reserved for Photoresistor messages to be logged.
+* [700 - 999] - Currently reserved for David Tille.
 **Notes:**
 * In general, you should never send a message of Type `0`. That really just wouldn't make any sense...
 * `Log Level` is only relevant when a `Log` Type message is sent. In all other cases a `0 - N/A` should be passed.

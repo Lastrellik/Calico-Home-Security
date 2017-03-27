@@ -14,13 +14,13 @@
   Base constructor that logs that ComponentTester is being used
 */
 ComponentTester::ComponentTester() {
-  Logger::Log("Default ComponentTester Constructor");
+  Serial.write(13300); // 13300 = Log, Debug, ComponentTester default constructor object successfully created
 }
 /**
   Constructor that builds a Component object for testing
 */
 ComponentTester::ComponentTester(Component* component){
-  Logger::Log("ComponentTester Constructor");
+  Serial.write(13301); // 13301 = Log, Debug, ComponentTester object successfully created
   _component = component;
 }
 /**

@@ -25,7 +25,7 @@
   Base contructor that writes that the Alarm Object has been created
 */
 Alarm::Alarm(){
-  Logger::Log("Alarm has been created");
+  Serial.write(13100); // 13100 = Log, Debug, Alarm object successfully created
 }
 
 /**
@@ -42,7 +42,7 @@ void Alarm::calibrate(){
     _isCalibrated = false;
   } else {
     alertSuccessfulAction();
-    Logger::Log("Alarm Successful Calibration");
+    Serial.write(30004); // 30004 = Command, N/A, Execute Command: Calibrate
     _isCalibrated = true;
   }
   _laser->off();
@@ -80,14 +80,14 @@ void Alarm::determineBasePhotoresistorReading(){
     _greenLED->flash();
   }
   _baseReading = avgReading / numOfReadings;
-  Logger::Log("Base Photoresistor Reading Determined");
+  Serial.write(13101); // 13101 = Log, Debug, Alarm base photorsistor reading determined
   _laser->on();
 }
 /**
   Makes the buzzer produce the Negative tone
 */
 void Alarm::alertFailedAction(){
-  Logger::Log("Alarm Failed Action");
+  Serial.write(13102); // 13102 = Log, Debug, Alarm failed action
   _buzzer->soundNegativeTone();
   _redLED->flash(1000);
 }
@@ -95,7 +95,7 @@ void Alarm::alertFailedAction(){
   Makes the buzzer produce the Affirmative tone
 */
 void Alarm::alertSuccessfulAction(){
-  Logger::Log("Alarm successful action");
+  Serial.write(13103); // 13103 = Log, Debug, Alarm successful action
   _buzzer->soundAffirmativeTone();
   _greenLED->flash(1000);
 }
@@ -108,14 +108,15 @@ void Alarm::alertSuccessfulAction(){
   @param _isArmed is alertSuccessfulAction is set to true
 */
 void Alarm::arm(){
+  Serial.write(30001); // 30001 = Command, N/A, Execute Command: Arm
   _laser->on();
   if (!this->isReadyToArm()){
-   Logger::Log("Alarm failed to arm");
+   Serial.write(13104); // 13104 = Log, Debug, Alarm failed to arm
    this->alertFailedAction();
    if(!this->isArmed()) _laser->off();
  } else {
    this->alertSuccessfulAction();
-    Logger::Log("Alarm sucessfully armed");
+    Serial.write(13105); // 13105 = Log, Debug, Alarm successfully armed
    _alarmLED->on();
    _isArmed = true;
  }
@@ -149,7 +150,7 @@ bool Alarm::isTripped(){
   @param sets _isSilenced to be false
 */
 void Alarm::trigger(){
-  Logger::Log("Alarm has been triggered!");
+  Serial.write(30005); // 30005 = Command, N/A, Execute Command: Trigger
   _isTriggered = true;
   _isSilenced = false;
 }
@@ -168,6 +169,7 @@ void Alarm::soundOneAlarmCycle(){
   @param _isCalibrated is set to false
 */
 void Alarm::resetCalibration(){
+  Serial.write(30006); // 30006 = Commmand, N/A, Execute Commmand: Reset Calibration
   disarm();
   _isCalibrated = false;
 }
@@ -192,14 +194,14 @@ void Alarm::disarm(){
   _alarmLED->off();
   _isSilenced = false;
   _laser->off();
-  Logger::Log("Alarm has been disarmed");
+  Serial.write(30002); // 30002 = Command, N/A, Execute Command: Disarm
 }
 /**
   Silences the alarm by setting _isSilenced to true
 */
 void Alarm::silence(){
   _isSilenced = true;
-  Logger::Log("Alarm has been silenced");
+  Serial.write(30003); // 30003 = Command, N/A, Execute Command: Silence
 }
 /**
   @return getter for _isCalibrated
