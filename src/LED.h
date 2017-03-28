@@ -3,7 +3,7 @@
   Purpose: LED creaties an LED ojbect and determines whether it should be on or
     off.
 
-  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
 */
 #ifndef LED_h

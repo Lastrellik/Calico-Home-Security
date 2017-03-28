@@ -4,7 +4,7 @@
     Which are used to determine the type of component Ex. "LED" and where it is
     on the breadboard
 
-  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
 */
 #ifndef Component_h

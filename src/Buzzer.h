@@ -2,7 +2,7 @@
   Calico Home Security System, Buzzer.h
   Purpose: sets the tone of the Buzzer and if it's on and off
 
-  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
 */
 #ifndef Buzzer_h

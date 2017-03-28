@@ -2,7 +2,7 @@
   Calico Home Security System, Button.cpp
   Purpose: Determines if the Button has been pressed, turning it on or off
 
-  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
 */
 #include "Arduino.h"

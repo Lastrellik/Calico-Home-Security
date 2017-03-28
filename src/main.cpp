@@ -3,7 +3,7 @@
   Purpose: Main class that manages looping of other classes and manages
     sequentially checks of certain conditions.
 
-  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
 */
 #include "Arduino.h"
@@ -40,7 +40,7 @@ void setup() {
 }
 /**
   Looping command for active listening or what is happening on the Arduino.
-    Listens to see if the alarm has been trigged, calibrated, or armed. 
+    Listens to see if the alarm has been trigged, calibrated, or armed.
 */
 void loop(){
   commandListener->executeCommandIfAvailable();

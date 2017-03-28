@@ -2,7 +2,7 @@
   Calico Home Security System, Photoresistor.h
   Purpose: Reads in the Photoresistor output
 
-  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
 */
 #ifndef Photoresistor_h

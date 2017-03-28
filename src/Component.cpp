@@ -5,7 +5,7 @@
     on the breadboard.
     Component is the superclass for LED, Laser, Buzzer, Photoresistor, Button.
 
-  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
 */
 #include "Arduino.h"
