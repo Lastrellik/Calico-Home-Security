@@ -15,6 +15,15 @@
 .classpath
 factoryConfiguration.json
 
+
+### IntelliJ ###
+.idea/*
+.idea_modules/
+*.iws
+*.iml
+/out/
+
+
 ### Eclipse ###
 
 .metadata
