@@ -2,7 +2,7 @@
   Calico Home Security System, Photoresistor.cpp
   Purpose: Reads in the Photoresistor output
 
-  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
 */
 #include "Arduino.h"

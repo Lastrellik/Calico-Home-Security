@@ -2,7 +2,7 @@
   Calico Home Security System, ComponentTester.h
   Purpose: Used to test the Component subclasses
 
-  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
 */
 #ifndef ComponentTester_h

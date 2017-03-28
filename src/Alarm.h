@@ -3,7 +3,7 @@
   Purpose: Alarm creaties an alarm ojbect, arms it, disarms it, and calibrates the paramaters
   for the alarm object
 
-  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
   @version To be Determined
 */
 
