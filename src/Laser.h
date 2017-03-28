@@ -1,5 +1,9 @@
-/*
-  Laser.h - Simple class for laser module
+/**
+  Calico Home Security System, Laser.h
+  Purpose: Manages the Laser and creates a Laser object
+
+  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @version To be Determined
 */
 #ifndef Laser_h
 #define Laser_h
@@ -14,7 +18,7 @@ public:
   Laser();
   void on();
   void off();
-  void toggle();
+  
 private:
   boolean _isOn;
 };

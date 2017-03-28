@@ -1,3 +1,11 @@
+/**
+  Calico Home Security System, ComponentTester.cpp
+  Purpose: Main class that manages looping of other classes and manages
+    sequentially checks of certain conditions.
+
+  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @version To be Determined
+*/
 #include "Arduino.h"
 
 #include "LED.h"
@@ -15,7 +23,9 @@ CommandListener* commandListener;
 
 #include "module_WIFI\Wifi.h"
 Wifi* wifi;
-
+/**
+  Setups the intial classes to be used like Alarm and Wifi
+*/
 void setup() {
   Serial.begin(Properties::BAUD_RATE);
   alarm = new Alarm();
@@ -28,7 +38,10 @@ void setup() {
     wifi->initialize();
   }
 }
-
+/**
+  Looping command for active listening or what is happening on the Arduino.
+    Listens to see if the alarm has been trigged, calibrated, or armed. 
+*/
 void loop(){
   commandListener->executeCommandIfAvailable();
   if(not alarm->isArmed()){

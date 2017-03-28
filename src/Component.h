@@ -1,5 +1,11 @@
-/*
-  Component.h - Component superclass for component classes
+/**
+  Calico Home Security System, Component.h
+  Purpose: Handles creation of a Component object.
+    Which are used to determine the type of component Ex. "LED" and where it is
+    on the breadboard
+
+  @author Chris Nash, Jason Bruderer, David Tille, Tyler Jacobs
+  @version To be Determined
 */
 #ifndef Component_h
 #define Component_h
@@ -17,6 +23,10 @@ class Component{
     void setComponentPin(int pin);
     void setComponentType(String componentType);
   private:
+    /**
+      @param pin is used to set pin of component
+      @param componentType is used to determine which library is being used
+    */
     int _pin;
     String _componentType;
 };
