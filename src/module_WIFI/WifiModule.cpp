@@ -49,6 +49,8 @@ void WifiModule::printWifiStatus() {
 void WifiModule::initialize() {
   if (Properties::DEBUGGING_ACTIVE) Serial.println("Initiallizing ESP9266...");
 
+  esp8266.begin(Properties::BAUD_RATE);
+
   initStatus();
   WiFi.init(&esp8266);
 
