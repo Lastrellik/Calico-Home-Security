@@ -17,11 +17,10 @@ class WifiModule {
     WifiModule(int baudRate);
     void setBaudRate(int baudRate);
     void initStatus();
+    void checkStatusAndReinitIfNecessary();
     void initialize();
-    // void beginSerialCommunication();
-    // void checkTwoWayCommunication();
-    // void connectToAccessPoint();
     void sendNotification();
+    void sendNotificationWithData(String param1, String param2, String param3);
     void printWifiStatus();
 
   private:

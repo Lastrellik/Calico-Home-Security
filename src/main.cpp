@@ -51,6 +51,9 @@ void loop(){
   } else {
     if(alarm->isTripped() && not alarm->isTriggered()){
       alarm->trigger();
+      if (Properties::MODULE_WIFI) {
+        wifiModule->sendNotification();
+      }
     }
   }
 

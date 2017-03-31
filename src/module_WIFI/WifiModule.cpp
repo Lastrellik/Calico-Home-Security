@@ -9,8 +9,6 @@
 #include <SoftwareSerial.h>
 #include "Properties.h"
 
-SoftwareSerial esp8266(Properties::WIFI_RX_PIN, Properties::WIFI_TX_PIN);
-
 WifiModule::WifiModule() : esp8266(SoftwareSerial(Properties::WIFI_RX_PIN, Properties::WIFI_TX_PIN)) {
 }
 
@@ -46,6 +44,18 @@ void WifiModule::printWifiStatus() {
   }
 }
 
+/* TODO: formalize this. I suspect that I either need to do some sort of 'keep-alive' once every 1000 cycles or something
+    or it may eventually disconnect from wifi. If that happens then we want to reinitialize. For now I will leave
+    the call to this method commented out as a reminder to come back and work on it further.
+*/
+void WifiModule::checkStatusAndReinitIfNecessary() {
+  if (_status != WL_CONNECTED) {
+    if (Properties::DEBUGGING_ACTIVE) Serial.println("Wifi not connected. Reinitializing...");
+    initialize();
+  }
+  return;
+}
+
 void WifiModule::initialize() {
   if (Properties::DEBUGGING_ACTIVE) Serial.println("Initiallizing ESP9266...");
 
@@ -74,6 +84,9 @@ void WifiModule::initialize() {
 void WifiModule::sendNotification() {
   if (Properties::DEBUGGING_ACTIVE) Serial.println("Sending notification...");
 
+  // TODO: Determine whether this is needed and how best to handle it.
+  // checkStatusAndReinitIfNecessary();
+
   WiFiEspClient client;
 
   if (client.connect(Properties::IFTTT_MAKER_URI.c_str(), 80) <= 0) {
@@ -83,25 +96,13 @@ void WifiModule::sendNotification() {
     }
     return;
   }
-  Serial.println("Connected.");
 
-  // String params1, params2,params3;
-  // params1 = String("Val1");
-  // params2 = String("Val2");
-  // params3 = String("Val3");
-  //
-  // String data="{\"value1\":\""+params1+"\",\"value2\":\""+params1+"\",\"value3\":\""+params1+"\"}";
+  if (Properties::DEBUGGING_ACTIVE) Serial.println("Connected.");
 
-  Serial.println("Posting to IFTTT!");
-  // Serial.println(data.length());
-  // Serial.println(data);
+  if (Properties::DEBUGGING_ACTIVE) Serial.println("Posting to IFTTT!");
 
-  Serial.println((String)"POST /trigger/" + Properties::IFTTT_MAKER_EVENT + "/with/key/" + Properties::IFTTT_MAKER_KEY + " HTTP/1.1\r\n" + "Host: " + Properties::IFTTT_MAKER_URI + "\r\n" + "Content-Type: application/x-www-form-urlencoded\r\n\r\n");
+  if (Properties::DEBUGGING_ACTIVE) Serial.println((String)"POST /trigger/" + Properties::IFTTT_MAKER_EVENT + "/with/key/" + Properties::IFTTT_MAKER_KEY + " HTTP/1.1\r\n" + "Host: " + Properties::IFTTT_MAKER_URI + "\r\n" + "Content-Type: application/x-www-form-urlencoded\r\n\r\n");
   client.print((String)"POST /trigger/" + Properties::IFTTT_MAKER_EVENT + "/with/key/" + Properties::IFTTT_MAKER_KEY + " HTTP/1.1\r\n" + "Host: " + Properties::IFTTT_MAKER_URI + "\r\n" + "Content-Type: application/x-www-form-urlencoded\r\n\r\n");
-  // client.print("Content-Length: ");
-  // client.print(data.length());
-  // client.print("\r\n\r\n");
-  // client.print(data);
 
   // available() will return the number of characters currently in the receive buffer.
   while (client.available()) {
@@ -118,60 +119,49 @@ void WifiModule::sendNotification() {
   }
 }
 
-// void WifiModule::beginSerialCommunication() {
-//   if (Properties::DEBUGGING_ACTIVE) {
-//     Serial.println("Beginning serial communication with ESP9266...");
-//   }
-//   // Check whether Serial.begin() has been called. If it hasn't then start Serial communication.
-//   if(!Serial) {
-//     Serial.begin(_baudRate);
-//   }
-//   while (!Serial) { /* Stall until serial comunication is ready */ }
-//   esp8266.begin(_baudRate);
-// }
-//
-// void WifiModule::checkTwoWayCommunication() {
-//   delay(5000);
-//   if (Properties::DEBUGGING_ACTIVE) {
-//     Serial.println("Sending an AT command...");
-//   }
-//   esp8266.println("AT");
-//   delay(100);
-//   while (esp8266.available()){
-//      String inData = esp8266.readStringUntil('\n');
-//      if (Properties::DEBUGGING_ACTIVE) {
-//        Serial.println("Got response from ESP8266: " + inData);
-//      }
-//   }
-// }
-//
-// void WifiModule::connectToAccessPoint() {
-//   if (Properties::DEBUGGING_ACTIVE) {
-//     Serial.println("Setting ESP8266 to Station Mode...");
-//   }
-//   esp8266.println("AT+CWMODE=1");
-//   delay(1000);
-//   while (esp8266.available()){
-//      String inData = esp8266.readStringUntil('\n');
-//      if (Properties::DEBUGGING_ACTIVE) {
-//        Serial.println("Got response from ESP8266: " + inData);
-//      }
-//   }
-//
-//   if (Properties::DEBUGGING_ACTIVE) {
-//     Serial.println("Connecting to AP " + Properties::WIFI_SSID);
-//   }
-//   esp8266.println("AT+CWJAP_CUR=\"" + Properties::WIFI_SSID + "\",\"" + Properties::WIFI_PASSWORD + "\""); // TODO: There is a different command AT+CWJAP= which persistst the access point instead of using this which is only for the current launch. Refactor this to use it instead.
-//
-//   if (Properties::DEBUGGING_ACTIVE) {
-//     Serial.println("Pausing for 30 seconds...");
-//   }
-//   delay(30000); // Give 30 seconds for the module to connect
-//
-//   while (esp8266.available()){ // TODO: This mechanism for logging incoming values from the ESP8266 is faulty for multiple lines of response. Replace this.
-//      String inData = esp8266.readStringUntil('\n');
-//      if (Properties::DEBUGGING_ACTIVE) {
-//        Serial.println("Got response from ESP8266: " + inData);
-//      }
-//   }
-// }
+// TODO: This currently has issues with actually sending the parameters. IFTTT Returns a partial bad response.
+void WifiModule::sendNotificationWithData(String param1, String param2, String param3) {
+  if (Properties::DEBUGGING_ACTIVE) Serial.println("Sending notification...");
+
+  // TODO: Determine whether this is needed and how best to handle it.
+  // checkStatusAndReinitIfNecessary();
+
+  WiFiEspClient client;
+
+  if (client.connect(Properties::IFTTT_MAKER_URI.c_str(), 80) <= 0) {
+    if (Properties::DEBUGGING_ACTIVE) {
+      Serial.print("Failed to connect to: ");
+      Serial.println(Properties::IFTTT_MAKER_URI);
+    }
+    return;
+  }
+
+  if (Properties::DEBUGGING_ACTIVE) Serial.println("Connected.");
+
+  String data="{\"value1\":\""+param1+"\",\"value2\":\""+param2+"\",\"value3\":\""+param3+"\"}";
+
+  if (Properties::DEBUGGING_ACTIVE) Serial.println("Posting to IFTTT!");
+  // Serial.println(data.length());
+  // Serial.println(data);
+
+  if (Properties::DEBUGGING_ACTIVE) Serial.println((String)"POST /trigger/" + Properties::IFTTT_MAKER_EVENT + "/with/key/" + Properties::IFTTT_MAKER_KEY + " HTTP/1.1\r\n" + "Host: " + Properties::IFTTT_MAKER_URI + "\r\n" + "Content-Type: application/x-www-form-urlencoded\r\n\r\n");
+  client.print((String)"POST /trigger/" + Properties::IFTTT_MAKER_EVENT + "/with/key/" + Properties::IFTTT_MAKER_KEY + " HTTP/1.1\r\n" + "Host: " + Properties::IFTTT_MAKER_URI + "\r\n" + "Content-Type: application/x-www-form-urlencoded\r\n\r\n");
+  client.print("Content-Length: ");
+  client.print(data.length());
+  client.print("\r\n\r\n");
+  client.print(data);
+
+  // available() will return the number of characters currently in the receive buffer.
+  while (client.available()) {
+    Serial.write(client.read()); // read() gets the FIFO char
+  }
+
+  // connected() is a boolean return value - 1 if the connection is active, 0 if it's closed.
+  if (client.connected()) {
+    client.stop(); // stop() closes a TCP connection.
+  }
+
+  while (Serial.available()) {
+    Serial.read();
+  }
+}
