@@ -38,7 +38,7 @@ Development
 
 * [IDE / Dev Environment Setup Instructions](./docs/development/dev_environment_setup.md)
 * [Logging & Command Message Details](./docs/development/logging.md)
-* [Future Development Ideas](./docs/development/future/future_ideas.md))
+* [Future Development Ideas](./docs/development/future/future_ideas.md)
 
 
 Wiring Diagrams / Schematics

@@ -22,6 +22,7 @@ The advantage of a cloud MQTT broker is that you don't have to manage your own i
 ### High-level Diagram
 
 ![MQTT High Level](MQTT_High_Level.png)
+
 <sub>(_This diagram was made using [UMLet](http://www.umlet.com/). The raw diagram is included in this directory for future modifications._)</sub>
 
 ### High-level Idea
