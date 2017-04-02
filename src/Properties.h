@@ -38,6 +38,7 @@ class Properties {
     static String WIFI_PASSWORD;
     static String IFTTT_MAKER_KEY;
     static String IFTTT_MAKER_EVENT;
+    static String IFTTT_MAKER_URI;
 
   private:
 

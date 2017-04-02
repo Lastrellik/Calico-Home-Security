@@ -21,8 +21,8 @@
 Alarm* alarm;
 CommandListener* commandListener;
 
-#include "module_WIFI\Wifi.h"
-Wifi* wifi;
+#include "module_WIFI\WifiModule.h"
+WifiModule* wifiModule;
 /**
   Setups the intial classes to be used like Alarm and Wifi
 */
@@ -34,8 +34,8 @@ void setup() {
   if(not Properties::MODULE_PI) alarm->calibrate();
 
   if (Properties::MODULE_WIFI) {
-    wifi = new Wifi(Properties::WIFI_RX_PIN, Properties::WIFI_TX_PIN);
-    wifi->initialize();
+    wifiModule = new WifiModule();
+    wifiModule->initialize();
   }
 }
 /**
@@ -51,6 +51,9 @@ void loop(){
   } else {
     if(alarm->isTripped() && not alarm->isTriggered()){
       alarm->trigger();
+      if (Properties::MODULE_WIFI) {
+        wifiModule->sendNotification();
+      }
     }
   }
 
