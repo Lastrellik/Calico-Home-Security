@@ -23,6 +23,7 @@ public enum PacketLogLevel {
 	
 	@Override
 	public String toString(){
-		return packetTypeStrings[packetLogLevelByte];
+		int packetTypeStringIndex = packetLogLevelByte - 1;
+		return packetTypeStrings[packetTypeStringIndex];
 	}
 }

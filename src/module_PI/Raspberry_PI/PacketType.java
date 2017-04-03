@@ -23,6 +23,7 @@ public enum PacketType {
 	
 	@Override
 	public String toString(){
-		return packetTypeStrings[packetTypeByte];
+		int packetTypeStringIndex = packetTypeByte - 1;
+		return packetTypeStrings[packetTypeStringIndex];
 	}
 }
