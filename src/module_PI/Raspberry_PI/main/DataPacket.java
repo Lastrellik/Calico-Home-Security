@@ -1,4 +1,4 @@
-package module_PI.Raspberry_PI;
+package module_PI.Raspberry_PI.main;
 
 import java.util.Arrays;
 
@@ -12,6 +12,9 @@ public class DataPacket {
 	private PacketType packetType;
 
 	public DataPacket(int packetContents) {
+		if(packetContents < 10000 || packetContents > 99999){
+			throw new IllegalArgumentException("packetContents invalid length");
+		}
 		packetCodeByteArray = new byte[SIZE_OF_DATAPACKET_IN_BYTES];
 		packetCodeInt = packetContents;
 		parseIntToByteArray(packetContents, SIZE_OF_DATAPACKET_IN_BYTES - 1);
@@ -25,6 +28,9 @@ public class DataPacket {
 	}
 
 	public DataPacket(byte[] packetContents) {
+		if(packetContents.length != SIZE_OF_DATAPACKET_IN_BYTES){
+			throw new IllegalArgumentException("packetContents invalid length");
+		}
 		packetCodeByteArray = Arrays.copyOf(packetContents, packetContents.length);
 		packetCodeInt = convertByteArrayToInt(packetContents);
 		parseTypeAndLogLevelFromByteArray();

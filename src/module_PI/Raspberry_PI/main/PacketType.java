@@ -1,4 +1,4 @@
-package module_PI.Raspberry_PI;
+package module_PI.Raspberry_PI.main;
 
 public enum PacketType {
 	LOG((byte)1), DATA((byte)2), COMMAND((byte)3), ERROR((byte)4), REQUEST((byte)5);
