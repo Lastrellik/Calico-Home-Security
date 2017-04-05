@@ -5,6 +5,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Graphics;
+
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,13 +27,13 @@ public class AddUserPanel extends JPanel {
 		setLayout(null);
 		
 		JPanel add_User_Inner_Display = new JPanel();
-		add_User_Inner_Display.setBounds(12, 13, 364, 230);
+		add_User_Inner_Display.setBounds(12, 35, 364, 210);
 		add(add_User_Inner_Display);
 		add_User_Inner_Display.setLayout(null);
 		user_List.setEditable(false);
 		
 		
-		user_List.setBounds(0, 0, 364, 230);
+		user_List.setBounds(0, 0, 364, 210);
 		add_User_Inner_Display.add(user_List);
 		
 		JPanel add_User_Inner_Buttons = new JPanel();
@@ -101,4 +103,10 @@ public class AddUserPanel extends JPanel {
 	public static int get_Create_User_Length(){
 		return create_User.length();
 	}
+	
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawString("Add User", 19, 30);   
+    }
 }
