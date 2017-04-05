@@ -19,8 +19,17 @@ public class SerialInputListener extends SerialComm implements Runnable {
 		serialInputStream = new LinkedList<Byte>();
 		packetInputStream = new LinkedList<DataPacket>();
 		comPort.openPort();
+		//flushInputStream();
 	}
 
+	private void flushInputStream(){
+		byte[] streamDisposalByteArray = new byte[1];
+		while (comPort.bytesAvailable() > 0){
+			comPort.readBytes(streamDisposalByteArray, 1);
+			pause(1);
+		}
+	}
+	
 	public boolean isPacketAvailable() {
 		return !packetInputStream.isEmpty();
 	}
@@ -39,6 +48,7 @@ public class SerialInputListener extends SerialComm implements Runnable {
 			comPort.readBytes(readBuffer, readBuffer.length);
 			for (byte b : readBuffer) {
 				serialInputStream.add(b);
+				System.out.println((char)b);
 			}
 		}
 	}
