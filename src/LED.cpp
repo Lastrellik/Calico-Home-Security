@@ -13,7 +13,7 @@
     to be off initially
 */
 LED::LED(int pin) : Component(pin, "LED") {
-  Serial.write(13400); // 13400 = Log, Debug, LED object successfully created
+  if(Properties::MODULE_PI) Serial.write(13400); // 13400 = Log, Debug, LED object successfully created
   pinMode(pin, OUTPUT);
   _isOn = false;
 }
@@ -22,7 +22,7 @@ LED::LED(int pin) : Component(pin, "LED") {
     to LED and sets the LED to be off initially
 */
 LED::LED() : Component(13, "LED"){
-  Serial.write(13400); // 13400 = Log, Debug, LED object successfully created
+  if(Properties::MODULE_PI) Serial.write(13400); // 13400 = Log, Debug, LED object successfully created
   pinMode(13, OUTPUT);
   _isOn = false;
 }
@@ -49,7 +49,7 @@ void LED::off() {
     uses hardcoded delays
 */
 void LED::flash(){
-  Serial.write(13403); // 13403 = Log, Debug, LED flashing
+  if(Properties::MODULE_PI) Serial.write(13403); // 13403 = Log, Debug, LED flashing
   this->on();
   delay(70);
   this->off();
@@ -61,7 +61,7 @@ void LED::flash(){
 */
 void LED::flash(int millisOn){
 
-  Serial.write(13403); // 13403 = Log, Debug, LED flashing
+  if(Properties::MODULE_PI) Serial.write(13403); // 13403 = Log, Debug, LED flashing
   this->on();
   delay(millisOn);
   this->off();
@@ -72,7 +72,7 @@ void LED::flash(int millisOn){
   @param sets _isOn to off if on and on if off
 */
 void LED::toggle() {
-  Serial.write(13404); // 13404 = Log, Debug, LED toggling
+  if(Properties::MODULE_PI) Serial.write(13404); // 13404 = Log, Debug, LED toggling
   if (_isOn) {
     LED::off();
   } else {

@@ -15,7 +15,7 @@
     3.3 volts (3.3V boards);
 */
 Laser::Laser(int pin) : Component(pin, "LASER"){
-  Serial.write(13350); // 13350 = Log, Debug, Laser object successfully created
+  if(Properties::MODULE_PI) Serial.write(13350); // 13350 = Log, Debug, Laser object successfully created
   pinMode(pin, OUTPUT);
 }
 /**
@@ -27,7 +27,7 @@ Laser::Laser(){
   Turns the Laser on
 */
 void Laser::on(){
-  Serial.write(13351); // 13351 = Log, Debug, Laser has been turned on
+  if(Properties::MODULE_PI) Serial.write(13351); // 13351 = Log, Debug, Laser has been turned on
   digitalWrite(Component::getPin(), HIGH);
   _isOn = true;
 }
@@ -35,7 +35,7 @@ void Laser::on(){
   Turns the LASER off
 */
 void Laser::off(){
-  Serial.write(13352); // 13352 = Log, Debug, Laser has been turned off
+  if(Properties::MODULE_PI) Serial.write(13352); // 13352 = Log, Debug, Laser has been turned off
   digitalWrite(Component::getPin(), LOW);
   _isOn = false;
 }
