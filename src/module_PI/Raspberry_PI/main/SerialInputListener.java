@@ -19,7 +19,7 @@ public class SerialInputListener extends SerialComm implements Runnable {
 		serialInputStream = new LinkedList<Byte>();
 		packetInputStream = new LinkedList<DataPacket>();
 		comPort.openPort();
-		//flushInputStream();
+		flushInputStream();
 	}
 
 	private void flushInputStream(){
