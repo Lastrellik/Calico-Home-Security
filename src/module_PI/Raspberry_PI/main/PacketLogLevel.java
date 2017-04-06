@@ -1,4 +1,4 @@
-package module_PI.Raspberry_PI;
+package module_PI.Raspberry_PI.main;
 
 public enum PacketLogLevel {
 	ERROR((byte)1), WARN((byte)2), DEBUG((byte)3), INFO((byte)4), TRACE((byte)5);

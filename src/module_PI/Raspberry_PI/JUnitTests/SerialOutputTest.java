@@ -2,48 +2,74 @@ package module_PI.Raspberry_PI.JUnitTests;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
-public class SerialOutputTest {
+import module_PI.Raspberry_PI.main.SerialOutput;
 
+public class SerialOutputTest {
+	
 	@Test
 	public void testSerialOutput() {
-		fail("Not yet implemented"); // TODO
+		SerialOutput output = new SerialOutput();
+		assertEquals(output.getPreviousBuffer(), null);
 	}
 
 	@Test
 	public void testSendArmPacket() {
-		fail("Not yet implemented"); // TODO
+		SerialOutput output = new SerialOutput();
+		byte[] expectedReturn = new byte[]{3,0,0,0,1}; // 30001 = Command, NA, Execute Command: Arm
+		output.sendArmPacket();
+		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));		
 	}
 
 	@Test
 	public void testSendDisarmPacket() {
-		fail("Not yet implemented"); // TODO
+		SerialOutput output = new SerialOutput();
+		byte[] expectedReturn = new byte[]{3,0,0,0,2};// 30002 = Command, NA, Execute Command: Disarm
+		output.sendDisarmPacket();
+		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
 
 	@Test
 	public void testSendSilencePacket() {
-		fail("Not yet implemented"); // TODO
+		SerialOutput output = new SerialOutput();
+		byte[] expectedReturn = new byte[]{3,0,0,0,3};// 30003 = Command, NA, Execute Command: Silence
+		output.sendSilencePacket();
+		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
 
 	@Test
 	public void testSendCalibratePacket() {
-		fail("Not yet implemented"); // TODO
+		SerialOutput output = new SerialOutput();
+		byte[] expectedReturn = new byte[]{3,0,0,0,4};// 30004 = Command, NA, Execute Command: Calibrate
+		output.sendCalibratePacket();
+		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
 
 	@Test
 	public void testSendTriggerPacket() {
-		fail("Not yet implemented"); // TODO
+		SerialOutput output = new SerialOutput();
+		byte[] expectedReturn = new byte[]{3,0,0,0,5};// 30005 = Command, NA, Execute Command: Trigger
+		output.sendTriggerPacket();
+		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
 
 	@Test
 	public void testSendResetCalibrationPacket() {
-		fail("Not yet implemented"); // TODO
+		SerialOutput output = new SerialOutput();
+		byte[] expectedReturn = new byte[]{3,0,0,0,6};// 30006 = Command, NA, Execute Command: ResetCalibration
+		output.sendResetCalibrationPacket();
+		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
-
+	
 	@Test
 	public void testSendTestComponentsPacket() {
-		fail("Not yet implemented"); // TODO
+		SerialOutput output = new SerialOutput();
+		byte[] expectedReturn = new byte[]{3,0,0,0,7};// 30007 = Command, NA, Execute Command: TestComponents
+		output.sendTestComponentsPacket();
+		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
 
 }
