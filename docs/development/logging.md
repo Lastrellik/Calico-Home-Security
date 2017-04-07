@@ -67,7 +67,7 @@ Message Translation Chart
 |             |                  | 201 - Buzzer has started to sound
 |             |                  | 202 - Buzzer has stopped sounding
 |             |                  | 250 - Component object successfully created
-|             |                  | 300 - ComponentTester default constructor object successfully created
+|             |                  | 300 - ComponentTester default constructor called
 |             |                  | 301 - ComponentTester object successfully created
 |             |                  | 350 - Laser object successfully created
 |             |                  | 351 - Laser has been turned on
