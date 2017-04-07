@@ -56,11 +56,10 @@ public class PacketMessageTranslator {
 	}
 	
 	public String translate(int packetDetails){
-		if(isIntInScope(packetDetails)) throw new IllegalArgumentException("invalid packet int: " + packetDetails);
+		if(isIntOutOfScope(packetDetails)) throw new IllegalArgumentException("invalid packet int: " + packetDetails);
 		int correctedInt = parsePacketDetailsFromFullPacketInt(packetDetails);
 		if(!messageTable.containsKey(correctedInt)) throw new IllegalArgumentException("packetDetails " + packetDetails + " not in messageTable");
-		String packetMessage = messageTable.get(correctedInt);
-		return packetMessage;
+		return messageTable.get(correctedInt);
 	}
 	
 	private int parsePacketDetailsFromFullPacketInt(int packetAsInt){
@@ -68,19 +67,14 @@ public class PacketMessageTranslator {
 		return packetAsInt % packetModThisIsCorrectLength;
 	}
 	
-	private boolean isIntInScope(int packetDetails){
+	private boolean isIntOutOfScope(int packetDetails){
 		return (packetDetails < 1 
 				|| packetDetails > MAX_PACKET_DETAILS_INT
 				|| packetDetails > MAX_DETAILS_ONLY_INT && packetDetails < MIN_FULL_PACKET_INT);
 	}
 	
 	public String translate(String packetDetailsAsString){
-		if(isStringNumeric(packetDetailsAsString)) return translate(Integer.parseInt(packetDetailsAsString));
-		throw new IllegalArgumentException(packetDetailsAsString + " is not an integer");
-	}
-	
-	private boolean isStringNumeric(String numericString){
-		return numericString.matches("^\\d+$");
+		return translate(Integer.parseInt(packetDetailsAsString));
 	}
 	
 	public String translate(byte[] packetAsByteArray){
@@ -94,8 +88,7 @@ public class PacketMessageTranslator {
 	}
 	
 	private String packetByteArrayToMessage(byte[] packetAsByteArray){
-		int parsedDetailsIntFromByteArray = parseDetailsIntFromByteArray(packetAsByteArray);
-		return translate(parsedDetailsIntFromByteArray);
+		return translate(parseDetailsIntFromByteArray(packetAsByteArray));
 	}
 	
 	private int parseDetailsIntFromByteArray(byte[] packetAsByteArray){
