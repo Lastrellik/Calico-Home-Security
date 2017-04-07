@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import module_PI.Raspberry_PI.main.PacketLogLevel;
-import module_PI.Raspberry_PI.main.PacketType;
 
 public class PacketLogLevelTest {
 
