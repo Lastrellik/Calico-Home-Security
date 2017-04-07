@@ -8,10 +8,11 @@ import org.junit.rules.ExpectedException;
 import module_PI.Raspberry_PI.main.PacketMessageTranslator;
 
 public class PacketMessageTranslatorTest {
-	PacketMessageTranslator translator = new PacketMessageTranslator();
 	
 	@Rule
 	public ExpectedException expectedEx = ExpectedException.none();
+
+	PacketMessageTranslator translator = new PacketMessageTranslator();
 
 	@Test
 	public void testTranslateFromInt() {
