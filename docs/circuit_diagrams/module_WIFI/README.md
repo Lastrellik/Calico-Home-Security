@@ -122,6 +122,7 @@ By default, the ESP8266 communicates at `115200` baud which is too fast for the 
 3. Build then upload `main.cpp`
 4. After the code has uploaded, launch the Terminal - make sure baud rate is set to `115200`
 5. In the Terminal window, type `AT` and press Enter
+  * _If you have issues with this step, try unplugging and plugging back in the Arduino and relaunching the Serial Monitor. Also try relaunching Atom. It appears that it sometimes just gets into a state where it doesn't fully recognize you are sending commands through it._
 6. You should get back a message `OK`
 7. In the Terminal window, type `AT+UART_DEF=9600,8,1,0,0` and press Enter
 8. In the terminal window you should see the cursor moving and either blank or garbled characters will be displayed.
