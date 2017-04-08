@@ -1,4 +1,4 @@
-package module_PI.Raspberry_PI;
+package module_PI.Raspberry_PI.main;
 
 
 public class PiApp {

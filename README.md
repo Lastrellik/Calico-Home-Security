@@ -29,6 +29,7 @@ Hardware
 * Ordinary Red Laser Pointer
 * Photoresistor
 * Piezo Buzzer
+* A Few LEDs
 * Various Wires and Miscellaneous Odds & Ends
 
 
@@ -37,6 +38,7 @@ Development
 
 * [IDE / Dev Environment Setup Instructions](./docs/development/dev_environment_setup.md)
 * [Logging & Command Message Details](./docs/development/logging.md)
+* [Future Development Ideas](./docs/development/future/future_ideas.md)
 
 
 Wiring Diagrams / Schematics
@@ -48,6 +50,7 @@ Note that some modules will not function when other modules are present. Please 
 
 * [BASE Module](./docs/circuit_diagrams/module_BASE/README.md)
 * [WIFI Module](./docs/circuit_diagrams/module_WIFI/README.md)
+* [Raspberry Pi w/Touchscreen Module](./docs/circuit_diagrams/module_PI/README.md)
 
 
 About the Project
