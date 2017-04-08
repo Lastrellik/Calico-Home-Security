@@ -11,7 +11,7 @@
   Constructor for Button that sets the pin and the componentType
 */
 Button::Button(int pin) : Component(pin, "BUTTON"){
-  Serial.write(13150); // 13150 = Log, Debug, Button object successfully created
+  if(Properties::MODULE_PI) Serial.write(13150); // 13150 = Log, Debug, Button object successfully created
   pinMode(pin, INPUT);
 }
 /**
