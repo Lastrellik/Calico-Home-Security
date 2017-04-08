@@ -50,6 +50,7 @@ Note that some modules will not function when other modules are present. Please 
 
 * [BASE Module](./docs/circuit_diagrams/module_BASE/README.md)
 * [WIFI Module](./docs/circuit_diagrams/module_WIFI/README.md)
+* [Raspberry Pi w/Touchscreen Module](./docs/circuit_diagrams/module_PI/README.md)
 
 
 About the Project
