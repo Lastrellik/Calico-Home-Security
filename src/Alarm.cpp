@@ -25,7 +25,7 @@
   Base contructor that writes that the Alarm Object has been created
 */
 Alarm::Alarm(){
-  Serial.write(13100); // 13100 = Log, Debug, Alarm object successfully created
+if(Properties::MODULE_PI)  Serial.write(13100); // 13100 = Log, Debug, Alarm object successfully created
 }
 
 /**
@@ -80,14 +80,14 @@ void Alarm::determineBasePhotoresistorReading(){
     _greenLED->flash();
   }
   _baseReading = avgReading / numOfReadings;
-  Serial.write(13101); // 13101 = Log, Debug, Alarm base photorsistor reading determined
+  if(Properties::MODULE_PI) Serial.write(13101); // 13101 = Log, Debug, Alarm base photorsistor reading determined
   _laser->on();
 }
 /**
   Makes the buzzer produce the Negative tone
 */
 void Alarm::alertFailedAction(){
-  Serial.write(13102); // 13102 = Log, Debug, Alarm failed action
+  if(Properties::MODULE_PI) Serial.write(13102); // 13102 = Log, Debug, Alarm failed action
   _buzzer->soundNegativeTone();
   _redLED->flash(1000);
 }
@@ -108,7 +108,7 @@ void Alarm::alertSuccessfulAction(){
   @param _isArmed is alertSuccessfulAction is set to true
 */
 void Alarm::arm(){
-  Serial.write(13107); // 13107 = Log, Debug, Alarm has begun arming
+  if(Properties::MODULE_PI) Serial.write(13107); // 13107 = Log, Debug, Alarm has begun arming
   _laser->on();
   if (!this->isReadyToArm()){
    Serial.write(13104); // 13104 = Log, Debug, Alarm failed to arm
@@ -150,7 +150,7 @@ bool Alarm::isTripped(){
   @param sets _isSilenced to be false
 */
 void Alarm::trigger(){
-  Serial.write(13108); // 13108 = Log, Debug, Alarm has been triggered
+  if(Properties::MODULE_PI) Serial.write(13108); // 13108 = Log, Debug, Alarm has been triggered
   _isTriggered = true;
   _isSilenced = false;
 }
@@ -169,7 +169,7 @@ void Alarm::soundOneAlarmCycle(){
   @param _isCalibrated is set to false
 */
 void Alarm::resetCalibration(){
-  Serial.write(13109); // 13109 = Log, Debug, Alarm calibration is being reset
+  if(Properties::MODULE_PI) Serial.write(13109); // 13109 = Log, Debug, Alarm calibration is being reset
   disarm();
   _isCalibrated = false;
 }
