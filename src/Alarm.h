@@ -37,6 +37,9 @@ class Alarm{
     bool isReadyToArm();
     void soundOneAlarmCycle();
     void resetCalibration();
+    void alertFailedAction();
+    void alertSuccessfulAction();
+    void alertWaitingAction();
 
     /**
       @param _greenLED, _redLED, _alarmLED used for LEDs on the breadboard
@@ -67,8 +70,6 @@ class Alarm{
     int _baseReading = 0;
     int _threshold = 100;
     void determineBasePhotoresistorReading();
-    void alertFailedAction();
-    void alertSuccessfulAction();
   };
 
 #endif
