@@ -18,7 +18,6 @@
 #include "Photoresistor.h"
 #include "Button.h"
 #include "Alarm.h"
-#include "Logger.h"
 #include "ComponentTester.h"
 
 /**

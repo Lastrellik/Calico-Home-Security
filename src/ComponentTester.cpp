@@ -9,7 +9,6 @@
 #include "ComponentTester.h"
 #include "Buzzer.h"
 #include "Button.h"
-#include "Logger.h"
 /**
   Base constructor that logs that ComponentTester is being used
 */
@@ -42,7 +41,7 @@ void ComponentTester::testPin(){
   if(componentType.equalsIgnoreCase("PHOTORESISTOR")){
     for(int i = 1; i <= 10; i++){
         if(Properties::DEBUGGING_ACTIVE) {
-          Logger::Log(String("Test #") + i + String(": ") + String(analogRead(pin)));
+        //  Logger::Log(String("Test #") + i + String(": ") + String(analogRead(pin)));
         }
       }
   }
@@ -50,7 +49,7 @@ void ComponentTester::testPin(){
     Button button(_component->getPin()); //May be wasted memory
     for(int i = 0; i < 150; i++){
       if(button.isPressed()) {
-        Logger::Log("The button was pressed");
+        //Logger::Log("The button was pressed");
         break;
       }
       delay(200);

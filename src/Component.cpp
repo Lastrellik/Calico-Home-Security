@@ -10,7 +10,6 @@
 */
 #include "Arduino.h"
 #include "Component.h"
-#include "Logger.h"
 /**
   Constructor that takes in an int for the variable pin and a string for the
   variable componentType
