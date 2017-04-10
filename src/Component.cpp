@@ -10,7 +10,6 @@
 */
 #include "Arduino.h"
 #include "Component.h"
-#include "Logger.h"
 /**
   Constructor that takes in an int for the variable pin and a string for the
   variable componentType
@@ -18,7 +17,7 @@
   @param componentType names what type of component is being Ex. "LED"
 */
 Component::Component(int pin, String componentType){
-  Serial.write(13250); // 13250 = Log, Debug, Component object successfully created
+  if(Properties::MODULE_PI) Serial.write(13250); // 13250 = Log, Debug, Component object successfully created
 
   //Need to figure out if we can put the component type created and the pin it's
   //set at with the Serial.write and the table, for now just doing base message

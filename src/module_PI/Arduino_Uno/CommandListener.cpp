@@ -4,13 +4,11 @@ CommandListener.h - A class for listening and executing commands from an externa
 
 #include "Arduino.h"
 #include "Alarm.h"
-#include "Logger.h"
 #include "CommandListener.h"
 
 #define SIZE_OF_DATAPACKET_IN_BYTES 5
 
 CommandListener::CommandListener(Alarm* alarm){
-  Logger::Log("CommandListener Created");
   this->alarm = alarm;
 }
 
