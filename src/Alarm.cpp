@@ -42,7 +42,7 @@ void Alarm::calibrate(){
     _isCalibrated = false;
   } else {
     alertSuccessfulAction();
-    Serial.write(13106); // 13106 = Log, Debug, Alarm succesful calibration
+    if(Properties::MODULE_PI)  Serial.write(13106); // 13106 = Log, Debug, Alarm succesful calibration
     _isCalibrated = true;
   }
   _laser->off();
@@ -95,7 +95,7 @@ void Alarm::alertFailedAction(){
   Makes the buzzer produce the Affirmative tone
 */
 void Alarm::alertSuccessfulAction(){
-  Serial.write(13103); // 13103 = Log, Debug, Alarm successful action
+  if(Properties::MODULE_PI) Serial.write(13103); // 13103 = Log, Debug, Alarm successful action
   _buzzer->soundAffirmativeTone();
   _greenLED->flash(1000);
 }
