@@ -1,0 +1,8 @@
+//Enter your username for your Gmail account below.
+//On the line below that, enter your Gmail password.
+//In order to send emails through this application, you
+//will need to enable less-secure apps through gmail. 
+//More info can be found here:  https://support.google.com/accounts/answer/6010255?hl=en
+//Antivirus programs like Avast will also block this functionality. 
+testemail@gmail.com
+testpassword
