@@ -6,7 +6,6 @@ import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.ListSelectionModel;
 
-import javafx.scene.text.Font;
 
 import java.awt.Graphics;
 import java.awt.List;
@@ -15,6 +14,12 @@ import java.util.HashMap;
 
 import javax.swing.AbstractListModel;
 import java.awt.Panel;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RemoveUserPanel extends JPanel {
 	private static Users list = new Users();
@@ -27,68 +32,71 @@ public class RemoveUserPanel extends JPanel {
 	@SuppressWarnings("unchecked")
 	public RemoveUserPanel() {
 		setBounds(0,0,388,480);
+		setBackground(Colors.getPanelColor());
 		setLayout(null);
 		
-		JPanel remove_Users_Inner_Display = new JPanel();
-		remove_Users_Inner_Display.setLayout(null);
-		remove_Users_Inner_Display.setBounds(12, 32, 364, 210);
-		add(remove_Users_Inner_Display);
-		
 		fill_Current_User_List();
-		current_Users = new JList(store.toArray());
-		current_Users.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        current_Users.setListData(store.toArray());
 		
-		current_Users.setBounds(0, 0, 364, 210);
-		remove_Users_Inner_Display.add(current_Users);
+		JPanel panel = new JPanel();
+		panel.setBounds(12, 13, 364, 454);
+		add(panel);
+		panel.setLayout(new GridLayout(2, 1, 0, 0));
+		
+		JPanel panel_2 = new JPanel();
+		panel.add(panel_2);
+		panel_2.setLayout(null);
+		current_Users = new JList();
+		current_Users.setBounds(0, 39, 364, 188);
+		panel_2.add(current_Users);
+		current_Users.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		current_Users.setListData(store.toArray());
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setColumns(10);
+		textArea.setBounds(0, 0, 364, 40);
+		panel_2.add(textArea);
 		
 		JPanel remove_Users_Inner_Buttons = new JPanel();
-		remove_Users_Inner_Buttons.setLayout(null);
-		remove_Users_Inner_Buttons.setBounds(12, 245, 364, 222);
-		add(remove_Users_Inner_Buttons);
+		panel.add(remove_Users_Inner_Buttons);
+		remove_Users_Inner_Buttons.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		JButton button = new JButton("Create User");
-		button.setBounds(0, 0, 183, 77);
-		remove_Users_Inner_Buttons.add(button);
-		
-		JButton button_1 = new JButton("Main Menu");
-		button_1.setBounds(0, 149, 364, 74);
-		remove_Users_Inner_Buttons.add(button_1);
+		JPanel panel_1 = new JPanel();
+		remove_Users_Inner_Buttons.add(panel_1);
+		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JButton button_2 = new JButton("Delete User");
-		button_2.setBounds(181, 0, 183, 77);
-		remove_Users_Inner_Buttons.add(button_2);
+		button_2.setBackground(Colors.getButtonColor());
+		panel_1.add(button_2);
+		
+		JButton button = new JButton("Create User");
+		button.setBackground(Colors.getButtonColor());
+		panel_1.add(button);
 		
 		JButton button_3 = new JButton("Delete User");
-		button_3.setBounds(0, 73, 364, 78);
+		button_3.setBackground(Colors.getButtonColor());
 		remove_Users_Inner_Buttons.add(button_3);
 		
-		//testing for determining where paint is
-		//remove_Users_Inner_Display.setVisible(false);
-		//remove_Users_Inner_Buttons.setVisible(false);
+		JButton button_1 = new JButton("Main Menu");
+		button_1.setBackground(Colors.getButtonColor());
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainPanel.set_Main_Menu_Visible();
+			}
+		});
+		remove_Users_Inner_Buttons.add(button_1);
 	}
 	private static void fill_Current_User_List(){
 
 		for(String s: usersPass.keySet()){
 			store.add(String.valueOf(usersPass.keySet()));
 		}
-		
+		System.out.println();
 	}
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawString("Remove User", 19, 30);   
-    }
-    
-    //for testing
-    public static void main(String[] args){
-    	Users.readFromTextFile();
-    	fill_Current_User_List();
-    	String[] bar =  new String[store.size()];
-    	bar = store.toArray(bar);
-    	for(String s: bar){
-    		System.out.println(s);
-		}
-		//System.out.println(bar);
+
+        g.drawString("Remove User", 0, 0);   
     }
 }

@@ -29,6 +29,7 @@ public class MainPanel extends JPanel {
 	private static AddUserPanel add_User = new AddUserPanel();
 	private static RemoveUserPanel remove_User = new RemoveUserPanel();
 	
+	
 	private StringBuilder pass = new StringBuilder();
 	/**
 	 * @param timer used for creating a time event
@@ -53,6 +54,7 @@ public class MainPanel extends JPanel {
 	 */
 	public MainPanel() {
 		setLayout(null);
+		setBackground(Colors.getPanelColor());
 		main_Area.setBounds(0, 0, 388, 480);
 		
 		add(main_Area);
@@ -76,6 +78,7 @@ public class MainPanel extends JPanel {
 		add_User_House.setLayout(null);
 		
 		JButton button_Add_User = new JButton("Add User");
+		button_Add_User.setBackground(Colors.getButtonColor());
 		button_Add_User.setBounds(0, 0, 388, 90);
 		add_User_House.add(button_Add_User);
 		
@@ -84,6 +87,7 @@ public class MainPanel extends JPanel {
 		remove_User_House.setLayout(null);
 		
 		JButton remove_User_Button = new JButton("Remove User");
+		remove_User_Button.setBackground(Colors.getButtonColor());
 		remove_User_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				set_Remove_User_Visible();
@@ -107,178 +111,378 @@ public class MainPanel extends JPanel {
 
 	private void number_Pad() {
 		JButton numPad_7 = new JButton("<html><center>7<br>ABC</center></html>");
+		numPad_7.setBackground(Colors.getButtonColor());
 		numPad_7.addActionListener(new ActionListener() {
 			int count = 0;
 			public void actionPerformed(ActionEvent e) {
+				if(AddUserPanel.getButtonPressed() == false) count = 0;
 				count++;
+				AddUserPanel.pressedTrue();
+				
+				if(pass.length()<4){
+					pass.append("7");
+					MainMenuPanel.append_Text_Field();
+					//t_Display.setText(String.valueOf(asterisk));
+					System.out.println(numPad_7.getText());
+				}
+				//for testing print out of pass when reaching 4 characters
+				if(pass.length() == 4){
+					System.out.println(pass);
+				}
+				
 				if(count == 1){
 					if(AddUserPanel.get_Create_User_Length() > 0)
 						AddUserPanel.remove_Last_Create_User();
-					AddUserPanel.append_Create_User("A");
+					AddUserPanel.append_Create_User('A');
 				}
 				if(count == 2){
 					if(AddUserPanel.get_Create_User_Length() > 0)
 						AddUserPanel.remove_Last_Create_User();
-					AddUserPanel.append_Create_User("B");
+					AddUserPanel.append_Create_User('B');
 				}
 				if(count == 3){
 					if(AddUserPanel.get_Create_User_Length() > 0)
 						AddUserPanel.remove_Last_Create_User();
-					AddUserPanel.append_Create_User("C");
-				count = 0;
+					AddUserPanel.append_Create_User('C');
+					count = 0;
 				}
 			}
 		});
 		panel_1.add(numPad_7);
 		
 		JButton numPad_8 = new JButton("<html><center>8<br>DEF</center></html>");
+		numPad_8.setBackground(Colors.getButtonColor());
 		numPad_8.addActionListener(new ActionListener() {
+			int count = 0;
 			public void actionPerformed(ActionEvent e) {
+				if(AddUserPanel.getButtonPressed() == false) count = 0;
+				count++;
+				AddUserPanel.pressedTrue();
+				
 				if(pass.length()<4){
 					pass.append("8");
 					MainMenuPanel.append_Text_Field();
 					//t_Display.setText(String.valueOf(asterisk));
-					System.out.println(numPad_8.getText());
+					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
 				if(pass.length() == 4){
 					System.out.println(pass);
+				}
+				
+				if(count == 1){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('D');
+				}
+				if(count == 2){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('E');
+				}
+				if(count == 3){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('F');
+					count = 0;
 				}
 			}
 		});
 		panel_1.add(numPad_8);
 		JButton numPad_9 = new JButton("<html><center>9<br>GHI</center></html>");
+		numPad_9.setBackground(Colors.getButtonColor());
 		numPad_9.addActionListener(new ActionListener() {
+			int count = 0;
 			public void actionPerformed(ActionEvent e) {
+				if(AddUserPanel.getButtonPressed() == false) count = 0;
+				count++;
+				AddUserPanel.pressedTrue();
+				
 				if(pass.length()<4){
 					pass.append("9");
 					MainMenuPanel.append_Text_Field();
 					//t_Display.setText(String.valueOf(asterisk));
-					System.out.println(numPad_9.getText());
+					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
 				if(pass.length() == 4){
 					System.out.println(pass);
+				}
+				
+				if(count == 1){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('G');
+				}
+				if(count == 2){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('H');
+				}
+				if(count == 3){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('I');
+					count = 0;
 				}
 			}
 		});
 		panel_1.add(numPad_9);
 		JButton numPad_4 = new JButton("<html><center>4<br>JKL</center></html>");
+		numPad_4.setBackground(Colors.getButtonColor());
 		numPad_4.addActionListener(new ActionListener() {
+			int count = 0;
 			public void actionPerformed(ActionEvent e) {
+				if(AddUserPanel.getButtonPressed() == false) count = 0;
+				count++;
+				AddUserPanel.pressedTrue();
+				
 				if(pass.length()<4){
 					pass.append("4");
 					MainMenuPanel.append_Text_Field();
 					//t_Display.setText(String.valueOf(asterisk));
-					System.out.println(numPad_4.getText());
+					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
 				if(pass.length() == 4){
 					System.out.println(pass);
+				}
+				
+				if(count == 1){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('J');
+				}
+				if(count == 2){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('K');
+				}
+				if(count == 3){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('L');
+					count = 0;
 				}
 			}
 		});
 		panel_1.add(numPad_4);
 		
 		JButton numPad_5 = new JButton("<html><center>5<br>MNO</center></html>");
+		numPad_5.setBackground(Colors.getButtonColor());
 		numPad_5.addActionListener(new ActionListener() {
+			int count = 0;
 			public void actionPerformed(ActionEvent e) {
+				if(AddUserPanel.getButtonPressed() == false) count = 0;
+				count++;
+				AddUserPanel.pressedTrue();
+				
 				if(pass.length()<4){
 					pass.append("5");
 					MainMenuPanel.append_Text_Field();
 					//t_Display.setText(String.valueOf(asterisk));
-					System.out.println(numPad_5.getText());
+					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
 				if(pass.length() == 4){
 					System.out.println(pass);
+				}
+				
+				if(count == 1){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('M');
+				}
+				if(count == 2){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('N');
+				}
+				if(count == 3){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('O');
+					count = 0;
 				}
 			}
 		});
 		panel_1.add(numPad_5);
 		
 		JButton numPad_6 = new JButton("<html><center>6<br>PQR</center></html>");
+		numPad_6.setBackground(Colors.getButtonColor());
 		numPad_6.addActionListener(new ActionListener() {
+			int count = 0;
 			public void actionPerformed(ActionEvent e) {
+				if(AddUserPanel.getButtonPressed() == false) count = 0;
+				count++;
+				AddUserPanel.pressedTrue();
+				
 				if(pass.length()<4){
 					pass.append("6");
 					MainMenuPanel.append_Text_Field();
 					//t_Display.setText(String.valueOf(asterisk));
-					System.out.println(numPad_6.getText());
+					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
 				if(pass.length() == 4){
 					System.out.println(pass);
+				}
+				
+				if(count == 1){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('P');
+				}
+				if(count == 2){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('Q');
+				}
+				if(count == 3){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('R');
+					count = 0;
 				}
 			}
 		});
 		panel_1.add(numPad_6);
 		JButton numPad_1 = new JButton("<html><center>1<br>STU</center></html>");
+		numPad_1.setBackground(Colors.getButtonColor());
 		numPad_1.addActionListener(new ActionListener() {
+			int count = 0;
 			public void actionPerformed(ActionEvent e) {
+				if(AddUserPanel.getButtonPressed() == false) count = 0;
+				count++;
+				AddUserPanel.pressedTrue();
+				
 				if(pass.length()<4){
 					pass.append("1");
 					MainMenuPanel.append_Text_Field();
 					//t_Display.setText(String.valueOf(asterisk));
-					System.out.println(numPad_1.getText());
+					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
 				if(pass.length() == 4){
 					System.out.println(pass);
+				}
+				
+				if(count == 1){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('S');
+				}
+				if(count == 2){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('T');
+				}
+				if(count == 3){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('U');
+					count = 0;
 				}
 			}
 		});
 		panel_1.add(numPad_1);
 		
 		JButton numPad_2 = new JButton("<html><center>2<br>VWX</center></html>");
+		numPad_2.setBackground(Colors.getButtonColor());
 		numPad_2.addActionListener(new ActionListener() {
+			int count = 0;
 			public void actionPerformed(ActionEvent e) {
+				if(AddUserPanel.getButtonPressed() == false) count = 0;
+				count++;
+				AddUserPanel.pressedTrue();
+				
 				if(pass.length()<4){
 					pass.append("2");
 					MainMenuPanel.append_Text_Field();
 					//t_Display.setText(String.valueOf(asterisk));
-					System.out.println(numPad_2.getText());
+					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
 				if(pass.length() == 4){
 					System.out.println(pass);
+				}
+				
+				if(count == 1){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('V');
+				}
+				if(count == 2){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('W');
+				}
+				if(count == 3){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('X');
+					count = 0;
 				}
 			}
 		});
 		panel_1.add(numPad_2);
-		JButton numPad_3 = new JButton("<html><center>4<br>YZ</center></html>");
+		JButton numPad_3 = new JButton("<html><center>3<br>YZ</center></html>");
+		numPad_3.setBackground(Colors.getButtonColor());
 		numPad_3.addActionListener(new ActionListener() {
+			int count = 0;
 			public void actionPerformed(ActionEvent e) {
+				if(AddUserPanel.getButtonPressed() == false) count = 0;
+				count++;
+				AddUserPanel.pressedTrue();
+				
 				if(pass.length()<4){
 					pass.append("3");
 					MainMenuPanel.append_Text_Field();
 					//t_Display.setText(String.valueOf(asterisk));
-					System.out.println(numPad_3.getText());
+					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
 				if(pass.length() == 4){
 					System.out.println(pass);
+				}
+				
+				if(count == 1){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('Y');
+				}
+				if(count == 2){
+					if(AddUserPanel.get_Create_User_Length() > 0)
+						AddUserPanel.remove_Last_Create_User();
+					AddUserPanel.append_Create_User('Z');
+					count = 0;
 				}
 			}
 		});
 		panel_1.add(numPad_3);
 		
-		JButton numPad_Clear = new JButton("Clr");
+		JButton numPad_Clear = new JButton("Clear");
+		numPad_Clear.setBackground(Colors.getButtonColor());
 		numPad_Clear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MainMenuPanel.clear_Text_Field();
+				AddUserPanel.clear_Create_User();
+				pass.setLength(0);
 			}
 		});
 		
-		JButton num_Pad_Asterisk = new JButton("*");
-		num_Pad_Asterisk.addActionListener(new ActionListener() {
+		JButton num_Pad_Enter = new JButton("Enter");
+		num_Pad_Enter.setBackground(Colors.getButtonColor());
+		num_Pad_Enter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//invalid * can not be used clearing out code
 			}
 		});
 
-		panel_1.add(num_Pad_Asterisk);
+		panel_1.add(num_Pad_Enter);
 		
 		JButton numPad_0 = new JButton("0");
+		numPad_0.setBackground(Colors.getButtonColor());
 		numPad_0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(pass.length()<4){
@@ -332,6 +536,7 @@ public class MainPanel extends JPanel {
     	remove_User.setVisible(false);
     	add_User_House.setVisible(true);
     	remove_User_House.setVisible(false);
+    	MainMenuPanel.clear_Text_Field();
     }
     public static void set_Test_Menu_Visible(){
     	main_Menu.setVisible(false);
