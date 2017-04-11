@@ -14,9 +14,15 @@ public class EmailNotifierTest {
 	public static EmailNotifier testEmailNotifier = new EmailNotifier("testAddress@email.com", "testMessage");
 
 	@Test
-	public void testEmailNotifier_EmailAddressAndMessage() {
+	public void testEmailNotifier_EmailAddress() {
+		EmailNotifier emailNotifier = new EmailNotifier("test@test.com", null);
+		assertEquals(emailNotifier.getRecipientEmailAddress(), "test@test.com");
+	}
+	
+	@Test
+	public void testEmailNotifier_Message() {
 		EmailNotifier emailNotifier = new EmailNotifier("test@test.com", "test");
-		assertEquals(emailNotifier.getAttachmentFilePath(), null);
+		assertEquals(emailNotifier.getEmailMessage(), "test");
 	}
 	
 	@Test
@@ -35,7 +41,7 @@ public class EmailNotifierTest {
 	@SuppressWarnings("unused")
 	@Test
 	public void testEmailNotifier_InvalidEmailAddress(){
-		expectedException.expectMessage("notAProperEmailAddress" + " is not a valid email address");
+		expectedException.expectMessage("notAProperEmailAddress is not a valid email address");
 		EmailNotifier emailNotifier = new EmailNotifier("notAProperEmailAddress", "test");
 	}
 	
