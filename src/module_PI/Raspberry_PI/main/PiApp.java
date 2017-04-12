@@ -9,6 +9,8 @@ public class PiApp {
 	 * @param args Gmail Username and Password for sending mail
 	 */
 	public static void main(String[] args) {
+		int numOfArgs = 2;
+		if(args.length != numOfArgs) throw new IllegalArgumentException("Syntax is java PiApp <gmailusername> <gmailpassword>");
 		parseArgs(args);
 		SerialInputListener inputListener = new SerialInputListener();
 		Thread listener = new Thread(inputListener, "Listener");
