@@ -11,7 +11,7 @@
   Constructor sets the pin of the Buzzer and componentType to Buzzer
 */
 Buzzer::Buzzer(int pin) : Component(pin, "BUZZER"){
-  if(Properties::MODULE_PI) Serial.write(13200); // 13200 = Log, Debug, Buzzer object has been created
+  if(Properties::MODULE_PI) Serial.write("13200"); // 13200 = Log, Debug, Buzzer object has been created
   pinMode(pin, OUTPUT);
 }
 /**
@@ -26,7 +26,7 @@ Buzzer::Buzzer(){
     function.
 */
 void Buzzer::soundTone(int frequency) {
-if(Properties::MODULE_PI)  Serial.write(13201); // 13201 = Log, Debug, Buzzer has started to sound
+if(Properties::MODULE_PI)  Serial.write("13201"); // 13201 = Log, Debug, Buzzer has started to sound
   tone(this->getPin(), frequency);
 }
 /**
@@ -78,6 +78,6 @@ void Buzzer::soundNegativeTone(){
   Stops the tone of the Buzzer sounding
 */
 void Buzzer::stopTone() {
-  if(Properties::MODULE_PI) Serial.write(13202); // 13202 = Log, Debug, Buzzer has stopped sounding
+  if(Properties::MODULE_PI) Serial.write("13202"); // 13202 = Log, Debug, Buzzer has stopped sounding
   noTone(this->getPin());
 }

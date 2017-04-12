@@ -13,13 +13,13 @@
   Base constructor that logs that ComponentTester is being used
 */
 ComponentTester::ComponentTester() {
-  if(Properties::MODULE_PI) Serial.write(13300); // 13300 = Log, Debug, ComponentTester default constructor object successfully created
+  if(Properties::MODULE_PI) Serial.write("13300"); // 13300 = Log, Debug, ComponentTester default constructor object successfully created
 }
 /**
   Constructor that builds a Component object for testing
 */
 ComponentTester::ComponentTester(Component* component){
-  if(Properties::MODULE_PI) Serial.write(13301); // 13301 = Log, Debug, ComponentTester object successfully created
+  if(Properties::MODULE_PI) Serial.write("13301"); // 13301 = Log, Debug, ComponentTester object successfully created
   _component = component;
 }
 /**

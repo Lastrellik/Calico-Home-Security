@@ -15,7 +15,7 @@
     a voltage less than 1.0V (Approx) is present at the pin (3.3V boards);
 */
 Photoresistor::Photoresistor(int pin) : Component(pin, "PHOTORESISTOR"){
-  if(Properties::MODULE_PI) Serial.write(13450); // 13450 = Log, Debug, Photoresistor object has been successfully created
+  if(Properties::MODULE_PI) Serial.write("13450"); // 13450 = Log, Debug, Photoresistor object has been successfully created
   pinMode(pin, INPUT);
 }
 /**
@@ -28,6 +28,6 @@ Photoresistor::Photoresistor(){
   @return Returns the value of the photorsistor at request
 */
 int Photoresistor::takeReading() {
-  if(Properties::MODULE_PI) Serial.write(13451); // 13451 - Log, Debug, Photoresistor taking reading
+  if(Properties::MODULE_PI) Serial.write("13451"); // 13451 - Log, Debug, Photoresistor taking reading
   return analogRead(Component::getPin());
 }
