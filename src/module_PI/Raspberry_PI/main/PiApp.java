@@ -1,9 +1,9 @@
 package module_PI.Raspberry_PI.main;
 
-import java.io.*;
 import java.util.*;
 
 public class PiApp {
+	public static Properties GMAIL_CREDENTIALS = new Properties();
 
 	/**
 	 * @param args Gmail Username and Password for sending mail
@@ -20,20 +20,8 @@ public class PiApp {
 	}
 	
 	private static void parseArgs(String[] args){
-		Properties gmailCredentials = new Properties();
-		gmailCredentials.put("gmailUsername" , args[0]);
-		gmailCredentials.put("gmailPassword" , args[1]);
-		saveGmailProperties(gmailCredentials);
-		
-	}
-	private static void saveGmailProperties(Properties gmailCredentials){
-		try {
-			FileOutputStream out = new FileOutputStream("gmailCredentials");
-			gmailCredentials.store(out, "Gmail Credentials");
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		GMAIL_CREDENTIALS.put("gmailUsername" , args[0]);
+		GMAIL_CREDENTIALS.put("gmailPassword" , args[1]);
 	}
 	
 	private static void pause(int millis){

@@ -37,16 +37,8 @@ public class EmailNotifier {
 	}
 
 	private void loadGmailCredentials() {
-		try {
-			Properties gmailProperties = new Properties();
-			FileInputStream in = new FileInputStream("gmailCredentials");
-			gmailProperties.load(in);
-			gmailUsername = gmailProperties.getProperty("gmailUsername");
-			gmailPassword = gmailProperties.getProperty("gmailPassword");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			gmailUsername = PiApp.GMAIL_CREDENTIALS.getProperty("gmailUsername");
+			gmailPassword = PiApp.GMAIL_CREDENTIALS.getProperty("gmailPassword");
 	}
 
 	private void buildPropertiesAndCreateSession() {

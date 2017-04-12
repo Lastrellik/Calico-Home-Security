@@ -8,7 +8,7 @@ import module_PI.Raspberry_PI.main.SerialInputListener;
 
 @RunWith(Suite.class)
 @SuiteClasses({ DataPacketTest.class, PacketLogLevelTest.class, PacketTypeTest.class, SerialInputListenerTest.class,
-		SerialOutputTest.class, PacketLogLevelTest.class })
+		SerialOutputTest.class, PacketLogLevelTest.class, EmailNotifierTest.class })
 public class AllTests {
 	SerialInputListener listener = new SerialInputListener();
 }
