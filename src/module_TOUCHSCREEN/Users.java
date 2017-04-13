@@ -8,6 +8,13 @@ import java.util.Scanner;
 
 
 public class Users {
+	/**
+	 * Parameters are set to static so that other classes can make changes easily without getters and setters.
+	 */
+	
+	/**
+	 * Users is supposed to create an array of users to be managed
+	 */
 	private static Map<String, String> usersPass = new HashMap<String, String>();
 
 	public static Map<String, String> get_Users_Pass(){

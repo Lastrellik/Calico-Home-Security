@@ -11,7 +11,7 @@ import javax.swing.JFrame;
  */
 public class TouchscreenApp {
 	/**
-	 * Main class creates JFrame to house CalicoArmGUI
+	 * Main class creates JFrame to house CalicoArmGUI for testing
 	 * @param args
 	 */
 	public static void main(String[] args){

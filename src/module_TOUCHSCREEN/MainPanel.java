@@ -23,26 +23,37 @@ import java.awt.Graphics;
 
 public class MainPanel extends JPanel {
 	
-	private BufferedImage calDot = null;
+	/**
+	 * Parameters are set to static so that other classes can make changes easily without getters and setters.
+	 */
+	
+	/**
+	 * @param main_Menu used to create a panel of the MainMenuPanel class
+	 * @param test_Menu used to create a panel of the TestMenuPanel class
+	 * @param add_User used to create a panel of the AddUserPanel class
+	 * @param remove_User used to create a panel of the RemoveUserPanel class
+	 */
 	private static MainMenuPanel main_Menu = new MainMenuPanel();
 	private static TestMenuPanel test_Menu = new TestMenuPanel();
 	private static AddUserPanel add_User = new AddUserPanel();
 	private static RemoveUserPanel remove_User = new RemoveUserPanel();
 	
-	
+	/** 
+	 * @param pass used to display asterisks
+	 */
 	private StringBuilder pass = new StringBuilder();
 	/**
-	 * @param timer used for creating a time event
+	 * @param timer used for logo animation.
 	 */
 	private Timer timer = new Timer();
 
 	/**
-	 * Drawing booleans for the paint component
-	 * @param draw_Thinking_Dot
-	 * @param draw_Logo
+	 * @param main_Area used to house all panels in a cardlayout for displaying.
+	 * @param num_Pad houses numeric/alpha keys.
+	 * @param manage_Users houses Add and Remove User buttons in a cardlayout.
+	 * @param add_User_House used to house add user button.
+	 * @param remove_User_House used to house remove user button.
 	 */
-	private boolean draw_Thinking_Dot = false;
-	private boolean draw_Logo = false;
 	private final JPanel main_Area = new JPanel();
 	private final JPanel num_Pad = new JPanel();
 	private final JPanel mange_Users = new JPanel();
@@ -57,6 +68,7 @@ public class MainPanel extends JPanel {
 		setBackground(Colors.getPanelColor());
 		main_Area.setBounds(0, 0, 388, 480);
 		
+		//Add cards to the main_Area Panel
 		add(main_Area);
 		main_Area.setLayout(new CardLayout(0, 0));
 		main_Area.add(test_Menu, "name_29408201602606");
@@ -66,6 +78,7 @@ public class MainPanel extends JPanel {
 		main_Menu.setVisible(true);
 		num_Pad.setBounds(400, 13, 388, 454);
 		
+		//Adds the numeric/alpha keys
 		add(num_Pad);
 		add_User.setVisible(false);
 		test_Menu.setVisible(false);
@@ -74,9 +87,13 @@ public class MainPanel extends JPanel {
 		num_Pad.add(mange_Users);
 		mange_Users.setLayout(new CardLayout(0, 0));
 		
+		
 		mange_Users.add(add_User_House, "name_69549789820215");
 		add_User_House.setLayout(null);
 		
+		/**
+		 * @param button_Add_User makes the add user panel visible
+		 */
 		JButton button_Add_User = new JButton("Add User");
 		button_Add_User.setBackground(Colors.getButtonColor());
 		button_Add_User.setBounds(0, 0, 388, 90);
@@ -86,6 +103,9 @@ public class MainPanel extends JPanel {
 		mange_Users.add(remove_User_House, "name_69614333129613");
 		remove_User_House.setLayout(null);
 		
+		/**
+		 * @param remove_User_Button makes the remove user panel visible
+		 */
 		JButton remove_User_Button = new JButton("Remove User");
 		remove_User_Button.setBackground(Colors.getButtonColor());
 		remove_User_Button.addActionListener(new ActionListener() {
@@ -93,6 +113,7 @@ public class MainPanel extends JPanel {
 				set_Remove_User_Visible();
 			}
 		});
+		
 		remove_User_Button.setBounds(0, 0, 388, 90);
 		remove_User_House.add(remove_User_Button);
 		button_Add_User.addActionListener(new ActionListener() {
@@ -109,6 +130,14 @@ public class MainPanel extends JPanel {
 		
 	}
 
+	/**
+	 * Creates a series of buttons 0 to 9, with letter A to Z and enter and clear.
+	 * Keeps track of the number of times a button is pressed when the MainMenuPanel is uploaded, so it only displays a total of 4 asterisks.
+	 * Tells AddUserPanel that it's okay to press the select button again.
+	 * Tells AddUserPanel which char to pass to create_User StringBuilder.
+	 * Clear tells AddUserPanel to clear out create_User and user_List.
+//	 * Enter is currently not set to anything.
+	 */
 	private void number_Pad() {
 		JButton numPad_7 = new JButton("<html><center>7<br>ABC</center></html>");
 		numPad_7.setBackground(Colors.getButtonColor());
@@ -122,7 +151,7 @@ public class MainPanel extends JPanel {
 				if(pass.length()<4){
 					pass.append("7");
 					MainMenuPanel.append_Text_Field();
-					//t_Display.setText(String.valueOf(asterisk));
+					 
 					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
@@ -162,7 +191,7 @@ public class MainPanel extends JPanel {
 				if(pass.length()<4){
 					pass.append("8");
 					MainMenuPanel.append_Text_Field();
-					//t_Display.setText(String.valueOf(asterisk));
+					 
 					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
@@ -201,7 +230,7 @@ public class MainPanel extends JPanel {
 				if(pass.length()<4){
 					pass.append("9");
 					MainMenuPanel.append_Text_Field();
-					//t_Display.setText(String.valueOf(asterisk));
+					 
 					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
@@ -240,7 +269,7 @@ public class MainPanel extends JPanel {
 				if(pass.length()<4){
 					pass.append("4");
 					MainMenuPanel.append_Text_Field();
-					//t_Display.setText(String.valueOf(asterisk));
+					 
 					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
@@ -280,7 +309,7 @@ public class MainPanel extends JPanel {
 				if(pass.length()<4){
 					pass.append("5");
 					MainMenuPanel.append_Text_Field();
-					//t_Display.setText(String.valueOf(asterisk));
+					 
 					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
@@ -320,7 +349,7 @@ public class MainPanel extends JPanel {
 				if(pass.length()<4){
 					pass.append("6");
 					MainMenuPanel.append_Text_Field();
-					//t_Display.setText(String.valueOf(asterisk));
+					 
 					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
@@ -359,7 +388,7 @@ public class MainPanel extends JPanel {
 				if(pass.length()<4){
 					pass.append("1");
 					MainMenuPanel.append_Text_Field();
-					//t_Display.setText(String.valueOf(asterisk));
+					 
 					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
@@ -399,7 +428,7 @@ public class MainPanel extends JPanel {
 				if(pass.length()<4){
 					pass.append("2");
 					MainMenuPanel.append_Text_Field();
-					//t_Display.setText(String.valueOf(asterisk));
+					 
 					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
@@ -438,7 +467,7 @@ public class MainPanel extends JPanel {
 				if(pass.length()<4){
 					pass.append("3");
 					MainMenuPanel.append_Text_Field();
-					//t_Display.setText(String.valueOf(asterisk));
+					 
 					System.out.println(numPad_7.getText());
 				}
 				//for testing print out of pass when reaching 4 characters
@@ -505,12 +534,14 @@ public class MainPanel extends JPanel {
 	 * 
 	 */
 	private void checkFilePathOfImages() {
+		/**code not ready to implemented.
 		try {                
 	          calDot = ImageIO.read(getClass().getResource("calDot.png"));
 	       
 	       } catch (IOException ex) {
 	            System.out.println("Fail");
 	       }
+	     */
 	}
 	
 	/**
@@ -525,10 +556,10 @@ public class MainPanel extends JPanel {
             timer.cancel(); //Terminate the timer thread
         }
     }
-	/**
-	 * Getter for Pair Key Value usersPass, mainly for testing.
-	 * @param usersPass
-	 */
+    /**
+     * Used to set MainMenuPanel to visible.
+     * Used as static to keep setting menus visibility easily.
+     */
     public static void set_Main_Menu_Visible(){
     	main_Menu.setVisible(true);
     	test_Menu.setVisible(false);
@@ -538,12 +569,20 @@ public class MainPanel extends JPanel {
     	remove_User_House.setVisible(false);
     	MainMenuPanel.clear_Text_Field();
     }
+    /**
+     * Used to set the TestMenuPanel to visible.
+     * Used as static to keep setting menus visibility easily.
+     */
     public static void set_Test_Menu_Visible(){
     	main_Menu.setVisible(false);
     	test_Menu.setVisible(true);
     	add_User.setVisible(false);
     	remove_User.setVisible(false);
     }
+    /**
+     * Used to set the AddUserPanel to visible.
+     * Used as static to keep setting menus visibility easily.
+     */
     public static void set_Add_User_Visible(){
     	main_Menu.setVisible(false);
     	test_Menu.setVisible(false);
@@ -553,7 +592,10 @@ public class MainPanel extends JPanel {
     	remove_User_House.setVisible(true);
     	
     }
-
+    /**
+     * Used to set the RemoveUserPanel to visible.
+     * Used as static to keep setting menus visibility easily.
+     */
 	public static void set_Remove_User_Visible(){
     	main_Menu.setVisible(false);
     	test_Menu.setVisible(false);

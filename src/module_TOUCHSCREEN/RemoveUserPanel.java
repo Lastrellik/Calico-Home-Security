@@ -22,14 +22,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class RemoveUserPanel extends JPanel {
+	/**
+	 * Parameters are set to static so that other classes can make changes easily without getters and setters.
+	 */
+	
+	/**
+	 * @param list is meant to be used with current_User to display an array that is selectable for deletion
+	 * @param usersPass symbol table meant to store users, looking to remove and create simple array
+	 * @param store array list meant to be used with list, looking to remove and create a simple array
+	 * @param current_User displays a selectable list of users for deletion
+	 */
 	private static Users list = new Users();
 	private static HashMap<String, String> usersPass = (HashMap<String, String>) list.get_Users_Pass();
 	private static ArrayList<String> store = new ArrayList<>();
-	private static JList current_Users; 
+	private static JList current_Users = new JList();
 	/**
 	 * Create the panel.
 	 */
-	@SuppressWarnings("unchecked")
 	public RemoveUserPanel() {
 		setBounds(0,0,388,480);
 		setBackground(Colors.getPanelColor());
@@ -37,55 +46,75 @@ public class RemoveUserPanel extends JPanel {
 		
 		fill_Current_User_List();
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(12, 13, 364, 454);
-		add(panel);
-		panel.setLayout(new GridLayout(2, 1, 0, 0));
+		/**
+		 * @param main_Panel houses all other panels to keep them organized.
+		 * 		Set to two rows to create even spacing
+		 */
+		JPanel main_Panel = new JPanel();
+		main_Panel.setBounds(12, 13, 364, 454);
+		add(main_Panel);
+		main_Panel.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		panel.add(panel_2);
-		panel_2.setLayout(null);
-		current_Users = new JList();
+		/**
+		 * @param display_Panel handles displaying text area and the menu.
+		 * 		Uses absolute to make adjustable menu, to meet certain heights.
+		 */
+		JPanel display_Panel = new JPanel();
+		main_Panel.add(display_Panel);
+		display_Panel.setLayout(null);
+		
+		/**
+		 * current_Users set to Single Selection to prevent multiple deletions.
+		 */
 		current_Users.setBounds(0, 39, 364, 188);
-		panel_2.add(current_Users);
+		display_Panel.add(current_Users);
 		current_Users.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		current_Users.setListData(store.toArray());
+		current_Users.setBounds(0, 41, 364, 186);
+		display_Panel.add(current_Users);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setColumns(10);
-		textArea.setBounds(0, 0, 364, 40);
-		panel_2.add(textArea);
+		/**
+		 * Displays the current menu name.
+		 */
+		JTextArea menu_Name = new JTextArea();
+		menu_Name.setEditable(false);
+		menu_Name.setColumns(10);
+		menu_Name.setBounds(0, 0, 364, 40);
+		display_Panel.add(menu_Name);
 		
-		JPanel remove_Users_Inner_Buttons = new JPanel();
-		panel.add(remove_Users_Inner_Buttons);
-		remove_Users_Inner_Buttons.setLayout(new GridLayout(3, 1, 0, 0));
+		/**
+		 * @param buttons_Panel houses all buttons in 3 rows in grid layout.
+		 * @param action_Button_Panel house action buttons in two columns to keep organizing in the top row of add_User_Innner_Buttons panel
+		 */
+		JPanel buttons_Panel = new JPanel();
+		main_Panel.add(buttons_Panel);
+		buttons_Panel.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		remove_Users_Inner_Buttons.add(panel_1);
-		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
+		/**
+		 * @param button_Undo undoes the last deleted user.
+		 * @param button_Delete_User deletes the currently selected user.
+		 * @param button_Main_Menu makes the main menu visible.
+		 */
+		JButton button_Undo = new JButton("Undo");
+		buttons_Panel.add(button_Undo);
+		button_Undo.setBackground(Colors.getButtonColor());
+
+		JButton button_Delete_User = new JButton("Delete User");
+		button_Delete_User.setBackground(Colors.getButtonColor());
+		buttons_Panel.add(button_Delete_User);
 		
-		JButton button_2 = new JButton("Delete User");
-		button_2.setBackground(Colors.getButtonColor());
-		panel_1.add(button_2);
-		
-		JButton button = new JButton("Create User");
-		button.setBackground(Colors.getButtonColor());
-		panel_1.add(button);
-		
-		JButton button_3 = new JButton("Delete User");
-		button_3.setBackground(Colors.getButtonColor());
-		remove_Users_Inner_Buttons.add(button_3);
-		
-		JButton button_1 = new JButton("Main Menu");
-		button_1.setBackground(Colors.getButtonColor());
-		button_1.addActionListener(new ActionListener() {
+		JButton button_Main_Menu = new JButton("Main Menu");
+		button_Main_Menu.setBackground(Colors.getButtonColor());
+		button_Main_Menu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainPanel.set_Main_Menu_Visible();
 			}
 		});
-		remove_Users_Inner_Buttons.add(button_1);
+		buttons_Panel.add(button_Main_Menu);
 	}
+	/**
+	 * Supposed to fill the current user list to display current_Users
+	 */
 	private static void fill_Current_User_List(){
 
 		for(String s: usersPass.keySet()){
@@ -93,10 +122,4 @@ public class RemoveUserPanel extends JPanel {
 		}
 		System.out.println();
 	}
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        g.drawString("Remove User", 0, 0);   
-    }
 }
