@@ -1,6 +1,6 @@
 package module_PI.Raspberry_PI.main;
 
-import java.util.LinkedList;
+import java.util.*;
 
 public class SerialInputListener extends SerialComm implements Runnable {
 
@@ -19,16 +19,7 @@ public class SerialInputListener extends SerialComm implements Runnable {
 		serialInputStream = new LinkedList<Byte>();
 		packetInputStream = new LinkedList<DataPacket>();
 		comPort.openPort();
-		flushInputStream();
-	}
-
-	private void flushInputStream(){
-		byte[] streamDisposalByteArray = new byte[1];
-		while (comPort.bytesAvailable() > 0){
-			comPort.readBytes(streamDisposalByteArray, 1);
-			pause(1);
-		}
-	}
+	} 
 	
 	public boolean isPacketAvailable() {
 		return !packetInputStream.isEmpty();
@@ -46,11 +37,14 @@ public class SerialInputListener extends SerialComm implements Runnable {
 		if (comPort.bytesAvailable() > 0) {
 			byte[] readBuffer = new byte[comPort.bytesAvailable()];
 			comPort.readBytes(readBuffer, readBuffer.length);
-			for (byte b : readBuffer) {
-				serialInputStream.add(b);
-				System.out.println((char)b);
-			}
+			addBytesToInputStream(readBuffer);
 		}
+	}
+	
+	private void addBytesToInputStream(byte[] readBuffer){
+		for (byte b : readBuffer) {
+			serialInputStream.add((byte) Character.getNumericValue(b));
+		}		
 	}
 
 	private void createPacketIfAvailable() {
