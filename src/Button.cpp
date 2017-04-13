@@ -11,7 +11,7 @@
   Constructor for Button that sets the pin and the componentType
 */
 Button::Button(int pin) : Component(pin, "BUTTON"){
-  if(Properties::MODULE_PI) Serial.write(13150); // 13150 = Log, Debug, Button object successfully created
+  if(Properties::MODULE_PI) Serial.write("13150"); // 13150 = Log, Debug, Button object successfully created
   pinMode(pin, INPUT);
 }
 /**
@@ -26,10 +26,10 @@ Button::Button(){
     HIGH
 */
 boolean Button::isPressed() {
-  Serial.write(13151); // 13151 = Log, Debug, Button has been pressed
   boolean pressed = false;
   if (digitalRead(Component::getPin()) == HIGH) { // HIGH == Pressed
     pressed = true;
+    if(Properties::MODULE_PI) Serial.write("13151"); // 13151 = Log, Debug, Button has been pressed
   }
   return pressed;
 }

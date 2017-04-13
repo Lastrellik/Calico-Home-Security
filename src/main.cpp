@@ -23,8 +23,9 @@ CommandListener* commandListener;
 
 #include "module_WIFI\WifiModule.h"
 WifiModule* wifiModule;
+
 /**
-  Setups the intial classes to be used like Alarm and Wifi
+  Sets up the intial classes to be used like Alarm and Wifi
 */
 void setup() {
   Serial.begin(Properties::BAUD_RATE);
@@ -34,10 +35,13 @@ void setup() {
   if(not Properties::MODULE_PI) alarm->calibrate();
 
   if (Properties::MODULE_WIFI) {
+    alarm->alertWaitingAction();
     wifiModule = new WifiModule();
     wifiModule->initialize();
+    alarm->alertSuccessfulAction();
   }
 }
+
 /**
   Looping command for active listening or what is happening on the Arduino.
     Listens to see if the alarm has been trigged, calibrated, or armed.
@@ -52,7 +56,7 @@ void loop(){
     if(alarm->isTripped() && not alarm->isTriggered()){
       alarm->trigger();
       if (Properties::MODULE_WIFI) {
-        wifiModule->sendNotification();
+        wifiModule->sendNotification(); // TODO: This is blocking. See https://github.com/Lastrellik/Calico-Home-Security/issues/62
       }
     }
   }
