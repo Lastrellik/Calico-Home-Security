@@ -6,10 +6,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Calico Home Security</name>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>src/module_PI/Raspberry_PI</sourceDirectory>
+		<!--<testSourceDirectory>src/module_PI/Raspberry_PI/JUnitTests</testSourceDirectory>--> <!-- TODO: Adjust tests so they don't rely on an Arduino being plugged in (should be mocked) and running then uncomment this line so that all unit tests are run at build time -->
 		<resources>
 			<resource>
-				<directory>src</directory>
+				<directory>src/module_PI/Raspberry_PI</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
 				</excludes>
@@ -20,8 +21,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
 				<configuration>
-					<source />
-					<target />
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -51,6 +52,11 @@
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
 		</dependency>
 	</dependencies>
 </project>
