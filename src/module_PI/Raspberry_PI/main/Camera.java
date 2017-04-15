@@ -18,7 +18,7 @@ public class Camera {
 			WebcamResolution.HD720.getSize(),
 			new Dimension(2000, 1000),
 			new Dimension(1000, 500),
-};
+	};
 	public Camera(){
 		this("./");
 	}
@@ -30,12 +30,11 @@ public class Camera {
 	}
 	
 	private void setWebcamDriver(){
-	    Webcam.setDriver(new V4l4jDriver());
+		Webcam.setDriver(new V4l4jDriver());
 	}
 	
 	private void buildWebcam(){
 		webcam = Webcam.getDefault();
-		Webcam webcam = Webcam.getDefault();
 		webcam.setCustomViewSizes(imageResolutions);
 		webcam.setViewSize(WebcamResolution.HD720.getSize());
 	}
