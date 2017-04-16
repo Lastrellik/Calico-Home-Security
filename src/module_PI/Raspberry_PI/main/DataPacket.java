@@ -3,11 +3,14 @@ package module_PI.Raspberry_PI.main;
 import java.util.Arrays;
 
 public class DataPacket {
+	private static PacketMessageTranslator packetMessageTranslator = new PacketMessageTranslator();
+	private String message;
 	private byte[] packetCodeByteArray;
 	private int packetCodeInt;
 	private final int SIZE_OF_DATAPACKET_IN_BYTES = 5;
 	private final int PACKET_TYPE_INDEX = 0;
 	private final int LOG_LEVEL_INDEX = 1;
+	private final int NUM_OF_MESSAGE_BYTES_IN_PACKET = 3;
 	private PacketLogLevel packetLogLevel;
 	private PacketType packetType;
 
@@ -19,6 +22,7 @@ public class DataPacket {
 		packetCodeInt = packetContents;
 		parseIntToByteArray(packetContents, SIZE_OF_DATAPACKET_IN_BYTES - 1);
 		parseTypeAndLogLevelFromByteArray();
+		parseMessage();
 	}
 	
 	private void parseIntToByteArray(int packetCode, int index){
@@ -34,6 +38,7 @@ public class DataPacket {
 		packetCodeByteArray = Arrays.copyOf(packetContents, packetContents.length);
 		packetCodeInt = convertByteArrayToInt(packetContents);
 		parseTypeAndLogLevelFromByteArray();
+		parseMessage();
 	}
 	
 	private int convertByteArrayToInt(byte[] packetContents){
@@ -60,6 +65,12 @@ public class DataPacket {
 		packetLogLevel = PacketLogLevel.getLogLevelFromByte(packetCodeByteArray[LOG_LEVEL_INDEX]);
 	}
 	
+	private void parseMessage(){
+		int packetIntModThisIsMessageInt = (int) Math.pow(10, NUM_OF_MESSAGE_BYTES_IN_PACKET);
+		int messageInt = this.getPacketAsInt() % packetIntModThisIsMessageInt;
+		this.message = packetMessageTranslator.translate(messageInt);
+	}
+	
 	public int getSizeInBytes(){
 		return SIZE_OF_DATAPACKET_IN_BYTES;
 	}
@@ -78,5 +89,9 @@ public class DataPacket {
 	
 	public PacketType getPacketType(){
 		return packetType;
+	}
+	
+	public String getMessage(){
+		return this.message;
 	}
 }
