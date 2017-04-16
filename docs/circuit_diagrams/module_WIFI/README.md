@@ -8,6 +8,7 @@ This wireless functionality allows you to be notified when the alarm is triggere
 * [Bread Board Diagram](#bread-board-diagram)
 * [Schematic Diagram](#schematic-diagram)
 * [Setup Instructions](#setup)
+* [Assembled Wifi Module](#assembled-wifi-module)
 * [Future Development Ideas](#future-development-ideas)
 
 
@@ -31,6 +32,15 @@ Schematic Diagram
 -----------------
 ![WIFI Module Wiring Schematic](wifi_wiring_schem.png)
 <sub>(_The WIFI Module Wiring Schematic for the Calico Home Security System_)</sub>
+
+
+Assembled Wifi Module
+---------------------
+![Assembled Wifi Module](wifi_kit.jpg)
+<sub>(_An assembled WIFI Module_)</sub>
+
+![Wifi Module Labeled](wifi_kit_details_labeled.jpg)
+<sub>(_Labeled details of the assembled Wifi Module_)</sub>
 
 
 Setup
