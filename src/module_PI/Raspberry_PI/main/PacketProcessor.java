@@ -36,9 +36,9 @@ public class PacketProcessor implements Runnable{
 			currentPacket = inputListener.getDataPacket();
 			PiApp.LogToFile(currentPacket);
 			if(isTripPacket(currentPacket)){
-				alertEmailRecipientsOfTrip();
+				//alertEmailRecipientsOfTrip();
 			}
-			if(isArmPacket(currentPacket)){
+			if(isTriggeredPacket(currentPacket)){
 				alertEmailRecipientsOfBreach();
 			}
 		}
@@ -48,7 +48,7 @@ public class PacketProcessor implements Runnable{
 		return(packet.getMessage() == "Alarm has been tripped");
 	}
 	
-	private boolean isArmPacket(DataPacket packet){
+	private boolean isTriggeredPacket(DataPacket packet){
 		return (packet.getMessage() == "Alarm has been triggered");
 	}
 	
@@ -75,12 +75,13 @@ public class PacketProcessor implements Runnable{
 	private void capturePicture(){
 		String pictureFileName = String.valueOf(System.currentTimeMillis()) + ".jpg";
 		camera.takePicture(pictureFileName);
-		this.pictureFile = new File(pictureDirectory + pictureFileName);
+		this.pictureFile = new File(pictureDirectory + "/" + pictureFileName);
 		pause(10000);
 	}
 	
 	private void sendEmailToRecipients(){
 		emailNotifier.setEmailMessage(this.emailMessage);
+		PiApp.LogToFile("PacketProcessor called emailNotifier.setAttachmentFilePath with argument " + this.pictureFile.getPath());
 		emailNotifier.setAttachmentFilePath(this.pictureFile.getPath());
 		for(String s : recipientEmailAddresses){
 			emailNotifier.setRecipientEmailAddress(s);

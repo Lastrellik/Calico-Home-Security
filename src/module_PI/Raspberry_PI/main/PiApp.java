@@ -12,7 +12,7 @@ public class PiApp {
 	 */
 	public static void main(String[] args) {
 		int numOfArgs = 2;
-		if(args.length <= numOfArgs) throw new IllegalArgumentException("Syntax is java PiApp <gmailusername> <gmailpassword> <recipientEmailAddress>...");
+		if(args.length <= numOfArgs) throw new IllegalArgumentException(args.length + "Syntax is java PiApp <gmailusername> <gmailpassword> <recipientEmailAddress>...");
 		parseArgs(args);
 		LogToFile("PI startup application");
 		SerialInputListener inputListener = new SerialInputListener();

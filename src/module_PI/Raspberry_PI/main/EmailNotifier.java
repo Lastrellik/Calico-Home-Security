@@ -44,6 +44,7 @@ public class EmailNotifier {
 	}
 
 	private void buildPropertiesAndCreateSession() {
+		PiApp.LogToFile("EmailNotifier buildPropertiesAndCreateSession has been called");
 		this.mailSessionProperties = new Properties();
 		mailSessionProperties.put("mail.smtp.auth", "true");
 		mailSessionProperties.put("mail.smtp.host", "smtp.gmail.com");
@@ -53,6 +54,7 @@ public class EmailNotifier {
 	}
 
 	private void buildEmailMetadata() {
+		PiApp.LogToFile("EmailNotifier buildEmailMetadata has been called");
 		try {
 			buildMessageBodyPart();
 			if (this.hasAttachment())
@@ -65,6 +67,7 @@ public class EmailNotifier {
 	}
 
 	private void createSession() {
+		PiApp.LogToFile("EmailNotifier createSession has been called");
 		javaMailSession = Session.getInstance(mailSessionProperties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(gmailUsername, gmailPassword);
@@ -73,6 +76,7 @@ public class EmailNotifier {
 	}
 
 	private void buildMessageBodyPart() throws MessagingException {
+		PiApp.LogToFile("EmailNotifier buildMessageBodyPart has been called");
 		multipart = new MimeMultipart();
 		messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setContent(emailMessage, "text/html");
@@ -80,6 +84,7 @@ public class EmailNotifier {
 	}
 
 	private void buildAttachmentBodyPart() throws MessagingException {
+		PiApp.LogToFile("EmailNotifier buildAttachmentBodyPart called with current attachment " + attachmentFilePath);
 		attachmentDataSource = new FileDataSource(attachmentFilePath);
 		messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setDataHandler(new DataHandler(attachmentDataSource));
@@ -88,6 +93,7 @@ public class EmailNotifier {
 	}
 
 	private void buildMessageData() throws AddressException, MessagingException {
+		PiApp.LogToFile("EmailNotifier buildMessageData has been called");
 		javaMailMessage = new MimeMessage(javaMailSession);
 		javaMailMessage.setFrom(new InternetAddress(gmailUsername));
 		javaMailMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmailAddress));
@@ -110,9 +116,13 @@ public class EmailNotifier {
 	}
 
 	private void buildTransportAndSendMessage() throws MessagingException {
+		PiApp.LogToFile("EmailNotifier buildTransportAndSendMessage has been called");
 		Transport transport = javaMailSession.getTransport();
+		PiApp.LogToFile("transport was just created");
 		transport.connect();
+		PiApp.LogToFile("transport.connect was called. next args are javaMailMessage " + javaMailMessage.toString());
 		transport.sendMessage(javaMailMessage, javaMailMessage.getRecipients(Message.RecipientType.TO));
+		PiApp.LogToFile("transport.sendMessage was just called");
 		transport.close();
 	}
 
@@ -121,6 +131,7 @@ public class EmailNotifier {
 	}
 
 	public void setAttachmentFilePath(String attachmentFilePath) {
+		PiApp.LogToFile("EmailNotifier setAttachmentFilePath called with argument " + attachmentFilePath);
 		if (attachmentFilePath != null && !new File(attachmentFilePath).exists())
 			throw new IllegalArgumentException("File " + attachmentFilePath + " can't be found");
 		this.attachmentFilePath = attachmentFilePath;
