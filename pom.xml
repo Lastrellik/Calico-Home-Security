@@ -72,8 +72,6 @@
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>1.5.6</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/javax.mail-1.5.6.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>
