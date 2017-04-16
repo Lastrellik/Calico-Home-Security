@@ -62,6 +62,18 @@ public class ActivityLoggerTest {
 	}
 	
 	@Test
+	public void testLog_FromDataPacket(){
+		logger.log(new DataPacket(11100));
+		assertEquals(logger.getPreviousLogEntry(), "Level:ERROR Type:LOG\tAlarm object successfully created");
+	}
+	
+	@Test
+	public void testLog_FromString(){
+		logger.log("This is a test log");
+		assertEquals(logger.getPreviousLogEntry(), "This is a test log");
+	}
+	
+	@Test
 	public void testGetPreviousLogEntry(){
 		logger.log(PacketLogLevel.DEBUG, PacketType.LOG, "Debug Log entry");
 		assertEquals(logger.getPreviousLogEntry(), "Level:DEBUG Type:LOG\tDebug Log entry");
