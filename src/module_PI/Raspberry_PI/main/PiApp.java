@@ -4,6 +4,7 @@ import java.util.*;
 
 public class PiApp {
 	public static Properties GMAIL_CREDENTIALS = new Properties();
+	private static ActivityLogger activityLogger = new ActivityLogger("PI_Log.txt");
 
 	/**
 	 * @param args Gmail Username and Password for sending mail
@@ -12,6 +13,7 @@ public class PiApp {
 		int numOfArgs = 2;
 		if(args.length != numOfArgs) throw new IllegalArgumentException("Syntax is java PiApp <gmailusername> <gmailpassword>");
 		parseArgs(args);
+		LogToFile("PI startup application");
 		SerialInputListener inputListener = new SerialInputListener();
 		Thread listener = new Thread(inputListener, "Listener");
 		listener.start();		
@@ -32,6 +34,14 @@ public class PiApp {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void LogToFile(DataPacket packetToLog){
+		activityLogger.log(packetToLog);
+	}
+	
+	public static void LogToFile(String messageToLog){
+		activityLogger.log("\t\t\t\t" + messageToLog);
 	}
 
 }
