@@ -118,11 +118,8 @@ public class EmailNotifier {
 	private void buildTransportAndSendMessage() throws MessagingException {
 		PiApp.LogToFile("EmailNotifier buildTransportAndSendMessage has been called");
 		Transport transport = javaMailSession.getTransport();
-		PiApp.LogToFile("transport was just created");
 		transport.connect();
-		PiApp.LogToFile("transport.connect was called. next args are javaMailMessage " + javaMailMessage.toString());
 		transport.sendMessage(javaMailMessage, javaMailMessage.getRecipients(Message.RecipientType.TO));
-		PiApp.LogToFile("transport.sendMessage was just called");
 		transport.close();
 	}
 
