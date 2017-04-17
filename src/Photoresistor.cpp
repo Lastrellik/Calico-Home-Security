@@ -28,6 +28,5 @@ Photoresistor::Photoresistor(){
   @return Returns the value of the photorsistor at request
 */
 int Photoresistor::takeReading() {
-  if(Properties::MODULE_PI) Serial.write("13451"); // 13451 - Log, Debug, Photoresistor taking reading
   return analogRead(Component::getPin());
 }
