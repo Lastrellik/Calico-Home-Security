@@ -9,65 +9,58 @@ import org.junit.Test;
 import module_PI.Raspberry_PI.main.SerialOutput;
 
 public class SerialOutputTest {
+	SerialOutput output = new SerialOutput();
 	
 	@Test
 	public void testSerialOutput() {
-		SerialOutput output = new SerialOutput();
 		assertEquals(output.getPreviousBuffer(), null);
 	}
 
 	@Test
 	public void testSendArmPacket() {
-		SerialOutput output = new SerialOutput();
-		byte[] expectedReturn = new byte[]{3,0,0,0,1}; // 30001 = Command, NA, Execute Command: Arm
+		byte[] expectedReturn = new byte[]{3,2,0,0,1}; // 32001 = Command, Warn, Execute Command: Arm
 		output.sendArmPacket();
 		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));		
 	}
 
 	@Test
 	public void testSendDisarmPacket() {
-		SerialOutput output = new SerialOutput();
-		byte[] expectedReturn = new byte[]{3,0,0,0,2};// 30002 = Command, NA, Execute Command: Disarm
+		byte[] expectedReturn = new byte[]{3,2,0,0,2};// 32002 = Command, Warn, Execute Command: Disarm
 		output.sendDisarmPacket();
 		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
 
 	@Test
 	public void testSendSilencePacket() {
-		SerialOutput output = new SerialOutput();
-		byte[] expectedReturn = new byte[]{3,0,0,0,3};// 30003 = Command, NA, Execute Command: Silence
+		byte[] expectedReturn = new byte[]{3,2,0,0,3};// 32003 = Command, Warn, Execute Command: Silence
 		output.sendSilencePacket();
 		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
 
 	@Test
 	public void testSendCalibratePacket() {
-		SerialOutput output = new SerialOutput();
-		byte[] expectedReturn = new byte[]{3,0,0,0,4};// 30004 = Command, NA, Execute Command: Calibrate
+		byte[] expectedReturn = new byte[]{3,2,0,0,4};// 32004 = Command, Warn, Execute Command: Calibrate
 		output.sendCalibratePacket();
 		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
 
 	@Test
 	public void testSendTriggerPacket() {
-		SerialOutput output = new SerialOutput();
-		byte[] expectedReturn = new byte[]{3,0,0,0,5};// 30005 = Command, NA, Execute Command: Trigger
+		byte[] expectedReturn = new byte[]{3,2,0,0,5};// 32005 = Command, Warn, Execute Command: Trigger
 		output.sendTriggerPacket();
 		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
 
 	@Test
 	public void testSendResetCalibrationPacket() {
-		SerialOutput output = new SerialOutput();
-		byte[] expectedReturn = new byte[]{3,0,0,0,6};// 30006 = Command, NA, Execute Command: ResetCalibration
+		byte[] expectedReturn = new byte[]{3,2,0,0,6};// 32006 = Command, Warn, Execute Command: ResetCalibration
 		output.sendResetCalibrationPacket();
 		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
 	
 	@Test
 	public void testSendTestComponentsPacket() {
-		SerialOutput output = new SerialOutput();
-		byte[] expectedReturn = new byte[]{3,0,0,0,7};// 30007 = Command, NA, Execute Command: TestComponents
+		byte[] expectedReturn = new byte[]{3,2,0,0,7};// 30007 = Command, Warn, Execute Command: TestComponents
 		output.sendTestComponentsPacket();
 		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}

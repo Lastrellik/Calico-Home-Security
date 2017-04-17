@@ -24,6 +24,7 @@ public class Camera {
 	}
 	
 	public Camera(String filePath){
+		PiApp.LogToFile("Camera created with picture path " + filePath);
 		setFilePath(filePath);
 		setWebcamDriver();
 		buildWebcam();
@@ -40,6 +41,7 @@ public class Camera {
 	}
 	
 	public void takePicture(String pictureFileName){
+		PiApp.LogToFile("Webcam picture taken: " + pictureFileName);
 		String pictureFileNameWithExtension = pictureFileName;
 		boolean hasFileExtension = pictureFileName.matches("^[\\w,\\s-]+\\.[A-Za-z]{3}$");
 		if(!hasFileExtension) pictureFileNameWithExtension = pictureFileName + ".jpg";
@@ -57,6 +59,7 @@ public class Camera {
 	}
 	
 	public void setFilePath(String filePath){
+		PiApp.LogToFile("Webcam picture path set to " + filePath);
 		if(! new File(filePath).exists()) throw new IllegalArgumentException(filePath + " is not a valid path.");
 		this.filePath = filePath;
 	}

@@ -14,6 +14,7 @@ abstract class SerialComm {
 		try {
 			if(comPort == null){
 				comPort = getArduinoCommPort();
+				PiApp.LogToFile("Arduino found on comPort " + comPort.getDescriptivePortName());
 				comPort.setBaudRate(9600);
 			}
 		} catch (NoSuchElementException n) {
@@ -28,6 +29,7 @@ abstract class SerialComm {
 				return comPorts[i];
 			}
 		}
+		if(comPorts.length != 0) return comPorts[0]; //To account for arduino ports that don't match Arduino.*
 		throw new NoSuchElementException("Arduino Uno Cannot Be Found");
 	}
 
