@@ -24,6 +24,10 @@ CommandListener* commandListener;
 #include "module_WIFI\WifiModule.h"
 WifiModule* wifiModule;
 
+#include "module_TURRET\I2CMaster.h"
+I2CMaster* i2CMaster;
+
+
 /**
   Sets up the intial classes to be used like Alarm and Wifi
 */
@@ -39,6 +43,10 @@ void setup() {
     wifiModule = new WifiModule();
     wifiModule->initialize();
     alarm->alertSuccessfulAction();
+  }
+
+  if (Properties::MODULE_TURRET) {
+    i2CMaster = new I2CMaster();
   }
 }
 
@@ -58,6 +66,10 @@ void loop(){
       if (Properties::MODULE_WIFI) {
         wifiModule->sendNotification(); // TODO: This is blocking. See https://github.com/Lastrellik/Calico-Home-Security/issues/62
       }
+
+      if (Properties::MODULE_TURRET) {
+        i2CMaster->sendTransmission(Properties::TURRET_SLAVE_NUMBER, Properties::TURRET_COMMAND);
+      }
     }
   }
 
@@ -73,9 +85,15 @@ void loop(){
 
   if(alarm->isTriggered() && alarm->isButtonPressed()){
     alarm->disarm();
+    if (Properties::MODULE_TURRET) {
+      i2CMaster->resetStatus();
+    }
   }
 
   if(alarm->isArmed() && alarm->isButtonPressed()){
     alarm->disarm();
+    if (Properties::MODULE_TURRET) {
+      i2CMaster->resetStatus();
+    }
   }
 }
