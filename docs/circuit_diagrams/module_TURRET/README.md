@@ -11,15 +11,13 @@ Parts
 Bread Board Diagram
 -------------------
 
-TODO: These are just PLACEHOLDERS until we get updated diagrams in here!
-
-![TURRET Module Wiring Diagram](VertHoriz_bb.png)
+![TURRET Module Wiring Diagram](turret_wiring_bb.png)
 <sub>(_The TURRET Module Wiring Diagram for the Calico Home Security System_)</sub>
 
 Schematic Diagram
 -----------------
 
-![TURRET Module Wiring Diagram](VertHoriz_bb.png)
+![TURRET Module Wiring Diagram](turret_wiring_schem.png)
 <sub>(_The TURRET Module Wiring Diagram for the Calico Home Security System_)</sub>
 
 I2C Protocol
