@@ -83,6 +83,7 @@ public class EmailNotifierTest {
 	
 	@Test
 	public void testRemoveAttachment(){
+		testEmailNotifier.setAttachmentFilePath("./PI_PICS");
 		testEmailNotifier.removeAttachment();
 		assertTrue(testEmailNotifier.getAttachmentFilePath() == null);
 	}

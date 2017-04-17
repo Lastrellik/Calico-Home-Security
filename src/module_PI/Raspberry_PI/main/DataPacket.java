@@ -66,8 +66,8 @@ public class DataPacket {
 	}
 	
 	private void parseMessage(){
-		int packetIntModThisIsMessageInt = (int) Math.pow(10, NUM_OF_MESSAGE_BYTES_IN_PACKET);
-		int messageInt = this.getPacketAsInt() % packetIntModThisIsMessageInt;
+		int packetInt_modThisInt_isMessageInt = (int) Math.pow(10, NUM_OF_MESSAGE_BYTES_IN_PACKET);
+		int messageInt = this.getPacketAsInt() % packetInt_modThisInt_isMessageInt;
 		this.message = packetMessageTranslator.translate(messageInt);
 	}
 	

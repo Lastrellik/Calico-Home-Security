@@ -38,9 +38,9 @@ public class EmailNotifier {
 	}
 
 	private void loadGmailCredentials() {
-		PiApp.LogToFile("EmailNotifier credentials have been loaded");
 		gmailUsername = PiApp.GMAIL_CREDENTIALS.getProperty("gmailUsername");
 		gmailPassword = PiApp.GMAIL_CREDENTIALS.getProperty("gmailPassword");
+		PiApp.LogToFile("EmailNotifier credentials have been loaded");
 	}
 
 	private void buildPropertiesAndCreateSession() {
