@@ -29,6 +29,7 @@ public class EmailNotifier {
 	}
 
 	public EmailNotifier(String recipientEmailAddress, String message, String pathToAttachment) {
+		PiApp.LogToFile("EmailNotifier object created");
 		this.loadGmailCredentials();
 		this.setRecipientEmailAddress(recipientEmailAddress);
 		this.emailMessage = message;
@@ -37,11 +38,13 @@ public class EmailNotifier {
 	}
 
 	private void loadGmailCredentials() {
-			gmailUsername = PiApp.GMAIL_CREDENTIALS.getProperty("gmailUsername");
-			gmailPassword = PiApp.GMAIL_CREDENTIALS.getProperty("gmailPassword");
+		gmailUsername = PiApp.GMAIL_CREDENTIALS.getProperty("gmailUsername");
+		gmailPassword = PiApp.GMAIL_CREDENTIALS.getProperty("gmailPassword");
+		PiApp.LogToFile("EmailNotifier credentials have been loaded");
 	}
 
 	private void buildPropertiesAndCreateSession() {
+		PiApp.LogToFile("EmailNotifier buildPropertiesAndCreateSession has been called");
 		this.mailSessionProperties = new Properties();
 		mailSessionProperties.put("mail.smtp.auth", "true");
 		mailSessionProperties.put("mail.smtp.host", "smtp.gmail.com");
@@ -51,9 +54,10 @@ public class EmailNotifier {
 	}
 
 	private void buildEmailMetadata() {
+		PiApp.LogToFile("EmailNotifier buildEmailMetadata has been called");
 		try {
 			buildMessageBodyPart();
-			if (this.attachmentFilePath != null)
+			if (this.hasAttachment())
 				buildAttachmentBodyPart();
 			buildMessageData();
 		} catch (MessagingException e) {
@@ -63,6 +67,7 @@ public class EmailNotifier {
 	}
 
 	private void createSession() {
+		PiApp.LogToFile("EmailNotifier createSession has been called");
 		javaMailSession = Session.getInstance(mailSessionProperties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(gmailUsername, gmailPassword);
@@ -71,6 +76,7 @@ public class EmailNotifier {
 	}
 
 	private void buildMessageBodyPart() throws MessagingException {
+		PiApp.LogToFile("EmailNotifier buildMessageBodyPart has been called");
 		multipart = new MimeMultipart();
 		messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setContent(emailMessage, "text/html");
@@ -78,6 +84,7 @@ public class EmailNotifier {
 	}
 
 	private void buildAttachmentBodyPart() throws MessagingException {
+		PiApp.LogToFile("EmailNotifier buildAttachmentBodyPart called with current attachment " + attachmentFilePath);
 		attachmentDataSource = new FileDataSource(attachmentFilePath);
 		messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setDataHandler(new DataHandler(attachmentDataSource));
@@ -86,6 +93,7 @@ public class EmailNotifier {
 	}
 
 	private void buildMessageData() throws AddressException, MessagingException {
+		PiApp.LogToFile("EmailNotifier buildMessageData has been called");
 		javaMailMessage = new MimeMessage(javaMailSession);
 		javaMailMessage.setFrom(new InternetAddress(gmailUsername));
 		javaMailMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmailAddress));
@@ -100,9 +108,15 @@ public class EmailNotifier {
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
+		if(this.hasAttachment()){
+			PiApp.LogToFile("Email sent to: " + this.getRecipientEmailAddress() + " with attachment");
+		} else {
+			PiApp.LogToFile("Email sent to: " + this.getRecipientEmailAddress());
+		}
 	}
 
 	private void buildTransportAndSendMessage() throws MessagingException {
+		PiApp.LogToFile("EmailNotifier buildTransportAndSendMessage has been called");
 		Transport transport = javaMailSession.getTransport();
 		transport.connect();
 		transport.sendMessage(javaMailMessage, javaMailMessage.getRecipients(Message.RecipientType.TO));
@@ -114,9 +128,15 @@ public class EmailNotifier {
 	}
 
 	public void setAttachmentFilePath(String attachmentFilePath) {
+		PiApp.LogToFile("EmailNotifier setAttachmentFilePath called with argument " + attachmentFilePath);
 		if (attachmentFilePath != null && !new File(attachmentFilePath).exists())
 			throw new IllegalArgumentException("File " + attachmentFilePath + " can't be found");
 		this.attachmentFilePath = attachmentFilePath;
+	}
+	
+	public void removeAttachment(){
+		PiApp.LogToFile("EmailNotifier attachment has been removed");
+		this.attachmentFilePath = null;
 	}
 
 	public String getRecipientEmailAddress() {
@@ -218,6 +238,7 @@ public class EmailNotifier {
 		if (!recipientEmailAddress.matches(hilariousEmailAddressRegex)) {
 			throw new IllegalArgumentException(recipientEmailAddress + " is not a valid email address.");
 		}
+		PiApp.LogToFile("EmailNotifier recipient set to " + recipientEmailAddress);
 		this.recipientEmailAddress = recipientEmailAddress;
 	}
 
@@ -226,6 +247,11 @@ public class EmailNotifier {
 	}
 
 	public void setEmailMessage(String emailMessage) {
+		PiApp.LogToFile("EmailNotifier email message set to " + emailMessage);
 		this.emailMessage = emailMessage;
+	}
+	
+	public boolean hasAttachment(){
+		return (this.attachmentFilePath != null);
 	}
 }

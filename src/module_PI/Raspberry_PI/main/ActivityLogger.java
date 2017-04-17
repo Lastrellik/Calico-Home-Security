@@ -42,10 +42,18 @@ public class ActivityLogger {
 	public void log(PacketLogLevel logLevel, PacketType packetType, String message){
 		if(isLoggingAtOrBelowThisLevel(logLevel)){
 			String logEntry = "Level:" + logLevel + " Type:" + packetType + "\t" + message;
-			javaLogger.info(logEntry);
-			setPreviousLogEntry(logEntry);
+			log(logEntry);
 		}
 	}	
+	
+	public void log(DataPacket packet){
+		log(packet.getPacketLogLevel(), packet.getPacketType(), packet.getMessage());
+	}
+	
+	public void log(String messageToLog){
+		javaLogger.info(messageToLog);
+		setPreviousLogEntry(messageToLog);
+	}
 	
 	private boolean isLoggingAtOrBelowThisLevel(PacketLogLevel logLevel){
 		return (logLevel.getByte() <= this.logLevel.getByte());

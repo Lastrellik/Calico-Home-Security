@@ -7,13 +7,12 @@
 	<name>Calico Home Security</name>
 	<build>
 		<sourceDirectory>src/module_PI/Raspberry_PI</sourceDirectory>
-		<!--<testSourceDirectory>src/module_PI/Raspberry_PI/JUnitTests</testSourceDirectory>--> <!-- TODO: Adjust tests so they don't rely on an Arduino being plugged in (should be mocked) and running then uncomment this line so that all unit tests are run at build time -->
+		<testSourceDirectory>src/module_PI/Raspberry_PI/JUnitTests</testSourceDirectory> <!-- TODO: Adjust tests so they don't rely on an Arduino being plugged in 
+			(should be mocked) and running then uncomment this line so that all unit 
+			tests are run at build time -->
 		<resources>
 			<resource>
 				<directory>src/module_PI/Raspberry_PI</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
 			</resource>
 		</resources>
 		<plugins>
@@ -24,6 +23,22 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>module_PI.Raspberry_PI.main.PiApp</mainClass>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -49,14 +64,14 @@
 			<version>1.3.11</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.6</version>
 		</dependency>
 	</dependencies>
 </project>

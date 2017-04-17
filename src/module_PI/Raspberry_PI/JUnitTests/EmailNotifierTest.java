@@ -80,4 +80,17 @@ public class EmailNotifierTest {
 		expectedException.expectMessage("notanemailaddress is not a valid email address");
 		testEmailNotifier.setRecipientEmailAddress("notanemailaddress");
 	}
+	
+	@Test
+	public void testRemoveAttachment(){
+		testEmailNotifier.setAttachmentFilePath("./PI_PICS");
+		testEmailNotifier.removeAttachment();
+		assertTrue(testEmailNotifier.getAttachmentFilePath() == null);
+	}
+	
+	@Test
+	public void testHasAttachment(){
+		testEmailNotifier.removeAttachment();
+		assertFalse(testEmailNotifier.hasAttachment());
+	}
 }
