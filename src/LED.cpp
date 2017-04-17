@@ -57,7 +57,6 @@ void LED::flash(){
     uses the variable millisOn for the delays
 */
 void LED::flash(int millisOn){
-  if(Properties::MODULE_PI) Serial.write("13403"); // 13403 = Log, Debug, LED flashing
   this->on();
   delay(millisOn);
   this->off();

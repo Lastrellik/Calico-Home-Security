@@ -55,5 +55,8 @@ void CommandListener::executeCommand(byte* commandBytes){
     case 30007:
       alarm->testBoardComponents();
       break;
+    case 30008:
+      alarm->trip();
+      break;
   }
 }
