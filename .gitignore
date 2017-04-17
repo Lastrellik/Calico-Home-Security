@@ -22,7 +22,7 @@ factoryConfiguration.json
 *.iws
 *.iml
 /out/
-
+**/*.idea/*
 
 ### Eclipse ###
 
