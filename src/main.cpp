@@ -74,12 +74,14 @@ void loop(){
 
   if((alarm->isTriggered() || alarm->isTripped()) && alarm->isButtonPressed()){
     alarm->disarm();
+  }
+
+  if(not alarm->isTripped() && not alarm->isTriggered()){
     timeAlarmHasBeenTrippedInMillis = 0;
   }
 
   if(alarm->isArmed() && alarm->isButtonPressed()){
     alarm->disarm();
-    timeAlarmHasBeenTrippedInMillis = 0;
   }
 
   if(alarm->isTripped()){
