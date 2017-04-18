@@ -1,6 +1,7 @@
 package module_TOUCHSCREEN;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JList;
 import javax.swing.JButton;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
+
 import java.awt.Panel;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -20,6 +23,7 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class RemoveUserPanel extends JPanel {
 	/**
@@ -33,9 +37,10 @@ public class RemoveUserPanel extends JPanel {
 	 * @param current_User displays a selectable list of users for deletion
 	 */
 	private static Users list = new Users();
-	private static HashMap<String, String> usersPass = (HashMap<String, String>) list.get_Users_Pass();
 	private static ArrayList<String> store = new ArrayList<>();
-	private static JList current_Users = new JList();
+	private static JList current_Users;
+	private static DefaultListModel model = new DefaultListModel();
+	private static String[] users;
 	/**
 	 * Create the panel.
 	 */
@@ -44,7 +49,14 @@ public class RemoveUserPanel extends JPanel {
 		setBackground(Colors.getPanelColor());
 		setLayout(null);
 		
-		fill_Current_User_List();
+		/**
+			String[] users = list.getUsers();
+			list.readFromTextFile();
+			for(String s: users){
+				model.addElement(s);
+			}
+		*/
+		//fill_Current_User_List();
 		
 		/**
 		 * @param main_Panel houses all other panels to keep them organized.
@@ -66,21 +78,31 @@ public class RemoveUserPanel extends JPanel {
 		/**
 		 * current_Users set to Single Selection to prevent multiple deletions.
 		 */
-		current_Users.setBounds(0, 39, 364, 188);
-		display_Panel.add(current_Users);
-		current_Users.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		current_Users.setListData(store.toArray());
-		current_Users.setBounds(0, 41, 364, 186);
-		display_Panel.add(current_Users);
+		//display_Panel.add(current_Users);
 		
 		/**
 		 * Displays the current menu name.
 		 */
+		
+		current_Users = new JList();
+		current_Users.setFont(new Font("Tahoma", Font.PLAIN, 42));
+		current_Users.setBounds(12, 42, 180, 73);
+		current_Users.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		current_Users.setBounds(0, 41, 364, 186);
+		
 		JTextArea menu_Name = new JTextArea();
 		menu_Name.setEditable(false);
 		menu_Name.setColumns(10);
 		menu_Name.setBounds(0, 0, 364, 40);
+		
+		
 		display_Panel.add(menu_Name);
+		JScrollPane current_User_Scroll = new JScrollPane(current_Users);
+		current_User_Scroll.setBounds(0, 41, 364, 186);
+		current_User_Scroll.setBackground(Colors.getPanelColor());
+		display_Panel.add(current_User_Scroll);
+				
+	
 		
 		/**
 		 * @param buttons_Panel houses all buttons in 3 rows in grid layout.
@@ -112,14 +134,19 @@ public class RemoveUserPanel extends JPanel {
 		});
 		buttons_Panel.add(button_Main_Menu);
 	}
-	/**
-	 * Supposed to fill the current user list to display current_Users
-	 */
-	private static void fill_Current_User_List(){
-
-		for(String s: usersPass.keySet()){
-			store.add(String.valueOf(usersPass.keySet()));
+	public static void set_Model(){
+		/**
+		String[] users = list.getUsers();
+		list.readFromTextFile();
+		for(String s: users){
+			model.addElement(s);
 		}
-		System.out.println();
+		 */
+		list.readFromTextFile();
+		users = list.getUsers();
+		for(String s: users){
+			model.addElement(s);
+		}
+		current_Users.setModel(model);
 	}
 }

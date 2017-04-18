@@ -141,7 +141,7 @@ public class AddUserPanel extends JPanel {
 				user_List.setText("The following user has now been created\n"+
 				"User Name: "+create_User+"\nUser Pass Code: "+passcode);
 				createTrue();
-				
+				Users.addUser(create_User, passcode);
 			}
 		});
 		/**

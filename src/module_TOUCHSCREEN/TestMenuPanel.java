@@ -3,6 +3,7 @@ package module_TOUCHSCREEN;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import module_PI.Raspberry_PI.main.SerialOutput;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -18,7 +19,7 @@ public class TestMenuPanel extends JPanel {
 	/**
 	 * Parameters are set to static so that other classes can make changes easily without getters and setters.
 	 */
-	
+	private SerialOutput output = new SerialOutput();
 	/**
 	 * Create the panel.
 	 */
@@ -57,6 +58,7 @@ public class TestMenuPanel extends JPanel {
 		button_Arm.setBackground(Colors.getButtonColor());
 		button_Arm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				output.sendArmPacket();
 				Component frame = null;
 				JOptionPane.showMessageDialog(frame,
 					    "Alarm has been armed");
@@ -68,6 +70,7 @@ public class TestMenuPanel extends JPanel {
 		button_Disarm.setBackground(Colors.getButtonColor());
 		button_Disarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				output.sendDisarmPacket();
 				Component frame = null;
 				JOptionPane.showMessageDialog(frame,
 					    "Alarm has been disarmed");
@@ -75,21 +78,23 @@ public class TestMenuPanel extends JPanel {
 		});
 		test_Button_Panel.add(button_Disarm);
 		
-		JButton button_Trigger = new JButton("Trigger");
-		button_Trigger.setBackground(Colors.getButtonColor());
-		button_Trigger.addActionListener(new ActionListener() {
+		JButton button_Trip = new JButton("Trip");
+		button_Trip.setBackground(Colors.getButtonColor());
+		button_Trip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				output.sendTripPacket();
 				Component frame = null;
 				JOptionPane.showMessageDialog(frame,
 					    "Triggering Alarm");
 			}
 		});
-		test_Button_Panel.add(button_Trigger);
+		test_Button_Panel.add(button_Trip);
 		
 		JButton button_Silence = new JButton("Silence");
 		button_Silence.setBackground(Colors.getButtonColor());
 		button_Silence.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				output.sendSilencePacket();
 				Component frame = null;
 				JOptionPane.showMessageDialog(frame,
 					    "Silencing Arm");
@@ -101,6 +106,7 @@ public class TestMenuPanel extends JPanel {
 		button_Calibrate.setBackground(Colors.getButtonColor());
 		button_Calibrate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				output.sendCalibratePacket();
 				Component frame = null;
 				JOptionPane.showMessageDialog(frame,
 					    "Alarm has been calibrated");
@@ -112,6 +118,7 @@ public class TestMenuPanel extends JPanel {
 		button_Decalibrate.setBackground(Colors.getButtonColor());
 		button_Decalibrate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				output.sendResetCalibrationPacket();
 				Component frame = null;
 				JOptionPane.showMessageDialog(frame,
 					    "Alarm has been decalibrated");

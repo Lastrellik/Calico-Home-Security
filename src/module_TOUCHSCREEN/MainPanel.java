@@ -32,11 +32,13 @@ public class MainPanel extends JPanel {
 	 * @param test_Menu used to create a panel of the TestMenuPanel class
 	 * @param add_User used to create a panel of the AddUserPanel class
 	 * @param remove_User used to create a panel of the RemoveUserPanel class
+	 * @param users used to create instance of the user class
 	 */
 	private static MainMenuPanel main_Menu = new MainMenuPanel();
 	private static TestMenuPanel test_Menu = new TestMenuPanel();
 	private static AddUserPanel add_User = new AddUserPanel();
 	private static RemoveUserPanel remove_User = new RemoveUserPanel();
+	private static Users users = new Users();
 	
 	/** 
 	 * @param pass used to display asterisks
@@ -590,7 +592,7 @@ public class MainPanel extends JPanel {
     	remove_User.setVisible(false);
     	add_User_House.setVisible(false);
     	remove_User_House.setVisible(true);
-    	
+    	add_User.clear_Create_User();
     }
     /**
      * Used to set the RemoveUserPanel to visible.
@@ -603,7 +605,7 @@ public class MainPanel extends JPanel {
     	remove_User.setVisible(true);
     	add_User_House.setVisible(false);
     	remove_User_House.setVisible(false);
-    	
+    	RemoveUserPanel.set_Model();
 	}
 	/**
 	 * Testing for reading in from file

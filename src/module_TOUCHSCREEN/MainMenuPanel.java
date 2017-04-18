@@ -12,6 +12,7 @@ import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
+import module_PI.Raspberry_PI.main.SerialOutput;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,6 +38,7 @@ public class MainMenuPanel extends JPanel {
 	private static StartupAnimation start_Logo = new StartupAnimation();
 	private static JTextArea top_Display = new JTextArea();
 	private JTextArea bottom_Display;
+	private SerialOutput output = new SerialOutput();
 	
 	/**
 	 * @param timer used for animation of the start_Logo
@@ -112,13 +114,19 @@ public class MainMenuPanel extends JPanel {
 		 * @param Arm used to arm the alarm.
 		 * @param Display the test menu.
 		 */
-		JButton button_Disarm = new JButton("Disarm");
-		button_Disarm.setBackground(Colors.getButtonColor());
-		action_Button_Panel.add(button_Disarm);
 		
 		JButton button_Arm = new JButton("Arm");
 		button_Arm.setBackground(Colors.getButtonColor());
 		action_Button_Panel.add(button_Arm);
+		JButton button_Disarm = new JButton("Disarm");
+		button_Disarm.setBackground(Colors.getButtonColor());
+		action_Button_Panel.add(button_Disarm);
+		button_Disarm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bottom_Display.setText("Enter employee access code");
+				output.sendDisarmPacket();
+			}
+		});
 		
 		JButton button_Test = new JButton("Test Screen");
 		button_Test.setBackground(Colors.getButtonColor());
@@ -134,16 +142,12 @@ public class MainMenuPanel extends JPanel {
 		button_Arm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				bottom_Display.setText("The alarm has been armed");
+				output.sendArmPacket();
 			}
 		});
 		/**
 		 * Disarms the alarm.
 		 */
-		button_Disarm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				bottom_Display.setText("Enter employee access code");
-			}
-		});
 		
 
 	}
