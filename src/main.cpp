@@ -20,7 +20,8 @@
 
 Alarm* alarm;
 CommandListener* commandListener;
-
+long timeAlarmHasBeenTrippedInMillis = 0;
+const long TIME_ALARM_CAN_BE_TRIPPED_IN_MILLIS = 30000;
 #include "module_WIFI\WifiModule.h"
 WifiModule* wifiModule;
 
@@ -57,12 +58,12 @@ void setup() {
 void loop(){
   commandListener->executeCommandIfAvailable();
   if(not alarm->isArmed()){
-    if(alarm->isButtonPressed()){
+    if(alarm->isButtonPressed() && alarm->isCalibrated()){
       alarm->arm();
     }
   } else {
-    if(alarm->isTripped() && not alarm->isTriggered()){
-      alarm->trigger();
+    if(alarm->isLaserBeamBroken() && not alarm->isTriggered() && not alarm->isTripped()){
+      alarm->trip();
       if (Properties::MODULE_WIFI) {
         wifiModule->sendNotification(); // TODO: This is blocking. See https://github.com/Lastrellik/Calico-Home-Security/issues/62
       }
@@ -83,17 +84,30 @@ void loop(){
     alarm->soundOneAlarmCycle();
   }
 
-  if(alarm->isTriggered() && alarm->isButtonPressed()){
+  if((alarm->isTriggered() || alarm->isTripped()) && alarm->isButtonPressed()){
     alarm->disarm();
     if (Properties::MODULE_TURRET) {
       i2CMaster->resetStatus();
     }
   }
 
+  if(not alarm->isTripped() && not alarm->isTriggered()){
+    timeAlarmHasBeenTrippedInMillis = 0;
+  }
+
   if(alarm->isArmed() && alarm->isButtonPressed()){
     alarm->disarm();
     if (Properties::MODULE_TURRET) {
       i2CMaster->resetStatus();
+    }
+  }
+
+  if(alarm->isTripped()){
+    long startTime = millis();
+    alarm->alertWaitingAction();
+    timeAlarmHasBeenTrippedInMillis += millis() - startTime;//Seconds it takes for the
+    if(timeAlarmHasBeenTrippedInMillis >= TIME_ALARM_CAN_BE_TRIPPED_IN_MILLIS){
+      alarm->trigger();
     }
   }
 }

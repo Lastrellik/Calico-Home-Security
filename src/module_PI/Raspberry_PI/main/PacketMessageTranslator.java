@@ -23,6 +23,7 @@ public class PacketMessageTranslator {
 		messageTable.put(5, "Execute Command: Trigger");
 		messageTable.put(6, "Execute Command: Reset Calibration");
 		messageTable.put(7, "Execute Command: Test Components");
+		messageTable.put(8, "Execute Command: Trip");
 		messageTable.put(100, "Alarm object successfully created");
 		messageTable.put(101, "Alarm base photoresistor reading determined");
 		messageTable.put(102, "Alarm failed action");
@@ -35,6 +36,7 @@ public class PacketMessageTranslator {
 		messageTable.put(109, "Alarm calibration is being reset");
 		messageTable.put(110, "Alarm is being disarmed");
 		messageTable.put(111, "Alarm is being silenced");
+		messageTable.put(112, "Alarm has been tripped");
 		messageTable.put(150, "Button object successfully created");
 		messageTable.put(151, "Button has been pressed");
 		messageTable.put(200, "Buzzer object has been created");
