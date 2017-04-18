@@ -3,14 +3,14 @@
 */
 #include "Arduino.h"
 #include <Wire.h>
-#include "I2CMaster.h"
+#include "TurretMASTER.h"
 
-I2CMaster::I2CMaster() {
+TurretMASTER::TurretMASTER() {
   Wire.begin();
   currentStatus = Status::WAITING; // Reset status to Waiting
 }
 
-void I2CMaster::sendTransmission(int deviceNumber, int command) {
+void TurretMASTER::sendTransmission(int deviceNumber, int command) {
   if(!currentStatus == Status::SENT) { // Only send the message once until it is reset when the alamr is disarmed
     setStatus(Status::SENT);
     Wire.beginTransmission(deviceNumber);
@@ -19,10 +19,10 @@ void I2CMaster::sendTransmission(int deviceNumber, int command) {
   }
 }
 
-void I2CMaster::resetStatus() {
+void TurretMASTER::resetStatus() {
   currentStatus = Status::WAITING; // Reset status to Waiting
 }
 
-void I2CMaster::setStatus(Status status) {
+void TurretMASTER::setStatus(Status status) {
   currentStatus = status;
 }

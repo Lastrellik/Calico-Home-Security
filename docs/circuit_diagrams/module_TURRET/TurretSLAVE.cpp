@@ -1,15 +1,46 @@
 #include "Arduino.h"
 #include <Wire.h>
+#include <Servo.h>
 
 int BUILTIN_LED = 13;
 int commandCode = 0;
+
+Servo servopan;
+int panPin = 3;
+
+Servo servotilt;
+int tiltPin = 4;
+
+int gun = 7;
+int post = 0;
+int posp = 0;
 
 void receiveEvent(int bytes) {
   commandCode = Wire.read();    // read one character from the I2C
 }
 
 void beginTurretSequence() {
-  // TODO: Turret Code begins here
+  for (posp = 0; posp <= 120; posp += 1);
+  for (post = 60; post <= 100; post += 1) {
+    servopan.write(posp);
+    servotilt.write(post);
+    delay(10);
+  }
+
+  digitalWrite(gun,HIGH);
+  delay (500);
+  digitalWrite(gun,LOW);
+
+  for (post = 120; post >= 100; post -= 1);
+  for (posp = 120; posp >= 0; posp -= 1) {
+    servopan.write(posp);
+    servotilt.write(post);
+    delay(10);
+  }
+
+  digitalWrite(gun,HIGH);
+  delay (500);
+  digitalWrite(gun,LOW);
 }
 
 void blinkLED_Fast() {
@@ -28,6 +59,9 @@ void blinkLED_Slow() {
 
 void setup() {
   pinMode (BUILTIN_LED, OUTPUT);
+  servopan.attach(panPin);
+  servotilt.attach(tiltPin);
+  pinMode(gun, OUTPUT);
 
   Wire.begin(9);  // Start the I2C Bus as Slave on address 9
   Wire.onReceive(receiveEvent); // Attach a function to trigger when something is received.
@@ -43,7 +77,7 @@ void loop() {
     blinkLED_Slow();
   }
 
-  if (commandCode == '9') { // TODO: Need to determine what code we are going to send
+  if (commandCode == '9') {
     beginTurretSequence();
   }
 }

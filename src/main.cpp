@@ -20,13 +20,15 @@
 
 Alarm* alarm;
 CommandListener* commandListener;
+
 long timeAlarmHasBeenTrippedInMillis = 0;
 const long TIME_ALARM_CAN_BE_TRIPPED_IN_MILLIS = 30000;
+
 #include "module_WIFI\WifiModule.h"
 WifiModule* wifiModule;
 
-#include "module_TURRET\I2CMaster.h"
-I2CMaster* i2CMaster;
+#include "module_TURRET\TurretMASTER.h"
+TurretMASTER* turretMASTER;
 
 
 /**
@@ -47,7 +49,7 @@ void setup() {
   }
 
   if (Properties::MODULE_TURRET) {
-    i2CMaster = new I2CMaster();
+    turretMASTER = new TurretMASTER();
   }
 }
 
@@ -64,13 +66,6 @@ void loop(){
   } else {
     if(alarm->isLaserBeamBroken() && not alarm->isTriggered() && not alarm->isTripped()){
       alarm->trip();
-      if (Properties::MODULE_WIFI) {
-        wifiModule->sendNotification(); // TODO: This is blocking. See https://github.com/Lastrellik/Calico-Home-Security/issues/62
-      }
-
-      if (Properties::MODULE_TURRET) {
-        i2CMaster->sendTransmission(Properties::TURRET_SLAVE_NUMBER, Properties::TURRET_COMMAND);
-      }
     }
   }
 
@@ -87,7 +82,7 @@ void loop(){
   if((alarm->isTriggered() || alarm->isTripped()) && alarm->isButtonPressed()){
     alarm->disarm();
     if (Properties::MODULE_TURRET) {
-      i2CMaster->resetStatus();
+      turretMASTER->resetStatus();
     }
   }
 
@@ -98,7 +93,7 @@ void loop(){
   if(alarm->isArmed() && alarm->isButtonPressed()){
     alarm->disarm();
     if (Properties::MODULE_TURRET) {
-      i2CMaster->resetStatus();
+      turretMASTER->resetStatus();
     }
   }
 
@@ -108,6 +103,14 @@ void loop(){
     timeAlarmHasBeenTrippedInMillis += millis() - startTime;//Seconds it takes for the
     if(timeAlarmHasBeenTrippedInMillis >= TIME_ALARM_CAN_BE_TRIPPED_IN_MILLIS){
       alarm->trigger();
+
+      if (Properties::MODULE_WIFI) {
+        wifiModule->sendNotification(); // TODO: This is blocking. See https://github.com/Lastrellik/Calico-Home-Security/issues/62
+      }
+
+      if (Properties::MODULE_TURRET) {
+        turretMASTER->sendTransmission(Properties::TURRET_SLAVE_NUMBER, Properties::TURRET_COMMAND);
+      }
     }
   }
 }

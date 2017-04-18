@@ -1,17 +1,17 @@
 /*
   I2C_Master.h - A class for connecting with another Arduino Uno or other I2C Device as the MASTER.
 */
-#ifndef I2CMaster_h
-#define I2CMaster_h
+#ifndef TurretMASTER_h
+#define TurretMASTER_h
 
 #include "Arduino.h"
 #include <Wire.h>
 
-class I2CMaster {
+class TurretMASTER {
 
   public:
     enum Status { WAITING, SENT };
-    I2CMaster();
+    TurretMASTER();
     void sendTransmission(int deviceNumber, int command);
     void resetStatus();
     void setStatus(Status status);
