@@ -29,9 +29,11 @@ class Alarm{
     void disarm();
     void silence();
     void trigger();
+    void trip();
     bool isButtonPressed();
     bool isCalibrated();
     bool isArmed();
+    bool isLaserBeamBroken();
     bool isTripped();
     bool isTriggered();
     bool isReadyToArm();
@@ -67,6 +69,7 @@ class Alarm{
     bool _isCalibrated = false;
     bool _isTriggered = false;
     bool _isSilenced = false;
+    bool _isTripped = false;
     int _baseReading = 0;
     int _threshold = 100;
     void determineBasePhotoresistorReading();

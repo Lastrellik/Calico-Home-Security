@@ -60,9 +60,16 @@ public class SerialOutputTest {
 	
 	@Test
 	public void testSendTestComponentsPacket() {
-		byte[] expectedReturn = new byte[]{3,2,0,0,7};// 30007 = Command, Warn, Execute Command: TestComponents
+		byte[] expectedReturn = new byte[]{3,2,0,0,7};// 32007 = Command, Warn, Execute Command: TestComponents
 		output.sendTestComponentsPacket();
 		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	}
+
+	@Test
+	public void testSendTripPacket() {
+		byte[] expectedReturn = new byte[]{3,2,0,0,8};// 32008 = Command, Warn, Execute Command: Trip
+		output.sendTripPacket();
+		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
+	} 
 
 }

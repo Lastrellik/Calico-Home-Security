@@ -150,23 +150,37 @@ bool Alarm::isArmed(){
   return _isArmed;
 }
 
+bool Alarm::isLaserBeamBroken(){
+  return (_photoR->takeReading() - 100 < _baseReading);
+}
+
 /**
-  @return returns a true false based on whether or the reading taken is less
-    than the _baseReading by 100
+  Getter for the param _isTripped
 */
 bool Alarm::isTripped(){
-  return (_photoR->takeReading() - 100 < _baseReading);
+  return _isTripped;
 }
 
 /**
   Sets the alarm to be triggered
   @param sets _isTriggered to be true
   @param sets _isSilenced to be false
+  @param sets _isTripped to be false //Except these aren't parameters.
 */
 void Alarm::trigger(){
   if(Properties::MODULE_PI) Serial.write("13108"); // 13108 = Log, Debug, Alarm has been triggered
   _isTriggered = true;
   _isSilenced = false;
+  _isTripped = false;
+}
+
+/**
+  Sets the alarm to be tripped
+*/
+void Alarm::trip(){
+  if(Properties::MODULE_PI) Serial.write("13112"); // 13112 = Log, Debug, Alarm has been tripped
+  _isTripped = true;
+  _laser->off();
 }
 
 /**
@@ -208,6 +222,7 @@ bool Alarm::isTriggered(){
 void Alarm::disarm(){
   this->alertSuccessfulAction();
   _isTriggered = false;
+  _isTripped = false;
   _isArmed = false;
   _alarmLED->off();
   _isSilenced = false;

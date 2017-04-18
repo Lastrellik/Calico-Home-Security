@@ -36,7 +36,7 @@ public class PacketProcessor implements Runnable{
 			currentPacket = inputListener.getDataPacket();
 			PiApp.LogToFile(currentPacket);
 			if(isTripPacket(currentPacket)){
-				//alertEmailRecipientsOfTrip();
+				alertEmailRecipientsOfTrip();
 			}
 			if(isTriggeredPacket(currentPacket)){
 				alertEmailRecipientsOfBreach();
@@ -76,7 +76,6 @@ public class PacketProcessor implements Runnable{
 		String pictureFileName = String.valueOf(System.currentTimeMillis()) + ".jpg";
 		camera.takePicture(pictureFileName);
 		this.pictureFile = new File(pictureDirectory + "/" + pictureFileName);
-		pause(10000);
 	}
 	
 	private void sendEmailToRecipients(){

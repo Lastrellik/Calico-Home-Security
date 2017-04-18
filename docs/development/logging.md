@@ -61,6 +61,7 @@ Message Translation Chart
 |             |                  | 109 - Alarm calibration is being reset
 |             |                  | 110 - Alarm is being disarmed
 |             |                  | 111 - Alarm is being is being silenced
+|             |                  | 112 - Alarm has been tripped
 |             |                  | 150 - Button object successfully created
 |             |                  | 151 - Button has been pressed
 |             |                  | 200 - Buzzer object has been created
@@ -75,10 +76,8 @@ Message Translation Chart
 |             |                  | 400 - LED object successfully created
 |             |                  | 401 - LED has been turned on
 |             |                  | 402 - LED has been turned off
-|             |                  | 403 - LED flashing
 |             |                  | 404 - LED toggling
 |             |                  | 450 - Photoresistor object has been successfully created
-|             |                  | 451 - Photoresistor taking reading
 |             |                  | 514 - [EXAMPLE] Component Configured on Pin 14 |
 |             |                  | 515 - [EXAMPLE] Component Configured on Pin 15 |
 |             |                  | 516 - [EXAMPLE] ... |
