@@ -79,7 +79,7 @@ public class MainMenuPanel extends JPanel {
 		logo_Panel.setBounds(0, 40, 364, 187);
 		logo_Panel.setLayout(null);
 		start_Logo.setBounds(0, 0, 364, 187);
-		logo_Panel.add(start_Logo);
+		//logo_Panel.add(start_Logo);
 		display_Panel.add(logo_Panel);
 		
 	

@@ -14,16 +14,16 @@ public class StartupAnimation extends JPanel{
 	private BufferedImage logo = null;
 	
 	public StartupAnimation(){
-		
+		/**
 		try {                
-	          logo = ImageIO.read(getClass().getResource("logo.png"));     
+	        //  logo = ImageIO.read(getClass().getResource("logo.png"));     
 	       } catch (IOException ex) {
 	            System.out.println("Fail");
 	       }
 		setBackground(Colors.getPanelColor());
 		JPanel logoPanel = new JPanel();
 		logoPanel.setBounds(0, 39, 364, 188);
-
+		*/
 
 	}
 

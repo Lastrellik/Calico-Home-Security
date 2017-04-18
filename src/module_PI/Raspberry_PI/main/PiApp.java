@@ -2,6 +2,10 @@ package module_PI.Raspberry_PI.main;
 
 import java.util.*;
 
+import javax.swing.JFrame;
+
+import module_TOUCHSCREEN.MainPanel;
+
 public class PiApp {
 	public static Properties GMAIL_CREDENTIALS = new Properties();
 	private static ActivityLogger activityLogger = new ActivityLogger("PI_Log.txt");
@@ -11,6 +15,7 @@ public class PiApp {
 	 * @param args Gmail Username and Password for sending mail
 	 */
 	public static void main(String[] args) {
+		/**
 		int numOfArgs = 2;
 		if(args.length <= numOfArgs) throw new IllegalArgumentException(args.length + "Syntax is java PiApp <gmailusername> <gmailpassword> <recipientEmailAddress>...");
 		parseArgs(args);
@@ -21,6 +26,13 @@ public class PiApp {
 		Thread processor = new Thread(packetProcessor, "Processor");
 		listener.start();
 		processor.start();
+		*/
+		JFrame frame = new JFrame("FrameDemo");
+		frame.setSize(820,525);
+		MainPanel panel = new MainPanel();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(panel);
+		frame.setVisible(true);
 	}
 	
 	private static void parseArgs(String[] args){
