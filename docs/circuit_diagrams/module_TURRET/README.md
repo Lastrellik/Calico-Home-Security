@@ -27,7 +27,7 @@ I2C stands for Inter-Integrated Circuit. Many details can be read online to lear
 Setup
 =====
 
-TODO: This is just a PLACEHOLDER. We need to include instructions about how to load just the Turret's code onto the secondary turret controlling Arduino Uno. We may just recommend that they copy and paste some code from here or the .cpp file and paste it temporarily over top the main. That feels a little clunky, but it at least would work.
+The Slave Arduino needs to have the contents of the `TurretSLAVE.cpp` file loaded onto it. There are multiple ways to do this. The easiest is to open that file in PlatformIO, copy the entire contents, paste them over top `main.cpp`, the deploy it to the Slave Arduino.
 
 See It In Action
 ================

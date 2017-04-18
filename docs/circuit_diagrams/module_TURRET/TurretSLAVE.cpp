@@ -2,28 +2,32 @@
 #include <Wire.h>
 #include <Servo.h>
 
-int BUILTIN_LED = 13;
+int ic2SlaveNumber = 9; // Configure this value to be the number you will communicate with via the Master
+
 int commandCode = 0;
 
+///// PAN Servo
 Servo servopan;
 int panPin = 3;
+int position_P = 0;
 
+///// TILT Servo
 Servo servotilt;
 int tiltPin = 4;
+int position_T = 0;
 
+///// GUN
 int gun = 7;
-int post = 0;
-int posp = 0;
 
 void receiveEvent(int bytes) {
-  commandCode = Wire.read();    // read one character from the I2C
+  commandCode = Wire.read();    // read one int from the I2C
 }
 
 void beginTurretSequence() {
-  for (posp = 0; posp <= 120; posp += 1);
-  for (post = 60; post <= 100; post += 1) {
-    servopan.write(posp);
-    servotilt.write(post);
+  for (position_P = 0; position_P <= 120; position_P += 1);
+  for (position_T = 60; position_T <= 100; position_T += 1) {
+    servopan.write(position_P);
+    servotilt.write(position_T);
     delay(10);
   }
 
@@ -31,53 +35,60 @@ void beginTurretSequence() {
   delay (500);
   digitalWrite(gun,LOW);
 
-  for (post = 120; post >= 100; post -= 1);
-  for (posp = 120; posp >= 0; posp -= 1) {
-    servopan.write(posp);
-    servotilt.write(post);
+  for (position_T = 120; position_T >= 100; position_T -= 1);
+  for (position_P = 120; position_P >= 0; position_P -= 1) {
+    servopan.write(position_P);
+    servotilt.write(position_T);
     delay(10);
   }
 
   digitalWrite(gun,HIGH);
   delay (500);
   digitalWrite(gun,LOW);
+
+  commandCode = 0;
 }
 
 void blinkLED_Fast() {
-  digitalWrite(BUILTIN_LED, HIGH);
-  delay(200);
-  digitalWrite(BUILTIN_LED, LOW);
-  delay(200);
+  for (int i = 0; i < 5; i++) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(200);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(200);
+  }
+
 }
 
 void blinkLED_Slow() {
-  digitalWrite(BUILTIN_LED, HIGH);
-  delay(400);
-  digitalWrite(BUILTIN_LED, LOW);
-  delay(400);
+  for (int i=0; i < 5; i++) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(800);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(800);
+  }
 }
 
 void setup() {
-  pinMode (BUILTIN_LED, OUTPUT);
+  Serial.begin(9600);
+  pinMode (LED_BUILTIN, OUTPUT);
   servopan.attach(panPin);
   servotilt.attach(tiltPin);
   pinMode(gun, OUTPUT);
 
-  Wire.begin(9);  // Start the I2C Bus as Slave on address 9
-  Wire.onReceive(receiveEvent); // Attach a function to trigger when something is received.
+  Wire.begin(ic2SlaveNumber);     // Start the I2C Bus as Slave
+  Wire.onReceive(receiveEvent);   // Attach a function to trigger when something is received.
 }
 
 void loop() {
-  //If value received is 0 blink LED for 200 ms
-  if (commandCode == '0') {
+  if (commandCode == 0) {
     blinkLED_Fast();
   }
-  //If value received is 3 blink LED for 400 ms
-  if (commandCode == '3') {
+
+  if (commandCode == 3) {
     blinkLED_Slow();
   }
 
-  if (commandCode == '9') {
+  if (commandCode == 9) {
     beginTurretSequence();
   }
 }
