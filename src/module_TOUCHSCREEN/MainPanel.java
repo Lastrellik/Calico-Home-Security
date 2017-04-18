@@ -69,7 +69,6 @@ public class MainPanel extends JPanel {
 		setLayout(null);
 		setBackground(Colors.getPanelColor());
 		main_Area.setBounds(0, 0, 388, 480);
-		
 		//Add cards to the main_Area Panel
 		add(main_Area);
 		main_Area.setLayout(new CardLayout(0, 0));

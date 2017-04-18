@@ -6,7 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Calico Home Security</name>
 	<build>
-		<sourceDirectory>src/module_PI/Raspberry_PI</sourceDirectory>
+		<sourceDirectory>src/</sourceDirectory>
 		<testSourceDirectory>src/module_PI/Raspberry_PI/JUnitTests</testSourceDirectory> <!-- TODO: Adjust tests so they don't rely on an Arduino being plugged in 
 			(should be mocked) and running then uncomment this line so that all unit 
 			tests are run at build time -->
