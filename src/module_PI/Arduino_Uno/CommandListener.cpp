@@ -34,26 +34,29 @@ int CommandListener::commandByteToInt(byte* commandBytes){
 void CommandListener::executeCommand(byte* commandBytes){
   int commandInt = commandByteToInt(commandBytes);
   switch (commandInt) {
-    case 30001:
+    case 32001:
       alarm->arm();
       break;
-    case 30002:
+    case 32002:
       alarm->disarm();
       break;
-    case 30003:
+    case 32003:
       alarm->silence();
       break;
-    case 30004:
+    case 32004:
       alarm->calibrate();
       break;
-    case 30005:
+    case 32005:
       alarm->trigger();
       break;
-    case 30006:
+    case 32006:
       alarm->resetCalibration();
       break;
-    case 30007:
+    case 32007:
       alarm->testBoardComponents();
+      break;
+    case 32008:
+      alarm->trip();
       break;
   }
 }

@@ -16,6 +16,7 @@ public class SerialInputListener extends SerialComm implements Runnable {
 	}
 
 	public SerialInputListener() {
+		PiApp.LogToFile("PI SerialInputListener object created");
 		serialInputStream = new LinkedList<Byte>();
 		packetInputStream = new LinkedList<DataPacket>();
 		comPort.openPort();

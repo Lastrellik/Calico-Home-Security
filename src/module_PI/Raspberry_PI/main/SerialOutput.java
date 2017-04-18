@@ -7,45 +7,60 @@ public class SerialOutput extends SerialComm {
 	private byte[] currentBuffer;
 	
 	public SerialOutput(){
+		PiApp.LogToFile("Pi SerialOutputListener created");
 		serialPacketOutputStream = new LinkedList<>();
 	}
 	
 	public void sendArmPacket(){
-		currentBuffer = new byte[]{3,0,0,0,1}; // 30001 = Command, NA, Execute Command: Arm
+		currentBuffer = new byte[]{3,2,0,0,1}; // 32001 = Command, Warn, Execute Command: Arm
+		PiApp.LogToFile(new DataPacket(currentBuffer));
 		comPort.writeBytes(currentBuffer, SIZE_OF_DATAPACKET_IN_BYTES);
 	}
 	
 	public void sendDisarmPacket(){
-		currentBuffer = new byte[]{3,0,0,0,2};// 30002 = Command, NA, Execute Command: Disarm
+		currentBuffer = new byte[]{3,2,0,0,2};// 32002 = Command, Warn, Execute Command: Disarm
+		PiApp.LogToFile(new DataPacket(currentBuffer));
 		comPort.writeBytes(currentBuffer, SIZE_OF_DATAPACKET_IN_BYTES);		
 	}
 	
 	public void sendSilencePacket(){
-		currentBuffer = new byte[]{3,0,0,0,3};// 30003 = Command, NA, Execute Command: Silence
+		currentBuffer = new byte[]{3,2,0,0,3};// 32003 = Command, Warn, Execute Command: Silence
+		PiApp.LogToFile(new DataPacket(currentBuffer));
 		comPort.writeBytes(currentBuffer, SIZE_OF_DATAPACKET_IN_BYTES);		
 	}
 	
 	public void sendCalibratePacket(){
-		currentBuffer = new byte[]{3,0,0,0,4};// 30004 = Command, NA, Execute Command: Calibrate
+		currentBuffer = new byte[]{3,2,0,0,4};// 32004 = Command, Warn, Execute Command: Calibrate
+		PiApp.LogToFile(new DataPacket(currentBuffer));
 		comPort.writeBytes(currentBuffer, SIZE_OF_DATAPACKET_IN_BYTES);		
 	}
 	
 	public void sendTriggerPacket(){
-		currentBuffer = new byte[]{3,0,0,0,5};// 30005 = Command, NA, Execute Command: Trigger
+		currentBuffer = new byte[]{3,2,0,0,5};// 32005 = Command, Warn, Execute Command: Trigger
+		PiApp.LogToFile(new DataPacket(currentBuffer));
 		comPort.writeBytes(currentBuffer, SIZE_OF_DATAPACKET_IN_BYTES);	
 	}
 	
 	public void sendResetCalibrationPacket(){
-		currentBuffer = new byte[]{3,0,0,0,6};// 30006 = Command, NA, Execute Command: ResetCalibration
+		currentBuffer = new byte[]{3,2,0,0,6};// 32006 = Command, Warn, Execute Command: ResetCalibration
+		PiApp.LogToFile(new DataPacket(currentBuffer));
 		comPort.writeBytes(currentBuffer, SIZE_OF_DATAPACKET_IN_BYTES);	
 	}
 	
 	public void sendTestComponentsPacket(){
-		currentBuffer = new byte[]{3,0,0,0,7};// 30007 = Command, NA, Execute Command: TestComponents
+		currentBuffer = new byte[]{3,2,0,0,7};// 32007 = Command, Warn, Execute Command: TestComponents
+		PiApp.LogToFile(new DataPacket(currentBuffer));
 		comPort.writeBytes(currentBuffer, SIZE_OF_DATAPACKET_IN_BYTES);		
+	}
+
+	public void sendTripPacket(){
+		currentBuffer = new byte[]{3,2,0,0,8};// 32008 = Command, Warn, Execute Command: Trip
+		PiApp.LogToFile(new DataPacket(currentBuffer));
+		comPort.writeBytes(currentBuffer, SIZE_OF_DATAPACKET_IN_BYTES);
 	}
 	
 	public byte[] getPreviousBuffer(){
 		return currentBuffer;
 	}
 }
+
