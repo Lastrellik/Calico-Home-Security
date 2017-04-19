@@ -3,7 +3,7 @@
   Purpose: sets the tone of the Buzzer and if it's on and off
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  @version To be Determined
+  
 */
 #ifndef Buzzer_h
 #define Buzzer_h

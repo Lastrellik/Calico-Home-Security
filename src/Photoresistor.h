@@ -3,7 +3,7 @@
   Purpose: Reads in the Photoresistor output
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  @version To be Determined
+  
 */
 #ifndef Photoresistor_h
 #define Photoresistor_h

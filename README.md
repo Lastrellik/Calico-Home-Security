@@ -26,7 +26,7 @@ Hardware
 --------
 
 * [Arduino Uno](https://www.arduino.cc/en/Main/ArduinoBoardUno)
-* Ordinary Red Laser Pointer
+* Red Laser
 * Photoresistor
 * Piezo Buzzer
 * A Few LEDs
@@ -44,13 +44,14 @@ Development
 Wiring Diagrams / Schematics
 ============================
 
-The wiring diagrams are all kept in the [docs](./docs/circuit_diagrams) directory. 
+The wiring diagrams are all kept in the [docs](./docs/circuit_diagrams) directory.
 
 Note that some modules will not function when other modules are present. Please refer to the table in the [Circuit Diagrams Readme](./docs/circuit_diagrams/README.md) for a compatibility chart.
 
 * [BASE Module](./docs/circuit_diagrams/module_BASE/README.md)
 * [WIFI Module](./docs/circuit_diagrams/module_WIFI/README.md)
 * [Raspberry Pi w/Touchscreen Module](./docs/circuit_diagrams/module_PI/README.md)
+* [TURRET Module](./docs/circuit_diagrams/module_TURRET/README.md)
 
 
 About the Project
@@ -71,7 +72,7 @@ This project was created as an assignment for our CSIS 2810 Computer Architectur
 
 The requirements for our project were that it must include a Micro Controller and it must be the foundation of the project. We chose to use an Arduino Uno for our project. The other requirement was that it must include at least one 'sensor' which reads in data and makes decisions based on that data.
 
-Picture in your mind the classic movie scene where the good guy is trying to break into the vault of the bad guy to get back the master plans he has stolen. To get into the vault, the good guy must pass through a maze of laser trip wires without breaking a single beam or the alarm will sound! 
+Picture in your mind the classic movie scene where the good guy is trying to break into the vault of the bad guy to get back the master plans he has stolen. To get into the vault, the good guy must pass through a maze of laser trip wires without breaking a single beam or the alarm will sound!
 
 We wanted to replicate those laser trip wires. We also wanted to have a well architected, well documented, and totally awesome project to be able to present to the class. Thus the **Calico Home Security System** was born!
 

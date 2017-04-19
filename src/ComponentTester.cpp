@@ -3,7 +3,7 @@
   Purpose: Used to test the Component subclasses
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  @version To be Determined
+  
 */
 #include "Arduino.h"
 #include "ComponentTester.h"

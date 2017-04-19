@@ -7,6 +7,7 @@ Parts
 -----
 * Additional Arduino Uno
 * 2x Servos
+* [4-Relay Module](https://www.amazon.com/Elegoo-Channel-Optocoupler-Arduino-Raspberry/dp/B01HEQF5HU/ref=sr_1_4?ie=UTF8&qid=1492560612&sr=8-4&keywords=4-relay+module)
 
 Bread Board Diagram
 -------------------
