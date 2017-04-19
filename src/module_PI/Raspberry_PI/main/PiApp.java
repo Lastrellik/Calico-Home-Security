@@ -2,6 +2,10 @@ package module_PI.Raspberry_PI.main;
 
 import java.util.*;
 
+import javax.swing.JFrame;
+
+import module_TOUCHSCREEN.MainPanel;
+
 public class PiApp {
 	public static Properties GMAIL_CREDENTIALS = new Properties();
 	private static ActivityLogger activityLogger = new ActivityLogger("PI_Log.txt");
@@ -21,6 +25,7 @@ public class PiApp {
 		Thread processor = new Thread(packetProcessor, "Processor");
 		listener.start();
 		processor.start();
+		buildGUI();
 	}
 	
 	private static void parseArgs(String[] args){
@@ -40,6 +45,17 @@ public class PiApp {
 	
 	public static void LogToFile(String messageToLog){
 		activityLogger.log(messageToLog);
+	}
+
+	private static void buildGUI(){
+		JFrame frame = new JFrame("Calico Home Security");
+		frame.setSize(820, 525);
+		MainPanel panel = new MainPanel();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(panel);
+		frame.setUndecorated(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setVisible(true);
 	}
 
 }

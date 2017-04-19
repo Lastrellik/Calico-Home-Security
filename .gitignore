@@ -4,6 +4,8 @@
 .gcc-flags.json
 /bin/
 
+PI_Log*
+/PI_PICS/
 
 
 # Created by https://www.gitignore.io/api/code-java,java,eclipse
