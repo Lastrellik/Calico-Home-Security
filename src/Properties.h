@@ -40,6 +40,11 @@ class Properties {
     static String IFTTT_MAKER_EVENT;
     static String IFTTT_MAKER_URI;
 
+
+    // ********** TURRET MODULE PROPERTIES ********** //
+    static int TURRET_SLAVE_NUMBER;
+    static int TURRET_COMMAND;
+
   private:
 
 };

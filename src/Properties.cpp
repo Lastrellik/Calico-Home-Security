@@ -33,3 +33,8 @@ String Properties::WIFI_PASSWORD = "YOUR_WIRELESS_PASSWORD";  // The password to
 String Properties::IFTTT_MAKER_KEY = "YOUR_IFTTT_MAKER_KEY";  // Key obtained from your IFTTT account. See `IFTTT Setup` instructions in the Wifi Module's README for more details.
 String Properties::IFTTT_MAKER_EVENT = "alarm_tripped";       // The IFTTT Maker's Event. See `IFTTT Setup` instructions in the Wifi Module's README for more details.
 String Properties::IFTTT_MAKER_URI = "maker.ifttt.com";       // The IFTTT Maker root URI. There is likely no need to change this until IFTTT changes the URI in the future.
+
+
+// ********** TURRET MODULE PROPERTIES ********** //
+int Properties::TURRET_SLAVE_NUMBER = 9;                      // The number configured in the Turrent_SLAVE.cpp file for the Arduino Uno configured ot control the Turret
+int Properties::TURRET_COMMAND = 9;                           // The command to send to the Turret

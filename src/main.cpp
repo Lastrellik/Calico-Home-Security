@@ -20,10 +20,16 @@
 
 Alarm* alarm;
 CommandListener* commandListener;
+
 long timeAlarmHasBeenTrippedInMillis = 0;
 const long TIME_ALARM_CAN_BE_TRIPPED_IN_MILLIS = 30000;
+
 #include "module_WIFI\WifiModule.h"
 WifiModule* wifiModule;
+
+#include "module_TURRET\TurretMASTER.h"
+TurretMASTER* turretMASTER;
+
 
 /**
   Sets up the intial classes to be used like Alarm and Wifi
@@ -41,6 +47,10 @@ void setup() {
     wifiModule->initialize();
     alarm->alertSuccessfulAction();
   }
+
+  if (Properties::MODULE_TURRET) {
+    turretMASTER = new TurretMASTER();
+  }
 }
 
 /**
@@ -56,9 +66,6 @@ void loop(){
   } else {
     if(alarm->isLaserBeamBroken() && not alarm->isTriggered() && not alarm->isTripped()){
       alarm->trip();
-      if (Properties::MODULE_WIFI) {
-        wifiModule->sendNotification(); // TODO: This is blocking. See https://github.com/Lastrellik/Calico-Home-Security/issues/62
-      }
     }
   }
 
@@ -74,6 +81,9 @@ void loop(){
 
   if((alarm->isTriggered() || alarm->isTripped()) && alarm->isButtonPressed()){
     alarm->disarm();
+    if (Properties::MODULE_TURRET) {
+      turretMASTER->resetStatus();
+    }
   }
 
   if(not alarm->isTripped() && not alarm->isTriggered()){
@@ -82,6 +92,9 @@ void loop(){
 
   if(alarm->isArmed() && alarm->isButtonPressed()){
     alarm->disarm();
+    if (Properties::MODULE_TURRET) {
+      turretMASTER->resetStatus();
+    }
   }
 
   if(alarm->isTripped()){
@@ -90,6 +103,14 @@ void loop(){
     timeAlarmHasBeenTrippedInMillis += millis() - startTime;//Seconds it takes for the
     if(timeAlarmHasBeenTrippedInMillis >= TIME_ALARM_CAN_BE_TRIPPED_IN_MILLIS){
       alarm->trigger();
+
+      if (Properties::MODULE_WIFI) {
+        wifiModule->sendNotification(); // TODO: This is blocking. See https://github.com/Lastrellik/Calico-Home-Security/issues/62
+      }
+
+      if (Properties::MODULE_TURRET) {
+        turretMASTER->sendTransmission(Properties::TURRET_SLAVE_NUMBER, Properties::TURRET_COMMAND);
+      }
     }
   }
 }
