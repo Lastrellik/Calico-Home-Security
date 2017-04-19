@@ -39,7 +39,7 @@ Where possible, especially in Java, a value should be defined as a member variab
 
 Message Translation Chart
 -------------------------
-| Type [0-9] | Log Level  [0-9] | Details  [000-999] |
+| Type [0-9]  | Log Level  [0-9] | Details  [000-999]  |
 | ----------- | ---------------- | ------------------- |
 | 0 - N/A     | 0 - N/A          | 000 - N/A            |
 | 1 - Log     | 1 - Error        | 001 - Execute Command: Arm |
@@ -78,9 +78,6 @@ Message Translation Chart
 |             |                  | 402 - LED has been turned off
 |             |                  | 404 - LED toggling
 |             |                  | 450 - Photoresistor object has been successfully created
-|             |                  | 514 - [EXAMPLE] Component Configured on Pin 14 |
-|             |                  | 515 - [EXAMPLE] Component Configured on Pin 15 |
-|             |                  | 516 - [EXAMPLE] ... |
 
 **Details Block Definitions:**
 * [001 - 009] - Reserved for Commands intended for the Alarm (Arduino) to execute.
@@ -92,7 +89,8 @@ Message Translation Chart
 * [350 - 399] - Reserved for Laser messages to be logged.
 * [400 - 449] - Reserved for LED messages to be logged.
 * [450 - 499] - Reserved for Photoresistor messages to be logged.
-* [700 - 999] - Currently reserved for David Tille.
+* [700 - 999] - Currently reserved for TURRET Commands.
+
 **Notes:**
 * In general, you should never send a message of Type `0`. That really just wouldn't make any sense...
 * `Log Level` is only relevant when a `Log` Type message is sent. In all other cases a `0 - N/A` should be passed.

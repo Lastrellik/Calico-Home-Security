@@ -47,7 +47,7 @@ Setup
 =====
 The **ESP8266** needs a few steps before it can be ready to communicate with the Arduino. You also need to create an **IFTTT** (*IF This Then That*) account and configure a **Maker** channel and create an IFTTT **Applet**.
 
-Once you have followed all the steps in both the IFTTT and ESP8266 Setup sections, make sure you have configured your Wifi Settings within the Properties.cpp file. There you will need to set your
+Once you have followed all the steps in both the IFTTT and ESP8266 Setup sections, make sure you have configured your Wifi Settings within the [/src/Properties.cpp](https://github.com/Lastrellik/Calico-Home-Security/blob/master/src/Properties.cpp) file. There you will need to enable the Wifi Module and set your wireless SSID & Password as well as enter you IFTTT Key.
 
 * [IFTTT Setup](#ifttt-setup)
 * [ESP8266 Setup](#esp8266-setup)

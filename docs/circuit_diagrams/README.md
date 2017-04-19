@@ -16,7 +16,7 @@ Not all modules are compatible with eachother. The following chart shows those w
 |-------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
 | Mini        | :white_check_mark: | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Base        | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Pi          | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | ?                  |
-| Wifi        | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :x:                | ?                  |
-| Touchscreen | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | ?                  |
-| Turret      | :white_check_mark: | :white_check_mark: | ?                  | ?                  | ?                  | :white_check_mark: |
+| Pi          | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :white_check_mark: |
+| Wifi        | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :x:                | :white_check_mark: |
+| Touchscreen | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :white_check_mark: |
+| Turret      | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |

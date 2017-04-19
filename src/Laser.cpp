@@ -3,7 +3,7 @@
   Purpose: Manages the Laser and creates a Laser object
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  @version To be Determined
+  
 */
 #include "Arduino.h"
 #include "Laser.h"

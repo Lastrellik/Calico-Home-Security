@@ -5,7 +5,7 @@
     on the breadboard
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  @version To be Determined
+  
 */
 #ifndef Component_h
 #define Component_h

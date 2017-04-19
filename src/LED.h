@@ -4,7 +4,7 @@
     off.
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  @version To be Determined
+  
 */
 #ifndef LED_h
 #define LED_h

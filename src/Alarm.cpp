@@ -4,7 +4,7 @@
   for the alarm object
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  @version To be Determined
+  
 */
 #include "Arduino.h"
 #include "Component.h"

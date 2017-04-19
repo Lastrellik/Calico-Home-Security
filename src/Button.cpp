@@ -3,7 +3,7 @@
   Purpose: Determines if the Button has been pressed, turning it on or off
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  @version To be Determined
+  
 */
 #include "Arduino.h"
 #include "Button.h"
