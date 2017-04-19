@@ -1,4 +1,0 @@
-2017-04-17 23:06:25 Pi SerialOutputListener created
-2017-04-17 23:06:25 Pi SerialOutputListener created
-2017-04-17 23:06:59 Level:WARN Type:COMMAND	Execute Command: Arm
-2017-04-17 23:07:01 Level:WARN Type:COMMAND	Execute Command: Disarm
