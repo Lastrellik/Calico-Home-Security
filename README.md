@@ -83,3 +83,7 @@ Why Calico?
 *Calico*, adj: Having sections or patches colored differently and usually brightly.
 
 We wanted our system to be modular from the very beginning. Calico seemed a fitting name.
+
+![Calico Logo](./src/module_TOUCHSCREEN/logo.png)
+
+**Big or Small, Calico does it all.**
