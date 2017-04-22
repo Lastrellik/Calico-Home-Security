@@ -12,8 +12,12 @@ public class HomeAlarmPanel extends JPanel{
 	CommandButton disarmButton = new CommandButton("Disarm", CommandType.DISARM);
 	CommandButton toggleLaserButton = new CommandButton("<html>Toggle<br>Laser</html>", CommandType.TOGGLELASER);
 	JButton adminPanelButton = new JButton("<html>Admin<br>Panel</html>");
+	private CardLayout cardLayout;
+	private MenuPanel cardParent;
 	
-	public HomeAlarmPanel(){
+	public HomeAlarmPanel(MenuPanel cardParent){
+		this.cardParent = cardParent;
+		this.cardLayout = (CardLayout) cardParent.getLayout();
 		buildMetadata();
 		configureAdminPanelButton();
 		addButtons();
@@ -21,16 +25,17 @@ public class HomeAlarmPanel extends JPanel{
 	
 	private void buildMetadata(){
 		setLayout(new GridLayout(2, 2, 3, 3));
+		setBackground(CalicoColors.PANELBACKGROUND.getColor());
 	}
 	
 	private void configureAdminPanelButton(){
-		adminPanelButton.setBackground(Colors.getButtonColor());
+		adminPanelButton.setBackground(CalicoColors.BUTTON.getColor());
+		adminPanelButton.setForeground(CalicoColors.FONT.getColor());
 		adminPanelButton.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				cardLayout.show(cardParent, "Admin Panel");
 			}
 			
 		});

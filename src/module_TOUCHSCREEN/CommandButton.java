@@ -25,8 +25,9 @@ public class CommandButton extends JButton{
 	}
 	
 	private void buildMetadata(){
-		setBackground(Colors.getButtonColor());	
+		setBackground(CalicoColors.BUTTON.getColor());	
 		setText(buttonText);
+		setForeground(CalicoColors.FONT.getColor());
 	}
 	
 	private void buildActionListener(){

@@ -8,14 +8,14 @@ public class KeypadButton extends JButton{
 	
 	private int buttonNumber;
 	private char[] buttonCharacters;
-	private Color buttonColor = Colors.getButtonColor();
+	private Color buttonColor = CalicoColors.BUTTON.getColor();
 	private int appropriateButtonCharacterIndex = 0;
 
 	public KeypadButton(int buttonNumber, char[] buttonCharacters){
 		this.buttonNumber = buttonNumber;
 		this.buttonCharacters = buttonCharacters;
 		buildButton();
-		buildButtonMetadata();
+		buildMetadata();
 	}
 
 	private void buildButton(){
@@ -23,8 +23,9 @@ public class KeypadButton extends JButton{
 		setButtonColor();
 	}
 	
-	private void buildButtonMetadata(){
+	private void buildMetadata(){
 		setFocusPainted(false);
+		setForeground(CalicoColors.FONT.getColor());
 	}
 	
 	private void setButtonText(){

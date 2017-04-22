@@ -20,6 +20,8 @@ public class KeypadTextField extends JPasswordField{
 		setFont(new Font("Courier", Font.BOLD, 55));
 		setEchoChar((char)0);
 		setHorizontalAlignment(CENTER);
+		setBackground(CalicoColors.TEXTFIELDBACKGROUND.getColor());
+		setForeground(CalicoColors.FONT.getColor());
 	}
 
 	public String getContents(){

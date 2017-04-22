@@ -22,12 +22,13 @@ public class KeypadButtonPanel extends JPanel{
 	public KeypadButtonPanel(JPasswordField keypadTextField){
 		this.outputTextArea = keypadTextField;
 		keypadButtons = new KeypadButton[NUM_OF_BUTTONS_ON_PANEL];
-		buildPanelMetadata();
+		buildMetadata();
 		buildNumberPad();
 	}
 	
-	private void buildPanelMetadata(){
+	private void buildMetadata(){
 		setLayout(new GridLayout(NUM_OF_ROWS, NUM_OF_COLUMNS));
+		setBackground(CalicoColors.PANELBACKGROUND.getColor());
 	}
 	
 	private void buildNumberPad() {
@@ -60,7 +61,8 @@ public class KeypadButtonPanel extends JPanel{
 	
 	private void buildAndAddClearButton(){
 		JButton clearButton = new JButton("Clear");
-		clearButton.setBackground(Colors.getButtonColor());
+		clearButton.setBackground(CalicoColors.BUTTON.getColor());
+		clearButton.setForeground(CalicoColors.FONT.getColor());
 		addClearButtonActionListener(clearButton);
 		add(clearButton);
 	}
@@ -86,7 +88,8 @@ public class KeypadButtonPanel extends JPanel{
 	
 	private void buildAndAddEnterButton(){
 		JButton enterButton = new JButton("Enter");
-		enterButton.setBackground(Colors.getButtonColor());
+		enterButton.setBackground(CalicoColors.BUTTON.getColor());
+		enterButton.setForeground(CalicoColors.FONT.getColor());
 		enterButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -134,6 +137,7 @@ public class KeypadButtonPanel extends JPanel{
 			appendTextField(Character.toString(nextCharacter));
 		} else {
 			buttonThatWasPressed.resetCharacterSelection();
+			nextCharacter = buttonThatWasPressed.getCurrentCharacter();
 			appendTextField(Character.toString(nextCharacter));
 		}
 	}

@@ -20,7 +20,12 @@ public class LogoPanel extends JPanel{
 	
 	public LogoPanel(String pathToPictureFile){
 		this.pathToPictureFile = pathToPictureFile;
+		buildMetadata();
 		buildPicture();
+	}
+	
+	private void buildMetadata(){
+		setBackground(CalicoColors.PANELBACKGROUND.getColor());
 	}
 	
 	private void buildPicture(){

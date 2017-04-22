@@ -13,13 +13,14 @@ public class KeypadPanel extends JPanel{
 	private final KeypadButtonPanel keypadButtonPanel = new KeypadButtonPanel(keypadTextField);
 	
 	public KeypadPanel(){
-		buildKeypadPanelMetadata();
+		buildMetadata();
 		buildKeypadPanelComponents();
 	}
 	
-	private void buildKeypadPanelMetadata(){
+	private void buildMetadata(){
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBackground(CalicoColors.PANELBACKGROUND.getColor());
 	}
 	
 	private void buildKeypadPanelComponents(){

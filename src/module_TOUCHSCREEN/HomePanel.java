@@ -6,15 +6,18 @@ import javax.swing.*;
 public class HomePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	LogoPanel logoPanel = new LogoPanel("src/module_TOUCHSCREEN/logo.png");
-	HomeAlarmPanel homeAlarmPanel = new HomeAlarmPanel();
+	HomeAlarmPanel homeAlarmPanel;
+	private MenuPanel cardParent;
 
-	public HomePanel(){
-		buildMetadata();
+	public HomePanel(MenuPanel cardParent){
+		this.cardParent = cardParent;
+		buildHomePanel();
 		addComponents();
 	}
 	
-	private void buildMetadata(){
+	private void buildHomePanel(){
 		setLayout(new BorderLayout());
+		homeAlarmPanel = new HomeAlarmPanel(cardParent);
 	}
 	
 	private void addComponents(){
