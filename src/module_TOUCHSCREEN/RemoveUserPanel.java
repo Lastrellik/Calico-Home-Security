@@ -129,7 +129,7 @@ public class RemoveUserPanel extends JPanel {
 		button_Main_Menu.setBackground(Colors.getButtonColor());
 		button_Main_Menu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainPanel.set_Main_Menu_Visible();
+				//MainPanel.set_Main_Menu_Visible();
 			}
 		});
 		buttons_Panel.add(button_Main_Menu);

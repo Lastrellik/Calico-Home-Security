@@ -16,10 +16,8 @@ import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 
 public class AddUserPanel extends JPanel {
-	/**
-	 * Parameters are set to static so that other classes can make changes easily without getters and setters.
-	 */
-	
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * @param create_User used to manage the string of the user currently being written
 	 */
@@ -118,7 +116,7 @@ public class AddUserPanel extends JPanel {
 		button_Main_Menu.setBackground(Colors.getButtonColor());
 		button_Main_Menu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainPanel.set_Main_Menu_Visible();
+				//MainPanel.set_Main_Menu_Visible();
 			}
 		});
 		

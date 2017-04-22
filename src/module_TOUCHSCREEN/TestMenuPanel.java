@@ -17,8 +17,9 @@ import java.awt.event.ActionEvent;
 
 public class TestMenuPanel extends JPanel {
 	/**
-	 * Parameters are set to static so that other classes can make changes easily without getters and setters.
+	 * 
 	 */
+	private static final long serialVersionUID = 1L;
 	private SerialOutput output = new SerialOutput();
 	/**
 	 * Create the panel.
@@ -132,7 +133,7 @@ public class TestMenuPanel extends JPanel {
 		main_Panel.add(main_Menu);
 		main_Menu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainPanel.set_Main_Menu_Visible();
+				//MainPanel.set_Main_Menu_Visible();
 			}
 		});
 	}
