@@ -24,6 +24,7 @@ public class PacketMessageTranslator {
 		messageTable.put(6, "Execute Command: Reset Calibration");
 		messageTable.put(7, "Execute Command: Test Components");
 		messageTable.put(8, "Execute Command: Trip");
+		messageTable.put(9, "Execute Command: Toggle Laser");
 		messageTable.put(100, "Alarm object successfully created");
 		messageTable.put(101, "Alarm base photoresistor reading determined");
 		messageTable.put(102, "Alarm failed action");
@@ -48,6 +49,7 @@ public class PacketMessageTranslator {
 		messageTable.put(350, "Laser object successfully created");
 		messageTable.put(351, "Laser has been turned on");
 		messageTable.put(352, "Laser has been turned off");
+		messageTable.put(353, "Laser has been toggled");
 		messageTable.put(400, "LED object successfully created");
 		messageTable.put(401, "LED has been turned on");
 		messageTable.put(402, "LED has been turned off");

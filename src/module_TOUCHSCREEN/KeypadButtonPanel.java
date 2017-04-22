@@ -15,7 +15,7 @@ public class KeypadButtonPanel extends JPanel{
 	private int buttonIterator = 0;
 	private JButton[] keypadButtons;
 	private boolean isPasswordMode = false;
-	private boolean isTextMode = false;
+	private boolean isTextMode = true;
 	private long millisAtButtonPress;
 	private KeypadButton previousPressedButton;
 

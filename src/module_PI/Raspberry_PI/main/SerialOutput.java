@@ -59,6 +59,12 @@ public class SerialOutput extends SerialComm {
 		comPort.writeBytes(currentBuffer, SIZE_OF_DATAPACKET_IN_BYTES);
 	}
 	
+	public void sendToggleLaserPacket(){
+		currentBuffer = new byte[]{3,2,0,0,9};// 32009 = Command, Warn, Execute Command: Toggle Laser
+		PiApp.LogToFile(new DataPacket(currentBuffer));
+		comPort.writeBytes(currentBuffer, SIZE_OF_DATAPACKET_IN_BYTES);
+	}
+	
 	public byte[] getPreviousBuffer(){
 		return currentBuffer;
 	}

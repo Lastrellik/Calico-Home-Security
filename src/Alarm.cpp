@@ -4,7 +4,7 @@
   for the alarm object
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  
+
 */
 #include "Arduino.h"
 #include "Component.h"
@@ -181,6 +181,11 @@ void Alarm::trip(){
   if(Properties::MODULE_PI) Serial.write("13112"); // 13112 = Log, Debug, Alarm has been tripped
   _isTripped = true;
   _laser->off();
+}
+
+void Alarm::toggleLaser(){
+  if(not _isCalibrated) _laser->toggle();
+  if(Properties::MODULE_PI) Serial.write("13353"); // 13353 = Log, Debug, Laser has been toggled
 }
 
 /**

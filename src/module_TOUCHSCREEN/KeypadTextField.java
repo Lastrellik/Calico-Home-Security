@@ -18,7 +18,7 @@ public class KeypadTextField extends JPasswordField{
 	private void buildTextAreaMetadata(){
 		setEditable(false);
 		setFont(new Font("Courier", Font.BOLD, 55));
-		setEchoChar('*');
+		setEchoChar((char)0);
 		setHorizontalAlignment(CENTER);
 	}
 

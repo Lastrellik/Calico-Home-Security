@@ -9,6 +9,7 @@ import java.awt.*;
 
 public class MainPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
+	private final MenuPanel menuPanel = new MenuPanel();
 	private final KeypadPanel keypadPanel = new KeypadPanel();
 	/*
 	private MainMenuPanel main_Menu = new MainMenuPanel();
@@ -70,13 +71,14 @@ public class MainPanel extends JPanel {
 	}
 	
 	private void buildMainPanelMetadata(){
-		setLayout(new GridLayout(0, 2));
+		setLayout(new GridLayout(0, 2, 10, 10));
 		setBackground(Colors.getPanelColor());
-		setBorder(new EmptyBorder(15, 15, 15, 15));
+		setBorder(new EmptyBorder(10, 10, 10, 10));
 	}
 	
 	private void addComponents(){
-		add(keypadPanel, BorderLayout.EAST);
+		add(menuPanel);
+		add(keypadPanel);
 	}
 	/*
     public void set_Main_Menu_Visible(){

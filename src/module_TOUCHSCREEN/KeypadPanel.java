@@ -2,6 +2,7 @@ package module_TOUCHSCREEN;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class KeypadPanel extends JPanel{
 	/**
@@ -18,6 +19,7 @@ public class KeypadPanel extends JPanel{
 	
 	private void buildKeypadPanelMetadata(){
 		setLayout(new BorderLayout());
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 	}
 	
 	private void buildKeypadPanelComponents(){
