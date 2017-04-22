@@ -10,10 +10,14 @@ public class KeypadButtonPanel extends JPanel{
 	private final int NUM_OF_BUTTONS_ON_PANEL = 12;
 	private final int NUM_OF_ROWS = 4;
 	private final int NUM_OF_COLUMNS = 3;
+	private final int MILLIS_BEFORE_BUTTON_CHAR_CHANGE = 500;
 	private JPasswordField outputTextArea;
 	private int buttonIterator = 0;
 	private JButton[] keypadButtons;
 	private boolean isPasswordMode = false;
+	private boolean isTextMode = false;
+	private long millisAtButtonPress;
+	private KeypadButton previousPressedButton;
 
 	public KeypadButtonPanel(JPasswordField keypadTextField){
 		this.outputTextArea = keypadTextField;
@@ -36,7 +40,7 @@ public class KeypadButtonPanel extends JPanel{
 	private void buildAndAddButtonsOneThroughNine(){
 		int numOfButtons = 9;
 		char[][] numberButtonCharacters = {
-				{' '},
+				{'_'},
 				{'A', 'B', 'C'},
 				{'D', 'E', 'F'},
 				{'G', 'H', 'I'}, 
@@ -89,7 +93,6 @@ public class KeypadButtonPanel extends JPanel{
 				togglePasswordMode();
 			}
 		});
-		
 		add(enterButton);
 	}
 	
@@ -102,13 +105,54 @@ public class KeypadButtonPanel extends JPanel{
 		keypadButtons2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				appendTextField(String.valueOf(((KeypadButton) e.getSource()).getButtonNumber()));
+				KeypadButton buttonThatWasPressed = (KeypadButton) e.getSource();
+				processKeypadButtonPress(buttonThatWasPressed);
+				setSystemTimeThatButtonWasPressed();
 			}
 		});
 	}
 	
+	private void setSystemTimeThatButtonWasPressed(){
+		this.millisAtButtonPress = System.currentTimeMillis();
+	}
+
+	private void processKeypadButtonPress(KeypadButton buttonThatWasPressed) {
+		if(!this.isTextMode){
+			appendTextField(String.valueOf(buttonThatWasPressed.getButtonNumber()));
+		} else {
+			appendAppropriateCharacter(buttonThatWasPressed);
+		}
+		this.previousPressedButton = buttonThatWasPressed;
+	}
+	
+	private void appendAppropriateCharacter(KeypadButton buttonThatWasPressed){
+		char nextCharacter = buttonThatWasPressed.getCurrentCharacter();
+		if(shouldUseNextButtonChar(buttonThatWasPressed)){
+			buttonThatWasPressed.incrementCharacterSelection();
+			nextCharacter = buttonThatWasPressed.getCurrentCharacter();
+			deleteLastCharacterInTextField();
+			appendTextField(Character.toString(nextCharacter));
+		} else {
+			buttonThatWasPressed.resetCharacterSelection();
+			appendTextField(Character.toString(nextCharacter));
+		}
+	}
+	
+	
+	private boolean shouldUseNextButtonChar(KeypadButton keypadButton){
+		boolean sufficientTime = (System.currentTimeMillis() - this.millisAtButtonPress < MILLIS_BEFORE_BUTTON_CHAR_CHANGE);
+		boolean sameKeyWasPressed = (keypadButton == this.previousPressedButton);
+		return (sufficientTime && sameKeyWasPressed);
+	}
+	
+	private void deleteLastCharacterInTextField(){
+		int numOfCharsInTextField = outputTextArea.getPassword().length;
+		String textFieldString = new String(outputTextArea.getPassword());
+		outputTextArea.setText(textFieldString.substring(0, numOfCharsInTextField - 1));
+	}
+	
 	private void appendTextField(String stringToAppend){
-		this.outputTextArea.setText(this.outputTextArea.getText() + stringToAppend);
+		this.outputTextArea.setText(new String(outputTextArea.getPassword()) + stringToAppend);
 	}
 	
 	public void enablePasswordMode(boolean passwordMode){
