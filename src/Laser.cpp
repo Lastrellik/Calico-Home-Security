@@ -3,7 +3,7 @@
   Purpose: Manages the Laser and creates a Laser object
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  
+
 */
 #include "Arduino.h"
 #include "Laser.h"
@@ -23,6 +23,16 @@ Laser::Laser(int pin) : Component(pin, "LASER"){
 */
 Laser::Laser(){
 }
+
+void Laser::toggle(){
+   if(_isOn){
+     digitalWrite(Component::getPin(), LOW);
+    _isOn = false;
+   } else {
+     digitalWrite(Component::getPin(), HIGH);
+    _isOn = true;
+   }
+ }
 /**
   Turns the Laser on
 */

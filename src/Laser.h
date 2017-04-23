@@ -3,7 +3,7 @@
   Purpose: Manages the Laser and creates a Laser object
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  
+
 */
 #ifndef Laser_h
 #define Laser_h
@@ -18,7 +18,8 @@ public:
   Laser();
   void on();
   void off();
-  
+  void toggle();
+
 private:
   boolean _isOn;
 };

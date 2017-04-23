@@ -71,5 +71,12 @@ public class SerialOutputTest {
 		output.sendTripPacket();
 		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
 	} 
+	
+	@Test
+	public void testSendToggleLaserPacket() {
+		byte[] expectedReturn = new byte[]{3,2,0,0,9};// 32009 = Command, Warn, Execute Command: Toggle Laser
+		output.sendTripPacket();
+		assertTrue(Arrays.equals(output.getPreviousBuffer(), expectedReturn));
+	} 
 
 }

@@ -4,7 +4,7 @@
   for the alarm object
 
   @author Christopher Nash, Jason Bruderer, David Tille, Tyler Jacobs
-  
+
 */
 
 #ifndef Alarm_h
@@ -42,7 +42,7 @@ class Alarm{
     void alertFailedAction();
     void alertSuccessfulAction();
     void alertWaitingAction();
-
+    void toggleLaser();
     /**
       @param _greenLED, _redLED, _alarmLED used for LEDs on the breadboard
         creates LED objects to manage them

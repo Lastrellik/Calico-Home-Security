@@ -58,5 +58,8 @@ void CommandListener::executeCommand(byte* commandBytes){
     case 32008:
       alarm->trip();
       break;
+    case 32009:
+      alarm->toggleLaser();
+      break;
   }
 }

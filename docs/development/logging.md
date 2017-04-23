@@ -49,6 +49,8 @@ Message Translation Chart
 | 5 - Request | 5 - Trace        | 005 - Execute Command: Trigger |
 |             |                  | 006 - Execute Command: Reset Calibration |
 |             |                  | 007 - Execute Command: Test Components |
+|             |                  | 008 - Execute Command: Trip|
+|             |                  | 009 - Execute Command: Toggle Laser |
 |             |                  | 100 - Alarm object successfully created |
 |             |                  | 101 - Alarm base photoresistor reading determined
 |             |                  | 102 - Alarm failed action
@@ -73,6 +75,7 @@ Message Translation Chart
 |             |                  | 350 - Laser object successfully created
 |             |                  | 351 - Laser has been turned on
 |             |                  | 352 - Laser has been turned off
+|             |                  | 353 - Laser has been toggled
 |             |                  | 400 - LED object successfully created
 |             |                  | 401 - LED has been turned on
 |             |                  | 402 - LED has been turned off
