@@ -15,7 +15,7 @@
 #include "ComponentTester.h"
 #include "Laser.h"
 #include "Properties.h"
-#include "module_Pi/Arduino_Uno/CommandListener.h"
+#include "module_PI/Arduino_Uno/CommandListener.h"
 
 Alarm* alarm;
 CommandListener* commandListener;
@@ -23,10 +23,10 @@ CommandListener* commandListener;
 long timeAlarmHasBeenTrippedInMillis = 0;
 const long TIME_ALARM_CAN_BE_TRIPPED_IN_MILLIS = 30000;
 
-#include "module_WIFI\WifiModule.h"
+#include "module_WIFI/WifiModule.h"
 WifiModule* wifiModule;
 
-#include "module_TURRET\TurretMASTER.h"
+#include "module_TURRET/TurretMASTER.h"
 TurretMASTER* turretMASTER;
 
 
