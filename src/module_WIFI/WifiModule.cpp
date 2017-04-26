@@ -20,8 +20,21 @@ void WifiModule::setBaudRate(int baudRate) {
   _baudRate = baudRate;
 }
 
-void WifiModule::initStatus(){
+void WifiModule::initStatus() {
   _status = WL_IDLE_STATUS;
+}
+
+/**
+  Returns whether the module is initialized or not.
+
+  @return True if initialized and connected. False if not initialized and connected.
+*/
+boolean WifiModule::isInitialized() {
+  if (Properties::DEBUGGING_ACTIVE) {
+    Serial.println("Wifi Initialized Status:");
+    Serial.println(_initialized);
+  }
+  return _initialized;
 }
 
 void WifiModule::printWifiStatus() {
@@ -66,8 +79,11 @@ void WifiModule::initialize() {
 
   if (WiFi.status() == WL_NO_SHIELD) {
     Serial.println("ESP8266 not present or miscofigured");
-    while (true); // TODO: Handle this different than just stalling forever...
+    _initialized = false;
+    return; // Wifi Module failure. Return so we don't try any further work.
   }
+
+  int connectAttemptCount = 0;
 
   while (_status != WL_CONNECTED) {
     if (Properties::DEBUGGING_ACTIVE) {
@@ -76,9 +92,15 @@ void WifiModule::initialize() {
     }
 
     _status = WiFi.begin(Properties::WIFI_SSID.c_str(), Properties::WIFI_PASSWORD.c_str());
+
+    if(++connectAttemptCount >= Properties::WIFI_CONNECT_RETRY_COUNT) {
+      _initialized = false;
+      return; // We failed to connect in the number of times configured so bail early.
+    }
   }
 
   printWifiStatus();
+  _initialized = true;
 }
 
 void WifiModule::sendNotification() {

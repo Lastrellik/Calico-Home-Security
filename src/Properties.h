@@ -38,6 +38,7 @@ class Properties {
     static int WIFI_TX_PIN;
     static String WIFI_SSID;
     static String WIFI_PASSWORD;
+    static int WIFI_CONNECT_RETRY_COUNT;
     static String IFTTT_MAKER_KEY;
     static String IFTTT_MAKER_EVENT;
     static String IFTTT_MAKER_URI;

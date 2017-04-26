@@ -17,6 +17,7 @@ class WifiModule {
     WifiModule(int baudRate);
     void setBaudRate(int baudRate);
     void initStatus();
+    boolean isInitialized();
     void checkStatusAndReinitIfNecessary();
     void initialize();
     void sendNotification();
@@ -27,6 +28,7 @@ class WifiModule {
     SoftwareSerial esp8266;
     int _baudRate = Properties::BAUD_RATE;
     int _status;
+    boolean _initialized = false;
 };
 
 #endif
