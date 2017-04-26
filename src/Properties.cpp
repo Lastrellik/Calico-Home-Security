@@ -31,6 +31,7 @@ int Properties::WIFI_TX_PIN = 11;                             // The pin on the 
 String Properties::WIFI_SSID = "YOUR_SSID_HERE";              // The name (SSID) of your wireless access point.
 String Properties::WIFI_PASSWORD = "YOUR_WIRELESS_PASSWORD";  // The password to connect to your wireless network.
 String Properties::IFTTT_MAKER_KEY = "YOUR_IFTTT_MAKER_KEY";  // Key obtained from your IFTTT account. See `IFTTT Setup` instructions in the Wifi Module's README for more details.
+int Properties::WIFI_CONNECT_RETRY_COUNT = 3;                      // The number of times the Wifi module will attempt to connect before it fails.
 String Properties::IFTTT_MAKER_EVENT = "alarm_tripped";       // The IFTTT Maker's Event. See `IFTTT Setup` instructions in the Wifi Module's README for more details.
 String Properties::IFTTT_MAKER_URI = "maker.ifttt.com";       // The IFTTT Maker root URI. There is likely no need to change this until IFTTT changes the URI in the future.
 

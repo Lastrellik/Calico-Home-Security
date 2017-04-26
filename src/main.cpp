@@ -41,10 +41,16 @@ void setup() {
   if(not Properties::MODULE_PI) alarm->calibrate();
 
   if (Properties::MODULE_WIFI) {
-    alarm->alertWaitingAction();
+    alarm->alertWaitingAction(); // Let the user know that we're preparing to connect
     wifiModule = new WifiModule();
     wifiModule->initialize();
-    alarm->alertSuccessfulAction();
+    if(wifiModule->isInitialized()) {
+      alarm->alertSuccessfulAction(); // Let the user know that everything is good
+    } else {
+      alarm->alertFailedAction();
+      alarm->alertFailedAction(); // Let the user know that something didn't go right
+      alarm->alertFailedAction();
+    }
   }
 
   if (Properties::MODULE_TURRET) {
@@ -103,7 +109,7 @@ void loop(){
     if(timeAlarmHasBeenTrippedInMillis >= TIME_ALARM_CAN_BE_TRIPPED_IN_MILLIS){
       alarm->trigger();
 
-      if (Properties::MODULE_WIFI) {
+      if (Properties::MODULE_WIFI && wifiModule->isInitialized()) {
         wifiModule->sendNotification(); // TODO: This is blocking. See https://github.com/Lastrellik/Calico-Home-Security/issues/62
       }
 
