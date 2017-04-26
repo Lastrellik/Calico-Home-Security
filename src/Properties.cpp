@@ -13,7 +13,9 @@
 
 // ********** GENERAL ********** //
 boolean Properties::DEBUGGING_ACTIVE = false;                 // Set to `true` if you are troubleshooting an issue and want to see log output in your terminal window
+boolean Properties::LASER_AIMING_MODE = false;                // Setting to true will activate the laser during the setup phase of the alarm and leave it on until the button is pressed. This can be helpful when setting up the laser.
 int Properties::BAUD_RATE = 9600;                             // Normally shouldn't be changed. The only time you might need to is when working with an ESP8266 module. See the Wifi Module's README for more information.
+int Properties::ALARM_TRIPPED_TO_TRIGGERED_MILLIS = 30000;    // The amount of time between the alarm being tripped and it being triggered. Default is 30000 (30 seconds).
 
 // ********** MODULES ********** //
 boolean Properties::MODULE_BASE = true;                       // Normally set to `true`. This is only set to `false` if you are using the MINI module. This is the ONLY module which should be checked into the repo as `true`.
