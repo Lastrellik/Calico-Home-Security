@@ -18,7 +18,9 @@ class Properties {
   public:
     // ********** GENERAL ********** //
     static boolean DEBUGGING_ACTIVE;
+    static boolean LASER_AIMING_MODE;
     static int BAUD_RATE;
+    static int ALARM_TRIPPED_TO_TRIGGERED_MILLIS;
 
 
     // ********** MODULES ********** //

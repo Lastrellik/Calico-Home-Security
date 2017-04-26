@@ -21,7 +21,6 @@ Alarm* alarm;
 CommandListener* commandListener;
 
 long timeAlarmHasBeenTrippedInMillis = 0;
-const long TIME_ALARM_CAN_BE_TRIPPED_IN_MILLIS = 30000;
 
 #include "module_WIFI/WifiModule.h"
 WifiModule* wifiModule;
@@ -36,6 +35,15 @@ TurretMASTER* turretMASTER;
 void setup() {
   Serial.begin(Properties::BAUD_RATE);
   alarm = new Alarm();
+
+  if(Properties::LASER_AIMING_MODE){
+    alarm->toggleLaser();
+    while(not alarm->isButtonPressed()) {
+      // Loop here until the button is pressed
+    }
+    alarm->toggleLaser();
+  }
+
   if(not Properties::MODULE_PI) alarm->testBoardComponents();
   commandListener = new CommandListener(alarm);
   if(not Properties::MODULE_PI) alarm->calibrate();
@@ -100,7 +108,7 @@ void loop(){
     long startTime = millis();
     alarm->alertWaitingAction();
     timeAlarmHasBeenTrippedInMillis += millis() - startTime;//Seconds it takes for the
-    if(timeAlarmHasBeenTrippedInMillis >= TIME_ALARM_CAN_BE_TRIPPED_IN_MILLIS){
+    if(timeAlarmHasBeenTrippedInMillis >= Properties::ALARM_TRIPPED_TO_TRIGGERED_MILLIS){
       alarm->trigger();
 
       if (Properties::MODULE_WIFI) {
