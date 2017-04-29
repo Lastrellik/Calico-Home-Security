@@ -137,10 +137,12 @@ void Alarm::arm(){
     calibrated, and isTripped and isTriggered are not activated
 */
 bool Alarm::isReadyToArm(){
+  _laser->on();
   return(!this->isArmed()
-        && this->isCalibrated()
-        && !this->isTripped()
-        && !this->isTriggered());
+      && this->isCalibrated()
+      && !this->isTripped()
+      && !this->isTriggered()
+      && !this->isLaserBeamBroken());
 }
 
 /**
