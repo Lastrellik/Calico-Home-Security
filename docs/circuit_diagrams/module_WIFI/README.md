@@ -84,7 +84,7 @@ Now we need to create an Applet in IFTTT.
 6. Click the `Create Trigger` button.
 7. Set the "That" to be the `Notifications` channel.
 8. Click the `Send a notification` box.
-9. Set the Notification to be `The event named "{{EventName}}" occurred {{OccurredAt}} on the Maker service. Value 1 was {{Value1}}. Value 2 was {{Value2}}. Value 3 was {{Value3}}.`  _(Note you can really set this to be whatever you want. This is just an example notification that you can tweak in the future to be whatever you like it to be.)_
+9. Set the Notification to be `Your alarm HOME - FRONT DOOR was TRIGGERED on {{OccurredAt}}`  _(Note you can really set this to be whatever you want. This is just an example notification that you can tweak in the future to be whatever you like it to be.)_
 10. Click the `Create Action` button.
 11. Click the `Finish` button.
 
@@ -92,6 +92,12 @@ You are now configured to use IFTTT! Make sure you have included the key in the 
 
 **Want to have some additional fun?** See what other channels you can add an also trigger when an alarm is triggered. For example, you could have it send you a text. You could have it send you a tweet or post on your Facebook page. You could log every event in a Google Spreadsheet. You could have it turn on your Phillips Hue lights. You could... you get the idea. Welcome to the connected world of IFTTT!
 
+IFTTT Notification
+------------------
+
+This is an example of the notification that is sent to your phone from the IFTTT service:
+
+![IFTTT Notification Screenshot](IFTTT_notification.png)
 
 
 ESP8266 Setup
