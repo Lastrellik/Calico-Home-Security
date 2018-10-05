@@ -60,10 +60,10 @@ About the Project
 Authors
 -------
 
-* Christopher Nash
-* Tyler Jacobs
-* Dave Tille
-* Jason Bruderer
+* [Christopher Nash](https://github.com/Zeustopher)
+* [Tyler Jacobs](https://github.com/Boomstick105)
+* [Dave Tille](https://github.com/sithboy)
+* [Jason Bruderer](https://github.com/Lastrellik)
 
 Background
 ----------
